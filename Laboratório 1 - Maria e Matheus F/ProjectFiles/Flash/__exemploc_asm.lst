@@ -1,0 +1,74 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+    2 00000000         
+    3 00000000                 GLOBAL           f_asm
+    4 00000000                 EXTERN           matriz
+    5 00000000         
+    6 00000000                 THUMB
+    7 00000000         f_asm
+    8 00000000         
+    9 00000000 F44F 402A       mov              r0,#0xaa00
+   10 00000004 F04F 01BB       mov              r1,#0xbb
+   11 00000008 4301            orrs             r1,r0
+   12 0000000A         
+   13 0000000A 4802            ldr              r0,=matriz
+   14 0000000C 7802            ldrb             r2,[r0,#0]
+   15 0000000E 7982            ldrb             r2,[r0,#6]
+   16 00000010         
+   17 00000010 4770            bx               lr
+   18 00000012         
+   19 00000012                 END
+              00 00 00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\flash\__exemploc_asm_1.d -o.\flash\__exemploc_asm_1.o -I.\RTE
+\_TM4C129_Flash -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include -IC:\K
+eil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\RTOS\RTX\INC -IC:\Keil_v5\ARM\PACK\Keil\T
+M4C_DFP\1.1.0\Device\Include\TM4C129 --predefine="__RTX SETA 1" --predefine="__
+EVAL SETA 1" --predefine="__UVISION_VERSION SETA 526" --predefine="_RTE_ SETA 1
+" --predefine="TM4C1294NCPDT SETA 1" --list=.\flash\__exemploc_asm.lst __Exempl
+oC_ASM.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 1 in file __ExemploC_ASM.s
+   Uses
+      None
+Comment: .text unused
+f_asm 00000000
+
+Symbol: f_asm
+   Definitions
+      At line 7 in file __ExemploC_ASM.s
+   Uses
+      At line 3 in file __ExemploC_ASM.s
+Comment: f_asm used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+matriz 00000000
+
+Symbol: matriz
+   Definitions
+      At line 4 in file __ExemploC_ASM.s
+   Uses
+      At line 13 in file __ExemploC_ASM.s
+Comment: matriz used once
+1 symbol
+341 symbols in table

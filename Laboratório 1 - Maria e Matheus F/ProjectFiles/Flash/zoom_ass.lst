@@ -1,0 +1,635 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         
+    2 00000000                 AREA             |.text|, CODE, READONLY, ALIGN=
+2
+    3 00000000                 THUMB
+    4 00000000                 GLOBAL           ZoomAssembly
+    5 00000000                 EXTERN           matriz_resultado
+    6 00000000                 EXTERN           airplane
+    7 00000000                 EXTERN           bus
+    8 00000000         
+    9 00000000         
+   10 00000000         ZoomAssembly
+   11 00000000         ;r0 <= scale
+   12 00000000         ;r1 <= image_choose
+   13 00000000         ;r2 <= zoom_choose
+   14 00000000 E92D 4FF0       PUSH             {r4-r11,lr}
+   15 00000004         
+   16 00000004 4B57            ldr              r3, =matriz_resultado
+   17 00000006 4C58            ldr              r4, =airplane
+   18 00000008 4D58            ldr              r5, =bus
+   19 0000000A         
+   20 0000000A F04F 0600       mov              r6, #0      ;i
+   21 0000000E F04F 0700       mov              r7, #0      ;j
+   22 00000012 F04F 0A00       mov              r10,#0      ;pixel
+   23 00000016 F04F 0B00       mov              r11,#0      ; pinta
+   24 0000001A         
+   25 0000001A 2900            cmp              r1, #0      ; zoom aumentativo
+   26 0000001C D002            beq              zoom_in
+   27 0000001E 2901            cmp              r1,#1       ; zoom diminutivo
+   28 00000020 D056            beq              zoom_out
+   29 00000022 E09B            b                retorno
+   30 00000024         
+   31 00000024         zoom_in
+   32 00000024         
+   33 00000024         ; --- FOR i < 64 * scale
+   34 00000024         for_i
+   35 00000024         ; --- FOR j < 96 * scale
+   36 00000024         for_j
+   37 00000024         ; if j < 128 && i < 128
+   38 00000024 2F80            CMP              R7, #128    ; j < 128?
+   39 00000026 D23E            BCS              soma_pixel  ; Se não, ja pula p
+                                                            ro fim do if.
+   40 00000028         ; Se sim, continue
+   41 00000028 2E80            CMP              R6, #128    ; i < 128?
+   42 0000002A D23C            BCS              soma_pixel  ; Se não, ja pula p
+                                                            ro fim do if.
+   43 0000002C         ; Se sim, continue.
+   44 0000002C         ; if image_choose true or false.
+   45 0000002C 2900            CMP              R1, #0      ; 
+   46 0000002E D000            BEQ              if_airplane ; 0 = airplane 
+   47 00000030 D105            BNE              if_bus      ; 1 = bus
+   48 00000032         
+   49 00000032         if_airplane
+   50 00000032         ; if posição >= 0xF0
+   51 00000032 B402            PUSH             {R1}
+   52 00000034 F814 100A       LDRB             R1,[R4,R10] ; Lê airplane[pixel
+                                                            ] e salva em R3
+   53 00000038 29F0            CMP              R1, #0xF0   ; Se valor >= 0xF0,
+                                                             branco.
+   54 0000003A D205            BCS              pinta_branco
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   55 0000003C E007            B                pinta_preto ; Se não, preto.
+   56 0000003E         if_bus
+   57 0000003E         ; if posição >= 0xF0 
+   58 0000003E F815 100A       LDRB             R1,[R5,R10] ; Lê bus[pixel]. NÃ
+                                                            O POSSO SALVAR EM R
+                                                            3 AAAAAA.
+   59 00000042 29F0            CMP              R1, #0xF0   ; Se valor >= 0xF0,
+                                                             branco.
+   60 00000044 D200            BCS              pinta_branco
+   61 00000046 E002            B                pinta_preto ; Se não, preto.
+   62 00000048         pinta_branco
+   63 00000048 F04F 0B00       MOV              R11, #0
+   64 0000004C E002            B                cor_definida
+   65 0000004E         pinta_preto
+   66 0000004E F04F 0B01       MOV              R11, #1
+   67 00000052 E7FF            B                cor_definida
+   68 00000054         
+   69 00000054         cor_definida
+   70 00000054 E7FF            B                preenche_matriz
+   71 00000056         
+   72 00000056         preenche_matriz                      ;r6 = i || r7 = j |
+                                                            | r8 = k || r9 = l
+   73 00000056 46B0            MOV              R8, R6      ; k = i
+   74 00000058 B440            PUSH             {R6}        ; guarda i na pilha
+                                                             para depois.
+   75 0000005A F84D AD04       PUSH             {R10}       ; guarda pixel na p
+                                                            ilha para depois.
+   76 0000005E B420            PUSH             {R5}        ; guarda bus, afina
+                                                            l, tamo em bus mesm
+                                                            o
+   77 00000060 F04F 0500       MOV              R5, #0
+   78 00000064         for_k
+   79 00000064 EB06 0500       ADD              R5, R6, R0  ; y = i + scale
+   80 00000068 45A8            CMP              R8, R5      ; k < i + scale?
+   81 0000006A D217            BCS              acabou      ; Se sim, termina
+   82 0000006C         ; Se não, continua
+   83 0000006C 46B9            MOV              R9, R7      ; l = j
+   84 0000006E         for_l
+   85 0000006E EB07 0A00       ADD              R10, R7, R0 ; x = j + scale
+   86 00000072 45D1            CMP              R9, R10     ; l < j + scale?
+   87 00000074 D20F            BCS              fim_for_l   ; Se sim, termina.
+   88 00000076         ; Se não, continua
+   89 00000076         if_interno_loop_k_l
+   90 00000076 F1B9 0F80       CMP              R9, #128    ; l < 128?
+   91 0000007A D209            BCS              if_false    ; Se não, sai do if
+                                                            
+   92 0000007C         ; Se sim, continua
+   93 0000007C F1B8 0F80       CMP              R8, #128    ; k < 128?
+   94 00000080 D206            BCS              if_false    ; Se não, sai do if
+                                                            
+   95 00000082         ; Se sim, continua
+   96 00000082         ; matriz_resultados[l][k] = pinta
+   97 00000082 F04F 0C60       MOV              R12, #96
+   98 00000086 FB0C 9C08       MLA              R12, R12, R8, R9 ; R12 = K + (9
+                                                            6 * L)
+   99 0000008A F803 B00C       STRB             R11, [R3, R12]
+  100 0000008E E7FF            B                if_false    ; Após preencher, e
+                                                            xecuta o l++ natura
+                                                            lmente.
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+  101 00000090         if_false
+  102 00000090 F109 0901       ADD              R9, R9, #1  ; l++
+  103 00000094 E7EB            B                for_l
+  104 00000096         fim_for_l
+  105 00000096 F108 0801       ADD              R8, R8, #1  ; k ++
+  106 0000009A E7E3            B                for_k
+  107 0000009C         acabou
+  108 0000009C BC20            POP              {R5}
+  109 0000009E F85D AB04       POP              {R10}       ; Retorna pixel ori
+                                                            ginal 
+  110 000000A2 BC40            POP              {R6}        ; Retorna i origina
+                                                            l.
+  111 000000A4 E7FF            B                soma_pixel
+  112 000000A6         ; for do k e do l
+  113 000000A6         ; pixel += 3
+  114 000000A6         soma_pixel
+  115 000000A6 BC02            POP              {R1}
+  116 000000A8 F10A 0A03       ADD              R10, R10, #3
+  117 000000AC         ; --- FIM FOR j < 96*scale    
+  118 000000AC 4407            ADD              R7, R7, R0  ; j+=scale
+  119 000000AE F04F 0C60       MOV              R12, #96
+  120 000000B2 FB0C FC00       MUL              R12, R12, R0 ; 96 * scale
+  121 000000B6 4567            CMP              R7, R12     ; j < 96 * scale?
+  122 000000B8 D3B4            BLO              for_j       ; if YES, continue
+  123 000000BA E7FF            B                fim_for_j   ; if NOT, fim for j
+                                                            .
+  124 000000BC         fim_for_j
+  125 000000BC F04F 0700       MOV              R7, #0      ; j = 0.
+  126 000000C0 4406            ADD              R6, R6, R0  ; i+=scale
+  127 000000C2 F04F 0C40       MOV              R12, #64
+  128 000000C6 FB0C FC00       MUL              R12, R12, R0 ; 64 * scale
+  129 000000CA 4566            CMP              R6, R12     ; i < 64 * scale?
+  130 000000CC D3AA            BLO              for_i       ; if YES, continue
+  131 000000CE E045            B                retorno     ; if NOT. fim for i
+                                                            
+  132 000000D0         ; fim_for_i significa que ele entrou no IF inicial para 
+                       Zoom In, então encerramos a execução dessa função.
+  133 000000D0         ; --- FIM FOR i < 64*scale   
+  134 000000D0         zoom_out
+  135 000000D0         for_i_out
+  136 000000D0         ; Executa for j várias vezes
+  137 000000D0         for_j_out
+  138 000000D0         ; Executa conteudo do for j 96/scale vezes.
+  139 000000D0         if_externo_out
+  140 000000D0 2E80            CMP              R6, #128    ; i < 128?
+  141 000000D2 D225            BCS              fim_if_externo_out
+  142 000000D4         
+  143 000000D4 2F80            CMP              R7, #128    ; j < 128?
+  144 000000D6 D223            BCS              fim_if_externo_out
+  145 000000D8 E7FF            B                if_imagem_out
+  146 000000DA         
+  147 000000DA         if_imagem_out
+  148 000000DA 2A00            CMP              R2, #0
+  149 000000DC D000            BEQ              airplane_out
+  150 000000DE E005            B                bus_out
+  151 000000E0         
+  152 000000E0         airplane_out
+  153 000000E0 B402            PUSH             {R1}
+  154 000000E2 F814 100A       LDRB             R1,[R4,R10] ; Lê airplane[pixel
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+                                                            ] e salva em R1
+  155 000000E6 29F0            CMP              R1, #0xF0   ; Se valor >= 0xF0,
+                                                             branco.
+  156 000000E8 D206            BCS              pinta_branco_out
+  157 000000EA E008            B                pinta_preto_out 
+                                                            ; Se não, preto. 
+  158 000000EC         bus_out
+  159 000000EC B402            PUSH             {R1}
+  160 000000EE F815 100A       LDRB             R1,[R5,R10] ; Lê bus[pixel] e s
+                                                            alva em R1
+  161 000000F2 29F0            CMP              R1, #0xF0   ; Se valor >= 0xF0,
+                                                             branco.
+  162 000000F4 D200            BCS              pinta_branco_out
+  163 000000F6 E002            B                pinta_preto_out 
+                                                            ; Se não, preto.
+  164 000000F8         
+  165 000000F8         pinta_branco_out
+  166 000000F8 F04F 0B00       MOV              R11, #0
+  167 000000FC E002            B                pinta_matriz
+  168 000000FE         
+  169 000000FE         pinta_preto_out
+  170 000000FE F04F 0B01       MOV              R11, #1
+  171 00000102 E7FF            B                pinta_matriz
+  172 00000104         
+  173 00000104         pinta_matriz
+  174 00000104 E92D 1600       PUSH             {R9, R10, R12}
+  175 00000108 46B1            MOV              R9, R6
+  176 0000010A 46BA            MOV              R10, R7
+  177 0000010C FBB9 F9F0       UDIV             R9, R9, R0  ; i/scale
+  178 00000110 FBBA FAF0       UDIV             R10, R10, R0 ; j/scale
+  179 00000114 F04F 0C60       MOV              R12, #96
+  180 00000118 FB0A 9C0C       MLA              R12, R10, R12, R9 ; ((j/scale *
+                                                             96) + i/scale) 
+  181 0000011C F803 B00C       STRB             R11, [R3, R12]
+  182 00000120         fim_if_externo_out
+  183 00000120 B402            PUSH             {R1}
+  184 00000122 F04F 0103       MOV              R1, #3
+  185 00000126 FB00 AA01       MLA              R10, R0, R1, R10 ;´pixel = pixe
+                                                            l + (3*scale)
+  186 0000012A BC02            POP              {R1}
+  187 0000012C 4407            ADD              R7, R7, R0  ; j += scale
+  188 0000012E 2F60            CMP              R7, #96     ; j < 96?
+  189 00000130 D3CE            BLO              for_j_out   ; Se sim, continua
+  190 00000132 E7FF            B                soma_pixel_out 
+                                                            ; Se não, termina
+  191 00000134         soma_pixel_out
+  192 00000134 E92D 0880       PUSH             {R11, R7}
+  193 00000138 F04F 0B03       MOV              R11, #3
+  194 0000013C 4657            MOV              R7, R10
+  195 0000013E FB0B FB00       MUL              R11, R11, R0 ; 96 * 3
+  196 00000142 F1A0 0701       SUB              R7, R0, #1  ; scale - 1;
+  197 00000146 FB07 AA0B       MLA              R10, R7, R11, R10 ; pixel = pix
+                                                            el + ( (96*3) * (sc
+                                                            ale -1))
+  198 0000014A E8BD 0880       POP              {R7, R11}
+  199 0000014E         fim_for_j_out
+  200 0000014E F04F 0700       MOV              R7, #0      ; j = 0
+  201 00000152 4406            ADD              R6, R6, R0  ; i += scale
+  202 00000154 2E40            CMP              R6, #64     ; i < 64?
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  203 00000156 D3BB            BLO              for_i_out   ; Se sim, continua
+  204 00000158 E7FF            B                fim_zoom_out ; Se não, termina
+  205 0000015A         fim_zoom_out
+  206 0000015A E7FF            B                retorno
+  207 0000015C         retorno
+  208 0000015C E8BD 0FF0       POP              {r11,r10,r9,r8,r7,r6,r5,r4}
+  209 00000160 4770            BX               LR
+  210 00000162         
+  211 00000162 BF00            NOP
+  212 00000164                 ALIGN
+  213 00000164                 END
+              00000000 
+              00000000 
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\flash\zoom_ass.d -o.\flash\zoom_ass.o -I.\RTE\_TM4C129_Flash 
+-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include -IC:\Keil_v5\ARM\PACK\
+ARM\CMSIS\5.4.0\CMSIS\RTOS\RTX\INC -IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\De
+vice\Include\TM4C129 --predefine="__RTX SETA 1" --predefine="__UVISION_VERSION 
+SETA 526" --predefine="_RTE_ SETA 1" --predefine="TM4C1294NCPDT SETA 1" --list=
+.\flash\zoom_ass.lst zoom_ass.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+.text 00000000
+
+Symbol: .text
+   Definitions
+      At line 2 in file zoom_ass.s
+   Uses
+      None
+Comment: .text unused
+ZoomAssembly 00000000
+
+Symbol: ZoomAssembly
+   Definitions
+      At line 10 in file zoom_ass.s
+   Uses
+      At line 4 in file zoom_ass.s
+Comment: ZoomAssembly used once
+acabou 0000009C
+
+Symbol: acabou
+   Definitions
+      At line 107 in file zoom_ass.s
+   Uses
+      At line 81 in file zoom_ass.s
+Comment: acabou used once
+airplane_out 000000E0
+
+Symbol: airplane_out
+   Definitions
+      At line 152 in file zoom_ass.s
+   Uses
+      At line 149 in file zoom_ass.s
+Comment: airplane_out used once
+bus_out 000000EC
+
+Symbol: bus_out
+   Definitions
+      At line 158 in file zoom_ass.s
+   Uses
+      At line 150 in file zoom_ass.s
+Comment: bus_out used once
+cor_definida 00000054
+
+Symbol: cor_definida
+   Definitions
+      At line 69 in file zoom_ass.s
+   Uses
+      At line 64 in file zoom_ass.s
+      At line 67 in file zoom_ass.s
+
+fim_for_j 000000BC
+
+Symbol: fim_for_j
+   Definitions
+      At line 124 in file zoom_ass.s
+   Uses
+      At line 123 in file zoom_ass.s
+Comment: fim_for_j used once
+fim_for_j_out 0000014E
+
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: fim_for_j_out
+   Definitions
+      At line 199 in file zoom_ass.s
+   Uses
+      None
+Comment: fim_for_j_out unused
+fim_for_l 00000096
+
+Symbol: fim_for_l
+   Definitions
+      At line 104 in file zoom_ass.s
+   Uses
+      At line 87 in file zoom_ass.s
+Comment: fim_for_l used once
+fim_if_externo_out 00000120
+
+Symbol: fim_if_externo_out
+   Definitions
+      At line 182 in file zoom_ass.s
+   Uses
+      At line 141 in file zoom_ass.s
+      At line 144 in file zoom_ass.s
+
+fim_zoom_out 0000015A
+
+Symbol: fim_zoom_out
+   Definitions
+      At line 205 in file zoom_ass.s
+   Uses
+      At line 204 in file zoom_ass.s
+Comment: fim_zoom_out used once
+for_i 00000024
+
+Symbol: for_i
+   Definitions
+      At line 34 in file zoom_ass.s
+   Uses
+      At line 130 in file zoom_ass.s
+Comment: for_i used once
+for_i_out 000000D0
+
+Symbol: for_i_out
+   Definitions
+      At line 135 in file zoom_ass.s
+   Uses
+      At line 203 in file zoom_ass.s
+Comment: for_i_out used once
+for_j 00000024
+
+Symbol: for_j
+   Definitions
+      At line 36 in file zoom_ass.s
+   Uses
+      At line 122 in file zoom_ass.s
+Comment: for_j used once
+for_j_out 000000D0
+
+Symbol: for_j_out
+   Definitions
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+      At line 137 in file zoom_ass.s
+   Uses
+      At line 189 in file zoom_ass.s
+Comment: for_j_out used once
+for_k 00000064
+
+Symbol: for_k
+   Definitions
+      At line 78 in file zoom_ass.s
+   Uses
+      At line 106 in file zoom_ass.s
+Comment: for_k used once
+for_l 0000006E
+
+Symbol: for_l
+   Definitions
+      At line 84 in file zoom_ass.s
+   Uses
+      At line 103 in file zoom_ass.s
+Comment: for_l used once
+if_airplane 00000032
+
+Symbol: if_airplane
+   Definitions
+      At line 49 in file zoom_ass.s
+   Uses
+      At line 46 in file zoom_ass.s
+Comment: if_airplane used once
+if_bus 0000003E
+
+Symbol: if_bus
+   Definitions
+      At line 56 in file zoom_ass.s
+   Uses
+      At line 47 in file zoom_ass.s
+Comment: if_bus used once
+if_externo_out 000000D0
+
+Symbol: if_externo_out
+   Definitions
+      At line 139 in file zoom_ass.s
+   Uses
+      None
+Comment: if_externo_out unused
+if_false 00000090
+
+Symbol: if_false
+   Definitions
+      At line 101 in file zoom_ass.s
+   Uses
+      At line 91 in file zoom_ass.s
+      At line 94 in file zoom_ass.s
+      At line 100 in file zoom_ass.s
+
+if_imagem_out 000000DA
+
+Symbol: if_imagem_out
+   Definitions
+      At line 147 in file zoom_ass.s
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Relocatable symbols
+
+   Uses
+      At line 145 in file zoom_ass.s
+Comment: if_imagem_out used once
+if_interno_loop_k_l 00000076
+
+Symbol: if_interno_loop_k_l
+   Definitions
+      At line 89 in file zoom_ass.s
+   Uses
+      None
+Comment: if_interno_loop_k_l unused
+pinta_branco 00000048
+
+Symbol: pinta_branco
+   Definitions
+      At line 62 in file zoom_ass.s
+   Uses
+      At line 54 in file zoom_ass.s
+      At line 60 in file zoom_ass.s
+
+pinta_branco_out 000000F8
+
+Symbol: pinta_branco_out
+   Definitions
+      At line 165 in file zoom_ass.s
+   Uses
+      At line 156 in file zoom_ass.s
+      At line 162 in file zoom_ass.s
+
+pinta_matriz 00000104
+
+Symbol: pinta_matriz
+   Definitions
+      At line 173 in file zoom_ass.s
+   Uses
+      At line 167 in file zoom_ass.s
+      At line 171 in file zoom_ass.s
+
+pinta_preto 0000004E
+
+Symbol: pinta_preto
+   Definitions
+      At line 65 in file zoom_ass.s
+   Uses
+      At line 55 in file zoom_ass.s
+      At line 61 in file zoom_ass.s
+
+pinta_preto_out 000000FE
+
+Symbol: pinta_preto_out
+   Definitions
+      At line 169 in file zoom_ass.s
+   Uses
+      At line 157 in file zoom_ass.s
+      At line 163 in file zoom_ass.s
+
+preenche_matriz 00000056
+
+Symbol: preenche_matriz
+
+
+
+ARM Macro Assembler    Page 5 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 72 in file zoom_ass.s
+   Uses
+      At line 70 in file zoom_ass.s
+Comment: preenche_matriz used once
+retorno 0000015C
+
+Symbol: retorno
+   Definitions
+      At line 207 in file zoom_ass.s
+   Uses
+      At line 29 in file zoom_ass.s
+      At line 131 in file zoom_ass.s
+      At line 206 in file zoom_ass.s
+
+soma_pixel 000000A6
+
+Symbol: soma_pixel
+   Definitions
+      At line 114 in file zoom_ass.s
+   Uses
+      At line 39 in file zoom_ass.s
+      At line 42 in file zoom_ass.s
+      At line 111 in file zoom_ass.s
+
+soma_pixel_out 00000134
+
+Symbol: soma_pixel_out
+   Definitions
+      At line 191 in file zoom_ass.s
+   Uses
+      At line 190 in file zoom_ass.s
+Comment: soma_pixel_out used once
+zoom_in 00000024
+
+Symbol: zoom_in
+   Definitions
+      At line 31 in file zoom_ass.s
+   Uses
+      At line 26 in file zoom_ass.s
+Comment: zoom_in used once
+zoom_out 000000D0
+
+Symbol: zoom_out
+   Definitions
+      At line 134 in file zoom_ass.s
+   Uses
+      At line 28 in file zoom_ass.s
+Comment: zoom_out used once
+34 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+airplane 00000000
+
+Symbol: airplane
+   Definitions
+      At line 6 in file zoom_ass.s
+   Uses
+      At line 17 in file zoom_ass.s
+Comment: airplane used once
+bus 00000000
+
+Symbol: bus
+   Definitions
+      At line 7 in file zoom_ass.s
+   Uses
+      At line 18 in file zoom_ass.s
+Comment: bus used once
+matriz_resultado 00000000
+
+Symbol: matriz_resultado
+   Definitions
+      At line 5 in file zoom_ass.s
+   Uses
+      At line 16 in file zoom_ass.s
+Comment: matriz_resultado used once
+3 symbols
+374 symbols in table

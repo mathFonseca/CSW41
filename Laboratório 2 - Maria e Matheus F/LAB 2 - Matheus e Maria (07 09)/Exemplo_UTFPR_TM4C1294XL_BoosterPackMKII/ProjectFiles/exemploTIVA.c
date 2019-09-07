@@ -406,7 +406,7 @@ int showMessage (void) {
 		else																		 // Se índice ímpar, divide por m_impar
 		{	
 			/* Necessário tratar overflow aqui*/
-			//word /= m_impar;
+			word = 0x0020;
 		}											
 		par++;
 		decodedMsg[i/2] = word;

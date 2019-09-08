@@ -55,6 +55,8 @@ uint32_t key = 3;
 uint32_t lastKey = 2;
 uint32_t nextKey = 5;
 
+char msg[MSG_LENGTH/2 - 2], pbuf[10];
+
 /*----------------------------------------------------------------------------
  *  Transforming int to string
  *---------------------------------------------------------------------------*/
@@ -229,7 +231,7 @@ void t_keyGenerator(void const *argument){
 	// Executa após messagePrint termina de executar.
 	if(f_keyGenerator == false)
 	{
-		// Gera primo
+		
 		// Da yield quando termina	
 		f_keyGenerator = true;
 	}
@@ -244,8 +246,38 @@ void t_messageDecode(void const *argument){
 	if(f_keyGenerator == true && f_decodedMessage == false)
 	{
 		// Decodifica a mensagem
-		// Da yield quando termina	
+		uint16_t i=0;
+		uint16_t par=0;	// Idenficar índice da mensagem (Par / Ímpar)
+		uint16_t m_par = (key - lastKey);	// Indices pares: Chave  - Primo Anterior
+		uint16_t m_impar = (key - nextKey);	// Indices ímpares: Chave - Próximo Primo
+		uint32_t decodedMsg[MSG_LENGTH/2];	// 68 posições. Cada letra ocupa 2 espaços, 34 letras ao todo.
+		
+		for(i = 0; i < MSG_LENGTH; i += 2)	// For que decodifica a mensagem
+		{
+			uint32_t word;	// Porque a declaração é dentro do for? Realmente necessário?
+			word = men1[i];
+			word += men1[i+1] * 16 * 16;
+			
+			if(par % 2 ==0)	// Se índice par, divide por m_par
+			{	
+				word /= m_par;
+			}
+			else	// Se índice ímpar, divide por m_impar
+			{	
+				/* Necessário tratar overflow aqui*/
+				word = 0x0020;	// ASCII 0x20 é Space
+			}											
+			par++;
+			decodedMsg[i/2] = word;
+		}
+		
+		for(i = 0; i < MSG_LENGTH/2 - 2; i++)	// Transfere a mensagem decodificada para vetor mensagem 
+		{
+			msg[i] = (char)(decodedMsg[i]);
+		}			
+	
 		f_decodedMessage = true;
+		// Da yield quando termina
 	}
 	else
 	{
@@ -286,12 +318,20 @@ void t_messagePrint(void const *argument){
 	if( f_decodedMessage == true && f_beforePrimeTest == true && f_afterPrimeTest == true && f_keyGenerator == true)
 	{
 		// Imprime a mensagem na tela
+		uint16_t i = 0;
+		uint16_t displayLines = (MSG_LENGTH/2)/21 + 1;
+		for(i = 0; i < displayLines; i++)					// Imprime a mensagem  
+		{
+			GrStringDraw(&sContext, msg + (i*21), 21, 0, (sContext.psFont->ui8Height+2)*i, true);
+		}
 		// Ao terminar, reseta as flags para false e dá yield.
 		
 		f_decodedMessage = false;
 		f_beforePrimeTest = false;
 		f_afterPrimeTest = false;
 		f_keyGenerator  = false;
+		
+		
 	}
 	else
 	{
@@ -388,7 +428,6 @@ int showMessage (void) {
 	uint16_t m_par = (key - lastKey);					// Indices pares: Chave  - Primo Anterior
 	uint16_t m_impar = (key - nextKey);				// Indices ímpares: Chave - Próximo Primo
 	uint32_t decodedMsg[MSG_LENGTH/2];				// Não entendi pq /2
-	char msg[MSG_LENGTH/2 - 2], pbuf[10];
 	int displayLines = (MSG_LENGTH/2)/21 + 1;
   //Initializing all peripherals
 	init_all();
@@ -424,7 +463,7 @@ int showMessage (void) {
 
 }
 
-int main(){
+int main2(){
 		init_all();
 		findKey();
 		showMessage();
@@ -432,26 +471,32 @@ int main(){
 		return 0;
 }
 
+// Threads
+osThreadDef(t_keyGenerator, osPriorityNormal, 1, 0); 
+osThreadDef(t_messageDecode, osPriorityNormal, 1, 0); 
+osThreadDef(t_lastWordTest, osPriorityNormal, 1, 0); 
+osThreadDef(t_penultimateWordTest, osPriorityNormal, 1, 0); 
+osThreadDef(t_messagePrint, osPriorityNormal, 1, 0); 
 
-int main2 (void) {
+int main(){
 	
   //Initializing all peripherals
 	init_all();
-
-	//threads
-	
-	//	osThreadDef(t_keyGenerator, osPriorityNormal, 1, 0); 
-	//	osThreadDef(t_messageDecode, osPriorityNormal, 1, 0); 
-	//	osThreadDef(t_lastWordTest, osPriorityNormal, 1, 0); 
-	//	osThreadDef(t_penultimateWordTest, osPriorityNormal, 1, 0); 
-	//	osThreadDef(t_messagePrint, osPriorityNormal, 1, 0); 
 
 	osKernelInitialize();
 	
 	// Cria as Thread
 	
+	osThreadCreate(osThread(t_keyGenerator), NULL);
+	osThreadCreate(osThread(t_messageDecode), NULL);
+	osThreadCreate(osThread(t_lastWordTest), NULL);
+	osThreadCreate(osThread(t_penultimateWordTest), NULL);
+	osThreadCreate(osThread(t_messagePrint), NULL);
+	
 	osKernelStart(); 
 	osDelay(osWaitForever);
+	
+	return 0;
 }
 
 int main1 (void) {

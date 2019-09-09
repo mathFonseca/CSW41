@@ -161,7 +161,7 @@ void InitializeMessege(){
 	uint8_t i;
 	
 	for(i=0; i<MSG_LENGTH; i++){
-		men[i] = men2[i];
+		men[i] = men1[i];
 	}
 
 }
@@ -288,11 +288,8 @@ void t_keyGenerator(void const *argument){
 			nextKey = next;
 			
 			//chave 13399
-			//anterior 13397
-			//proxima 13411
-			key = 13399;
-			lastKey = 13397;
-			nextKey = 13411;
+			//anterior 48337
+			//proxima 48353
 			
 			// Da yield quando termina	
 			f_keyGenerator = true;
@@ -320,7 +317,7 @@ void t_messageDecode(void const *argument){
 				
 				for(i = 0; i < MSG_LENGTH; i += 2)	// For que decodifica a mensagem
 				{
-					uint16_t word;	// Porque a declaração é dentro do for? Realmente necessário?
+					int16_t word;	// Porque a declaração é dentro do for? Realmente necessário?
 					word = men[i];
 					word += men[i+1] * 16 * 16;
 					

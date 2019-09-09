@@ -556,13 +556,17 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
+          <Key>DLGUARM</Key>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
           <Key>DLGDARM</Key>
           <Name>(1010=-1,-1,-1,-1,0)(1007=-1,-1,-1,-1,0)(1008=-1,-1,-1,-1,0)(1009=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
           <Key>ARMRTXEVENTFLAGS</Key>
-          <Name>-L70 -Z18 -C0 -M0 -T1</Name>
+          <Name>-L70 -Z8 -C0 -M0 -T1</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -589,9 +593,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>420</LineNumber>
+          <LineNumber>334</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>2636</Address>
+          <Address>2016</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -600,55 +604,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 2 - Maria e Matheus F\LAB 2 - Matheus e Maria (07 09)\Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\base_project\exemploTIVA.c\420</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>430</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>2710</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 2 - Maria e Matheus F\LAB 2 - Matheus e Maria (07 09)\Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\base_project\exemploTIVA.c\430</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>415</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>2618</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 2 - Maria e Matheus F\LAB 2 - Matheus e Maria (07 09)\Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\base_project\exemploTIVA.c\415</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>431</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>2714</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 2 - Maria e Matheus F\LAB 2 - Matheus e Maria (07 09)\Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\base_project\exemploTIVA.c\431</Expression>
+          <Expression>\\\exemploTIVA.c\334</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

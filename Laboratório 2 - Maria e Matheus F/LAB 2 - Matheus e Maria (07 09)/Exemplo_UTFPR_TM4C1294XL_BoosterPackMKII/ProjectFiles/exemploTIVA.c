@@ -161,7 +161,7 @@ void InitializeMessege(){
 	uint8_t i;
 	
 	for(i=0; i<MSG_LENGTH; i++){
-		men[i] = men1[i];
+		men[i] = men2[i];
 	}
 
 }

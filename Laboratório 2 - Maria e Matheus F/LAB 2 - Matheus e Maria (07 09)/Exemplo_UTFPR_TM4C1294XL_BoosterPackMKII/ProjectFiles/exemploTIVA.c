@@ -399,8 +399,8 @@ void t_penultimateWordTest(void const *argument){
 			
 			intToString(key, pbufa, 10, 10, 3);
 			
-			GrStringDraw(&sContext, "Chave: ", -1, 0, (sContext.psFont->ui8Height+2)*5, true);
-			GrStringDraw(&sContext, (char*)pbufa, -1, (sContext.psFont->ui8MaxWidth)*7, (sContext.psFont->ui8Height+2)*5, true);
+			//GrStringDraw(&sContext, "Chave: ", -1, 0, (sContext.psFont->ui8Height+2)*5, true);
+			//GrStringDraw(&sContext, (char*)pbufa, -1, (sContext.psFont->ui8MaxWidth)*7, (sContext.psFont->ui8Height+2)*5, true);
 			
 			// Da yield quando termina
 
@@ -425,7 +425,7 @@ void t_messagePrint(void const *argument){
 			uint16_t displayLines = (MSG_LENGTH/2)/21 + 1;
 			for(i = 0; i < displayLines; i++)					// Imprime a mensagem  
 			{
-				GrStringDraw(&sContext, msg + (i*21), 21, 0, (sContext.psFont->ui8Height+2)*i, true);
+				//GrStringDraw(&sContext, msg + (i*21), 21, 0, (sContext.psFont->ui8Height+2)*i, true);
 			}
 			// Ao terminar, reseta as flags para false e dá yield.
 			
@@ -457,7 +457,7 @@ osThreadDef(t_messagePrint, osPriorityNormal, 1, 0);
 int main(){
 	osKernelInitialize();
   //Initializing all peripherals
-	init_all();
+	//init_all();
 		
 	// Cria as Thread
 	InitializeMessege();

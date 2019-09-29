@@ -1,0 +1,17 @@
+Dependencies for Project 'IncludeBinFile', Target 'Cortex-M3 Simulation': (DO NOT MODIFY !)
+F (.\main.c)(0x55D607F5)(-c --cpu Cortex-M3 -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\Listings\\"-I.\RTE\_Cortex-M3_Simulation-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="528" -D_RTE_ -DARMCM3-o .\objects\main.o --list_dir ".\\Listings\\" --list --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (MyBinFile2.h)(0x5D8FE0E9)
+F (.\MyBinFile1.s)(0x55D605B4)(--cpu Cortex-M3 --li -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_Cortex-M3_Simulation-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include--pd "__UVISION_VERSION SETA 528" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"--list .\listings\mybinfile1.lst --xref -o .\objects\mybinfile1.o --depend .\objects\mybinfile1.d)
+I (MyBinFile1.bin)(0x55D5D7BA)
+F (.\MyBinFile2.c)(0x5D8FE0E9)(-c --cpu Cortex-M3 -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\Listings\\"-I.\RTE\_Cortex-M3_Simulation-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="528" -D_RTE_ -DARMCM3-o .\objects\mybinfile2.o --list_dir ".\\Listings\\" --list --omf_browse .\objects\mybinfile2.crf --depend .\objects\mybinfile2.d)
+F (.\MyBinFile2ConvCmd)(0x5D8FEC83)()
+F (RTE\Device\ARMCM3\startup_ARMCM3.s)(0x50B320AC)(--cpu Cortex-M3 --li -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_Cortex-M3_Simulation-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include--pd "__UVISION_VERSION SETA 528" --pd "_RTE_ SETA 1" --pd "ARMCM3 SETA 1"--list .\listings\startup_armcm3.lst --xref -o .\objects\startup_armcm3.o --depend .\objects\startup_armcm3.d)
+F (RTE\Device\ARMCM3\system_ARMCM3.c)(0x53FF470A)(-c --cpu Cortex-M3 -D__MICROLIB --li -g -O0 --apcs=interwork --split_sections --asm --interleave --asm_dir ".\\Listings\\"-I.\RTE\_Cortex-M3_Simulation-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="528" -D_RTE_ -DARMCM3-o .\objects\system_armcm3.o --list_dir ".\\Listings\\" --list --omf_browse .\objects\system_armcm3.crf --depend .\objects\system_armcm3.d)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x5D262B68)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm3.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\mpu_armv7.h)(0x5C8FE884)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x5BBE062A)

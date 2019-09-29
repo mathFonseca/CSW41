@@ -1,0 +1,5 @@
+# This is a command file for the srec_cat.exe file conversion utility
+# which is invoked before build/rebuild
+new_eddie_lado.ppm -Binary              # input file has binary format
+-o new_eddie_lado.c                     # output file name
+-C-Array new_eddie_lado -INClude    # generate C-array with the name MyBinaryImage2 + include file

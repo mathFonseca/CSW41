@@ -1,15 +1,15 @@
 /*============================================================================
- *                    Exemplos de utilização do Kit
+ *                    Exemplos de utilizaï¿½ï¿½o do Kit
  *              EK-TM4C1294XL + Educational BooterPack MKII 
  *---------------------------------------------------------------------------*
- *                    Prof. André Schneider de Oliveira
- *            Universidade Tecnológica Federal do Paraná (UTFPR)
+ *                    Prof. Andrï¿½ Schneider de Oliveira
+ *            Universidade Tecnolï¿½gica Federal do Paranï¿½ (UTFPR)
  *===========================================================================
  * Autores das bibliotecas:
  * 		Allan Patrick de Souza - <allansouza@alunos.utfpr.edu.br>
  * 		Guilherme Jacichen     - <jacichen@alunos.utfpr.edu.br>
  * 		Jessica Isoton Sampaio - <jessicasampaio@alunos.utfpr.edu.br>
- * 		Mariana Carrião        - <mcarriao@alunos.utfpr.edu.br>
+ * 		Mariana Carriï¿½o        - <mcarriao@alunos.utfpr.edu.br>
  *===========================================================================*/
 #include "cmsis_os.h"
 #include "TM4C129.h"                    // Device header
@@ -65,7 +65,7 @@
 #define INICIO_Y 30
 #define MARGEM_ESQUERDA 3 
 
-#define TEMPO_TIMER 500 // em milisegundos.
+
 
 //To print on the screen
 tContext sContext;
@@ -805,7 +805,7 @@ void GameController(){
 			osDelay(500);
 		}	
 }
-
+/*
 int main (void) {
 
   uint32_t color = 0x00, i, j, pixel,pixel_ed;
@@ -815,60 +815,11 @@ int main (void) {
 	OnPause();
 	InitializeBacKGround();
 	GameController();
-}
+}*/
 
-/* THREADS E OUTRAS COISAS PRA VERSÃO FINAL */
-/*
-void t_GameController();
-void t_EddieController();
-void t_EnemiesController();
-void t_PointsController();
-void t_BossController();
+/* THREADS E OUTRAS COISAS PRA VERSï¿½O FINAL */
 
-voit t_TimerCallBack()
-{
-	// Chama os controler aqui dentro.
-	// Necessário alguma ordem em específica?
-}
-
-// A ser analisado. 
-void m_draw(const char* name, int state);
-
-osThreadDef(t_GameController, osPriorityNormal, 1, 0);
-osThreadDef(t_EddieController, osPriorityNormal, 1, 0);
-osThreadDef(t_EnemiesController, osPriorityNormal, 1, 0);
-osThreadDef(t_PointsController, osPriorityNormal, 1, 0);
-osThreadDef(t_BossController, osPriorityNormal, 1, 0);
-
-osTimerId	clock_sistema;
-osTimerDef(clock, t_TimerCallBack);
-
-osMutexId mutex_tela;
-osMutexDef (mutex_tela);
-
-int main (void)
-{
-	osKernelInitialize();
-	init_all();
-	
-	// Cria todas as threads
-	osThreadCreate(osThread(t_GameController), NULL);
-	osThreadCreate(osThread(t_EddieController), NULL);
-	osThreadCreate(osThread(t_EnemiesController), NULL);
-	osThreadCreate(osThread(t_PointsController), NULL);
-	osThreadCreate(osThread(t_BossController), NULL);
-	
-	// Cria o timer do sistema
-	clock_sistema = osTimerCreate(clock, osTimerPeriodic, NULL);
-	osTimerStart(clock_sistema, TEMPO_TIMER);
-	
-	// Cria os semáforos do sistema
-	
-	// Cria os Mutex do sistema
-	mutex_tela = osMutexCreate(osMutex(mutex_tela));
-	
-	osKernelStart();
-	osDelay(osWaitForever);
-}
-
-*/
+	/* Usar GRANTT para acesso aos IO
+	#ifdef GRANTT
+	#endif
+	*/

@@ -18,7 +18,7 @@
 ".\flash\eddiev3.o"
 "..\driverlib\rvmdk\driverlib.lib"
 "..\grlib\rvmdk\grlib.lib"
-"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"
 ".\flash\rtx_conf_cm.o"
 ".\flash\startup_tm4c129.o"
 ".\flash\system_tm4c129.o"

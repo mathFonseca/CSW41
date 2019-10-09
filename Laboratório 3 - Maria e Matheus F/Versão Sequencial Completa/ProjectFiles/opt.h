@@ -17,8 +17,8 @@
 
 #define opt_fread_lux() (opt_read_lux()/ (float) (1<<6))
 
-extern void  opt_init();
-extern uint16_t opt_read();
-extern uint32_t opt_read_lux();
+extern void  opt_init(void);
+extern uint16_t opt_read(void);
+extern uint32_t opt_read_lux(void);
 
 #endif //__OPT_H__

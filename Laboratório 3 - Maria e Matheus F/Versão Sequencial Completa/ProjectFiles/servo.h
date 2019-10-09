@@ -24,6 +24,6 @@
 #define servo_write_rad(angle)		servo_write((uint16_t)(((angle) +  PI/2) / PI 	 * 0xFFFF))
 
 extern void servo_write(uint16_t angle);
-extern void servo_init();
+extern void servo_init(void);
 
 #endif //__SERVO_H__

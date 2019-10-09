@@ -71,8 +71,11 @@
 #define MARGEM_ESQUERDA 3 
 #define MAXLEVEL 2
 
-#define TEMPO_TIMER 500 // em milisegundos.
-//#define GRANTT
+#define TIMER_EDDIE 500 // em milisegundos.
+#define TIMER_ENEMIES 400 // em milisegundos.
+#define TIMER_BOSS 300 // em milisegundos.
+#define TIMER_POINTS 200 // em milisegundos.
+#define GRANTT
 
 //To print on the screen
 tContext sContext;
@@ -115,10 +118,59 @@ bool game_over;
 bool game_won;
 bool onPause;
 
+void EddieController();
+void PointsController();
+void BossController();
+void EnemiesController();
+void GameController();
+void init_all();
 
-/*----------------------------------------------------------------------------
- *  Transforming int to string
- *---------------------------------------------------------------------------*/
+osThreadDef(GameController, osPriorityNormal, 1, 0);
+
+osTimerDef(timer_eddie, EddieController);
+osTimerDef(timer_points, PointsController);
+osTimerDef(timer_boss, BossController);
+osTimerDef(timer_enemies, EnemiesController);
+
+osMutexId mutex_tela;
+osMutexDef (mutex_tela);
+	
+// Cria todos os timers 
+osTimerId t_eddie; 
+osTimerId t_points;
+osTimerId t_boss; 
+osTimerId t_enemies; 
+
+int main (void)
+{
+	osKernelInitialize();
+	#ifdef GRANTT
+		init_all();
+	#endif
+
+	// Cria todas as threads
+	osThreadCreate(osThread(GameController), NULL);
+	
+	t_eddie = osTimerCreate(osTimer(timer_eddie), osTimerPeriodic, NULL);
+	t_points = osTimerCreate(osTimer(timer_points), osTimerPeriodic, NULL);
+	t_boss = osTimerCreate(osTimer(timer_boss), osTimerPeriodic, NULL);
+	t_enemies = osTimerCreate(osTimer(timer_enemies), osTimerPeriodic, NULL);
+	
+	// Inicia todos os timers
+	osTimerStart(t_eddie, TIMER_EDDIE);
+	osTimerStart(t_points, TIMER_POINTS);
+	osTimerStart(t_boss, TIMER_BOSS);
+	osTimerStart(t_enemies, TIMER_ENEMIES);
+
+	// Cria os Mutex do sistema
+	mutex_tela = osMutexCreate(osMutex(mutex_tela));
+	
+	osKernelStart();
+	//osDelay(osWaitForever);
+}
+
+
+
 static void intToString(int64_t value, char * pBuf, uint32_t len, uint32_t base, uint8_t zeros){
 	static const char* pAscii = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	bool n = false;
@@ -206,12 +258,8 @@ static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, 
 	}
 }
 
-/*----------------------------------------------------------------------------
- *    Initializations
- *---------------------------------------------------------------------------*/
 
-void init_all()
-{
+void init_all(){
 	cfaf128x128x16Init();
 	joy_init();
 	accel_init();
@@ -225,9 +273,7 @@ void init_all()
 	led_init();
 }
 
-
-void draw_pixel(uint16_t x, uint16_t y)
-{
+void draw_pixel(uint16_t x, uint16_t y){
 	GrPixelDraw(&sContext, x, y);
 }
 
@@ -328,7 +374,6 @@ void draw_Key(uint16_t x, uint16_t y){
 	}
 }
 
-
 void drawBack(uint16_t x, uint16_t y,uint16_t width, uint16_t height){
 	uint32_t i, j;
 	uint32_t color, pixel;
@@ -366,7 +411,7 @@ void drawBack(uint16_t x, uint16_t y,uint16_t width, uint16_t height){
 	}
 }
 void draw(uint8_t id, uint16_t x, uint16_t y, uint16_t last_x, uint16_t last_y, uint8_t key_y, uint8_t last_key_y){
-		
+		//checa o mutex
 		/*id: 0 - drawBack
 					1 - draw_Eddie
 					2 - draw_Enemy
@@ -398,6 +443,7 @@ void draw(uint8_t id, uint16_t x, uint16_t y, uint16_t last_x, uint16_t last_y, 
 				draw_Boss(x,y);			
 				draw_Key(x,Key_y);
 		}
+		//libera o mutex
 }
 
 void draw_circle(uint16_t x, uint16_t y){
@@ -435,32 +481,6 @@ uint32_t saturate(uint8_t r, uint8_t g, uint8_t b){
 					(((uint32_t) g) <<  8) | 
 					( (uint32_t) b       );
 }
-
-/*----------------------------------------------------------------------------
- *      Switch LED on
- *---------------------------------------------------------------------------*/
-void Switch_On (unsigned char led) {
-  if (led != LED_CLK) led_on (led);
-}
-/*----------------------------------------------------------------------------
- *      Switch LED off
- *---------------------------------------------------------------------------*/
-void Switch_Off (unsigned char led) {
-  if (led != LED_CLK) led_off (led);
-}
-
-
-
-
-
-	
-
-
-/*----------------------------------------------------------------------------
- *      Main
- *---------------------------------------------------------------------------*/
-
-
 bool button_read_debounce(void) {
 	uint8_t i = 0;
 	while(i < 50) {
@@ -624,25 +644,29 @@ void EddieController(){
 		uint32_t Eddie_last_x;
 		uint32_t Eddie_last_y;
 	
-		if(!onPause){
+		if(!onPause)
+		{
 				Eddie_last_x = Eddie_x;
 				Eddie_last_y = Eddie_y;
 				may_go_up = collisionStairsControllerUp();
 				may_go_down = collisionStairsControllerDown();
-				if(going_up==false && going_down==false && jumping==false){
+				if(going_up==false && going_down==false && jumping==false)
+				{
 						x = 0.0048*joy_read_x();
 						y = -0.0029*joy_read_y() + 12;
 						#ifdef GRANTT
 						jumping_button = button_read_debounce();
 						#endif
 					
-						if(jumping_button){	//jumping_side: 0=parado, 1=direita, 2=esquerda
+						if(jumping_button)
+						{	//jumping_side: 0=parado, 1=direita, 2=esquerda
 								jumping=true;
 								if(x>13){jumping_side=1;}
 								else if(x<5){jumping_side=2;}
 								else{jumping_side=0;}
 						}
-						if(jumping_button==false){
+						if(jumping_button==false)
+						{
 								if(x>13 && Eddie_x+EDDIE_PASSO<128-EDDIE_WIDTH){
 										Eddie_x+=EDDIE_PASSO;
 								}
@@ -655,7 +679,6 @@ void EddieController(){
 								if(y<3 && may_go_up){
 										going_up = true;
 								}
-								
 						}
 				}
 				
@@ -666,7 +689,6 @@ void EddieController(){
 								
 								if(jumping_side==1 && Eddie_x+EDDIE_PASSO<128-EDDIE_WIDTH){Eddie_x += EDDIE_PASSO;}
 								else if(jumping_side==  2 && Eddie_x-EDDIE_PASSO>MARGEM_ESQUERDA){Eddie_x -= EDDIE_PASSO;}
-								
 								jumping_counter++;
 						}
 						else{
@@ -897,8 +919,7 @@ void newEnemyPosition(uint8_t id){
 		#endif
 		
 }
-void InitializeNewLevel()
-{
+void InitializeNewLevel(){
 		uint8_t i;
 		if(level==2){
 				escadas_x[0] = 33;
@@ -938,8 +959,7 @@ void InitializeNewLevel()
 		
 		InitializeBackGround();
 }
-void OnPause()
-{
+void OnPause(){
 		bool pause=true;
 		#ifdef GRANTT
 		GrContextForegroundSet(&sContext, ClrWhite);
@@ -984,8 +1004,7 @@ void GameOver(){
 				#endif
 		}
 }
-void GameWon()
-{
+void GameWon(){
 		char buf[10];
 		uint16_t i,j;
 		bool pause=true;
@@ -1016,12 +1035,12 @@ void GameWon()
 				#endif
 		}
 }
-void NextLevel()
-{
+void NextLevel(){
 		uint16_t i,j;
 		char buf[10];
 		bool pause=true;
 		onPause = true;
+	//param os timers 
 		
 		#ifdef GRANTT
 			GrContextForegroundSet(&sContext, ClrBlack);
@@ -1053,24 +1072,25 @@ void NextLevel()
 		}
 		InitializeNewLevel();
 		onPause = false;
+		//reativam os timmers
 }
 
-void GameController()
-{
+void GameController(){
 		char pbufx[10], pbufy[10], pbufz[10];
 		uint8_t id_enemy=10, id_point=10;
 		bool boss_collision, key_collision;
-		bool needPause = false;
+		uint8_t statusTimer;
 		
 		while(!game_over && !game_won)
 		{
-			//vira thread
+				// Virou timer
+				/*
 				EddieController();
 				EnemiesController();
 				PointsController();
 				BossController();
+				*/
 			
-				//fica aqui msm 
 				boss_collision = collisionBossController();
 				key_collision = collisionKeyController();
 				id_enemy =collisionEnemyController();
@@ -1083,7 +1103,7 @@ void GameController()
 								lives--;
 								ResetEddie();
 								newEnemyPosition(id_enemy);
-								needPause = true;
+								
 						}
 						else{game_over = true;}
 					
@@ -1093,6 +1113,7 @@ void GameController()
 						points++;
 						score+=10;
 						newPointPosition(id_point);
+					//som 1
 				}
 				if(key_collision )
 				{
@@ -1117,141 +1138,31 @@ void GameController()
 					GrStringDraw(&sContext,(char*)pbufx, -1, (sContext.psFont->ui8MaxWidth)*6,  (sContext.psFont->ui8Height+2)*0, true);
 					GrStringDraw(&sContext,(char*)pbufy, -1, (sContext.psFont->ui8MaxWidth)*16,  (sContext.psFont->ui8Height+2)*0, true);
 				#endif
-			if(needPause)
-			{
-					osDelay(100);
-					needPause = false;
-			}	
+			
 			if(points>=4)
 			{
 					#ifdef GRANTT
 						GrStringDraw(&sContext,"Get The Key, idiot!", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*1, true);
 					#endif
 			}
-			osDelay(500);
+			osDelay(500);//some
 		}	
+		//jogo acabou
 		onPause = true;
+		//param os timmers
+		statusTimer = osTimerStop(t_eddie);
+		statusTimer = osTimerStop(t_points);
+		statusTimer = osTimerStop(t_boss);
+		statusTimer = osTimerStop(t_enemies);
+		
+		
 		if(game_won){
+			//som 2
 				GameWon();
+			
 		}
-		else{
+		if(game_over){
+			//som 3
 			GameOver();
 		}
-
 }
-
-
-
-/*
-int main (void) {
-
-  uint32_t color = 0x00, i, j, pixel,pixel_ed;
-	
-	init_all();
-	Initialize();
-	OnPause();
-	InitializeBackGround();
-	GameController();
-}
-*/
-
-void t_GameController()
-{
-	while(1)
-	{
-		// todo conte?do aqui dentro.
-		#ifdef GRANTT
-			// Todo acesso ao I/O aqui dentro.
-		#endif
-	}
-}
-void t_EddieController()
-{
-	while(1)
-	{
-		// todo conte?do aqui dentro.
-		#ifdef GRANTT
-			// Todo acesso ao I/O aqui dentro.
-		#endif
-	}
-}
-void t_EnemiesController()
-{
-	while(1)
-	{
-		// todo conte?do aqui dentro.
-		#ifdef GRANTT
-			// Todo acesso ao I/O aqui dentro.
-		#endif
-	}
-}
-void t_PointsController()
-{
-	while(1)
-	{
-		// todo conte?do aqui dentro.
-		#ifdef GRANTT
-			// Todo acesso ao I/O aqui dentro.
-		#endif
-	}
-}
-void t_BossController()
-{
-	while(1)
-	{
-		// todo conte?do aqui dentro.
-		#ifdef GRANTT
-			// Todo acesso ao I/O aqui dentro.
-		#endif
-	}
-}
-
-void t_TimerCallBack()
-{
-		EddieController();
-		EnemiesController();
-		PointsController();
-		BossController();
-}
-
-osThreadDef(t_GameController, osPriorityNormal, 1, 0);
-//osThreadDef(t_EddieController, osPriorityNormal, 1, 0);
-//osThreadDef(t_EnemiesController, osPriorityNormal, 1, 0);
-//osThreadDef(t_PointsController, osPriorityNormal, 1, 0);
-//osThreadDef(t_BossController, osPriorityNormal, 1, 0);
-
-osTimerDef(clock, t_TimerCallBack);
-osTimerId	clock_sistema;
-
-osMutexId mutex_tela;
-osMutexDef (mutex_tela);
-
-int main (void)
-{
-	osKernelInitialize();
-	#ifdef GRANTT
-		init_all();
-	#endif
-	
-	// Cria todas as threads
-	osThreadCreate(osThread(t_GameController), NULL);
-	//osThreadCreate(osThread(t_EddieController), NULL);
-	//osThreadCreate(osThread(t_EnemiesController), NULL);
-	//osThreadCreate(osThread(t_PointsController), NULL);
-	//osThreadCreate(osThread(t_BossController), NULL);
-	
-	// Cria o timer do sistema
-	clock_sistema = osTimerCreate(osTimer(clock), osTimerPeriodic, NULL);
-	osTimerStart(clock_sistema, TEMPO_TIMER);
-	
-	// Cria os sem?foros do sistema
-	
-	// Cria os Mutex do sistema
-	mutex_tela = osMutexCreate(osMutex(mutex_tela));
-	
-	osKernelStart();
-	//osDelay(osWaitForever);
-}
-
-
-

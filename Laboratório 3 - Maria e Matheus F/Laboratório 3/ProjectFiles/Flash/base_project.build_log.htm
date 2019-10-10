@@ -1,0 +1,306 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.25.2.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Eduardo Otte, UTFPR, LIC=NHYKP-M90H1-17KRR-KEW54-KEDB2-W2HLI
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.25.2.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.25.2.0
+Dialog DLL:      DCM.DLL V1.17.1.0
+Target DLL:      lmidk-agdi.dll V???
+Dialog DLL:      TCM.DLL V1.35.1.0
+ 
+<h2>Project:</h2>
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\base_project.uvprojx
+Project File Date:  05/05/2019
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+*** Note: Rebuilding project, since 'Options->Output->Create Batch File' is selected.
+Rebuild Project 'base_project' - Target 'TM4C129 Flash'
+compiling exemploTIVA.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(5): warning:  #1295-D: Deprecated declaration button_init - give arg types
+  extern void button_init();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(6): warning:  #1295-D: Deprecated declaration button_read_s1 - give arg types
+  extern bool button_read_s1();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(7): warning:  #1295-D: Deprecated declaration button_read_s2 - give arg types
+  extern bool button_read_s2();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(9): warning:  #1-D: last line of file ends without a newline
+  #endif //__BUTTONS_H
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buzzer.h(18): warning:  #1295-D: Deprecated declaration buzzer_init - give arg types
+  extern void buzzer_init();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buzzer.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif //__BUZZER_H
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\joy.h(20): warning:  #1295-D: Deprecated declaration joy_read_center - give arg types
+  extern bool joy_read_center();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(78): warning:  #1295-D: Deprecated declaration print_scores - give arg types
+  void print_scores();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(79): warning:  #1295-D: Deprecated declaration print_lives - give arg types
+  void print_lives();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(81): warning:  #1295-D: Deprecated declaration print_fantasmas - give arg types
+  void print_fantasmas();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(82): warning:  #1295-D: Deprecated declaration print_pacman - give arg types
+  void print_pacman();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(83): warning:  #1295-D: Deprecated declaration print_initial_map - give arg types
+  void print_initial_map();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(85): warning:  #1295-D: Deprecated declaration draw_big_pill - give arg types
+  void draw_big_pill();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(86): warning:  #1295-D: Deprecated declaration erase_big_pill - give arg types
+  void erase_big_pill();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(100): warning:  #177-D: variable "i"  was declared but never referenced
+        uint8_t i;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(179): warning:  #223-D: function "print_score" declared implicitly
+        print_score();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(265): warning:  #940-D: missing return statement at end of non-void function "moveCheckPacMan" 
+  }
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(224): warning:  #177-D: variable "j"  was declared but never referenced
+        int i = 0, j = 0; 
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(309): warning:  #940-D: missing return statement at end of non-void function "possibleMoveCheckPacMan" 
+  }
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(268): warning:  #177-D: variable "j"  was declared but never referenced
+        int i = 0, j = 0; 
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(353): warning:  #940-D: missing return statement at end of non-void function "moveCheckGhost" 
+  }
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(312): warning:  #177-D: variable "j"  was declared but never referenced
+        int i = 0, j = 0; 
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(448): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                else if(startTick_ghost_escape != 0 && (((osKernelSysTick() - startTick_ghost_escape) / (float)osKernelSysTickFrequency) * 145.0) > 8000)
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(467): warning:  #223-D: function "rand" declared implicitly
+                                        random_number = rand()%100;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(473): warning:  #68-D: integer conversion resulted in a change of sign
+                                                ghost_vel_y[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(494): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_x[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(509): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_y[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(521): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_x[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(534): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_y[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(548): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_x[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(563): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_y[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(575): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_y[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(584): warning:  #68-D: integer conversion resulted in a change of sign
+                                                        ghost_vel_x[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(608): warning:  #68-D: integer conversion resulted in a change of sign
+                                                ghost_vel_x[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(619): warning:  #68-D: integer conversion resulted in a change of sign
+                                                ghost_vel_y[ghost] = -1;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(943): warning:  #223-D: function "rand" declared implicitly
+                        if(rand()%5000000 < 5)
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(954): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                else if(big_pill_enabled == true && (((osKernelSysTick() - startTick_big_pill) / (float)osKernelSysTickFrequency) * 145.0) > 3000)
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(970): warning:  #223-D: function "print_score" declared implicitly
+                        print_score();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(795): warning:  #177-D: variable "k"  was declared but never referenced
+        int i = 0, j = 0, k = 0, m = 0, original_score;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(795): warning:  #177-D: variable "m"  was declared but never referenced
+        int i = 0, j = 0, k = 0, m = 0, original_score;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(989): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_ptimer"
+  osTimerDef(periodo, callback);
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(1028): warning:  #223-D: function "srand" declared implicitly
+        srand(osKernelSysTick()-startTick);
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\exemploTIVA.c(1032): warning:  #1-D: last line of file ends without a newline
+  }
+exemploTIVA.c: 43 warnings, 0 errors
+compiling mapaParaColisoes.c...
+compiling pacman0.c...
+compiling pacman1.c...
+compiling pacman2.c...
+compiling vitamina.c...
+compiling draw.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(78): warning:  #1295-D: Deprecated declaration print_scores - give arg types
+  void print_scores();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(79): warning:  #1295-D: Deprecated declaration print_lives - give arg types
+  void print_lives();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(81): warning:  #1295-D: Deprecated declaration print_fantasmas - give arg types
+  void print_fantasmas();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(82): warning:  #1295-D: Deprecated declaration print_pacman - give arg types
+  void print_pacman();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(83): warning:  #1295-D: Deprecated declaration print_initial_map - give arg types
+  void print_initial_map();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(85): warning:  #1295-D: Deprecated declaration draw_big_pill - give arg types
+  void draw_big_pill();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.h(86): warning:  #1295-D: Deprecated declaration erase_big_pill - give arg types
+  void erase_big_pill();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\draw.c(137): warning:  #111-D: statement is unreachable
+        if(velx == 1)   {
+draw.c: 8 warnings, 0 errors
+compiling ghost0.c...
+compiling ghost1.c...
+compiling eyes.c...
+compiling deadPacman0.c...
+compiling deadPacman1.c...
+compiling deadPacman2.c...
+compiling deadPacman3.c...
+compiling deadPacman4.c...
+compiling deadPacman5.c...
+compiling deadPacman6.c...
+compiling buzzer.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buzzer.h(18): warning:  #1295-D: Deprecated declaration buzzer_init - give arg types
+  extern void buzzer_init();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buzzer.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif //__BUZZER_H
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buzzer.c(162): warning:  #1-D: last line of file ends without a newline
+  }
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buzzer.c(31): warning:  #550-D: variable "g_ui32SysClock"  was set but never used
+  static uint32_t g_ui32SysClock;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buzzer.c(33): warning:  #550-D: variable "g_current_per"  was set but never used
+  static uint16_t g_current_per;
+buzzer.c: 5 warnings, 0 errors
+compiling accel.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\accel.c(89): warning:  #1-D: last line of file ends without a newline
+  }
+accel.c: 1 warning, 0 errors
+compiling buttons.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(5): warning:  #1295-D: Deprecated declaration button_init - give arg types
+  extern void button_init();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(6): warning:  #1295-D: Deprecated declaration button_read_s1 - give arg types
+  extern bool button_read_s1();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(7): warning:  #1295-D: Deprecated declaration button_read_s2 - give arg types
+  extern bool button_read_s2();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\buttons.h(9): warning:  #1-D: last line of file ends without a newline
+  #endif //__BUTTONS_H
+buttons.c: 4 warnings, 0 errors
+compiling cfaf128x128x16.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\cfaf128x128x16.c(880): warning:  #1-D: last line of file ends without a newline
+  //*****************************************************************************
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\cfaf128x128x16.c(770): warning:  #177-D: function "ssiSetDataMode"  was declared but never referenced
+  ssiSetDataMode(uint8_t mode) {
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\cfaf128x128x16.c(777): warning:  #177-D: function "ssiSetClockDivider"  was declared but never referenced
+  ssiSetClockDivider(uint8_t divider){
+cfaf128x128x16.c: 3 warnings, 0 errors
+compiling led.c...
+compiling mic.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\mic.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif //__MIC_H__
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\mic.c(91): warning:  #1-D: last line of file ends without a newline
+  }
+mic.c: 2 warnings, 0 errors
+compiling opt.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.h(20): warning:  #1295-D: Deprecated declaration opt_init - give arg types
+  extern void  opt_init();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.h(21): warning:  #1295-D: Deprecated declaration opt_read - give arg types
+  extern uint16_t opt_read();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.h(22): warning:  #1295-D: Deprecated declaration opt_read_lux - give arg types
+  extern uint32_t opt_read_lux();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.h(24): warning:  #1-D: last line of file ends without a newline
+  #endif //__OPT_H__
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.c(149): warning:  #128-D: loop is not reachable
+                while(i < n){
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.c(195): warning:  #128-D: loop is not reachable
+                while(i < n-1){
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.c(330): warning:  #177-D: variable "temp"  was declared but never referenced
+                uint64_t temp = 0;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.c(60): warning:  #550-D: variable "mid"  was set but never used
+  static uint16_t mid, did;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.c(60): warning:  #550-D: variable "did"  was set but never used
+  static uint16_t mid, did;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.c(86): warning:  #177-D: variable "g_mid"  was declared but never referenced
+  static uint16_t g_mid, g_did, g_timeout_count;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\opt.c(86): warning:  #177-D: variable "g_did"  was declared but never referenced
+  static uint16_t g_mid, g_did, g_timeout_count;
+opt.c: 11 warnings, 0 errors
+compiling rgb.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\rgb.h(66): warning:  #1-D: last line of file ends without a newline
+  #endif //__RGB_H__
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\rgb.c(290): warning:  #1-D: last line of file ends without a newline
+  }
+rgb.c: 2 warnings, 0 errors
+compiling servo.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\servo.h(27): warning:  #1295-D: Deprecated declaration servo_init - give arg types
+  extern void servo_init();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\servo.c(59): warning:  #550-D: variable "g_ui32SysClock"  was set but never used
+  static uint32_t g_ui32SysClock;
+servo.c: 2 warnings, 0 errors
+compiling joy.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\joy.h(20): warning:  #1295-D: Deprecated declaration joy_read_center - give arg types
+  extern bool joy_read_center();
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\joy.c(102): warning:  #1-D: last line of file ends without a newline
+  }
+joy.c: 2 warnings, 0 errors
+compiling temp.c...
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\temp.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif //__TEMP_H__
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\temp.c(158): warning:  #128-D: loop is not reachable
+                while(i < n){
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\temp.c(207): warning:  #128-D: loop is not reachable
+                while(i < n-1){
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\temp.c(303): warning:  #177-D: variable "temp"  was declared but never referenced
+        uint64_t temp = 0;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\temp.c(94): warning:  #550-D: variable "g_mid"  was set but never used
+  static uint16_t g_mid, g_did, g_timeout_count;
+G:\My Drive\UTFPR\Sistemas Embarcados\Laboratório 3\ProjectFiles\temp.c(94): warning:  #550-D: variable "g_did"  was set but never used
+  static uint16_t g_mid, g_did, g_timeout_count;
+temp.c: 6 warnings, 0 errors
+compiling RTX_Conf_CM.c...
+assembling startup_TM4C129.s...
+compiling system_TM4C129.c...
+linking...
+Program Size: Code=20584 RO-data=54164 RW-data=248 ZI-data=26536  
+".\Flash\base_project.axf" - 0 Error(s), 89 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.3.0.pack
+                ARM.CMSIS.5.3.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: RTOS Version: 1.0.0
+   * Component: CORE Version: 5.1.1
+   * Component: Keil RTX Version: 4.81.1
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.TM4C_DFP.1.1.0.pack
+                Keil.TM4C_DFP.1.1.0
+                Texas Instruments Tiva C Series Device Support and Examples
+   * Component: Startup Version: 1.0.0
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_TM4C129_Flash
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\RTOS\RTX\INC
+  C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ::CMSIS:RTOS:1.0.0 (API)
+
+   * Component: ARM::CMSIS:CORE:5.1.1
+
+   * Component: ARM::CMSIS:RTOS:Keil RTX:4.81.1
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
+      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
+      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib
+      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
+
+   * Component: Keil::Device:Startup:1.0.0
+      Include file:  Device\Include\TM4C129\TM4C129.h
+      Source file:   Device\Source\ARM\startup_TM4C129.s
+      Source file:   Device\Source\system_TM4C129.c
+Build Time Elapsed:  00:00:20
+</pre>
+</body>
+</html>

@@ -1,6 +1,9 @@
 /*============================================================================
  *                    Exemplos de utilização do Kit
  *              EK-TM4C1294XL + Educational BooterPack MKII 
+ /*============================================================================
+ *                    Exemplos de utilização do Kit
+ *              EK-TM4C1294XL + Educational BooterPack MKII 
  *---------------------------------------------------------------------------*
  *                    Prof. André Schneider de Oliveira
  *            Universidade Tecnológica Federal do Paraná (UTFPR)
@@ -38,6 +41,7 @@
 #include "point.h"
 #include "boss.h"
 #include "key.h"
+#include "cmsis_os.h"
 
 #define LED_A      0
 #define LED_B      1
@@ -71,7 +75,7 @@
 #define MARGEM_ESQUERDA 3 
 #define MAXLEVEL 2
 
-#define TIMER_EDDIE 500
+#define TIMER 500
 //To print on the screen
 tContext sContext;
 
@@ -111,7 +115,15 @@ uint8_t lives;
 uint16_t score;
 bool game_over;
 bool game_won;
-bool onPause;
+
+//Sounds
+uint16_t buzzer_vol = 0xFFFF;
+uint16_t buzzer_per = 3;
+
+//mutex
+osMutexId mutex_draw;
+osMutexDef(mutex_draw);
+
 
 void init_all();
 void Initialize();
@@ -122,34 +134,59 @@ void EddieController();
 void EnemiesController();
 void PointsController();
 void BossController();
+void AwakeEverybody();
+void StopSound();
 
+
+//threads
+osThreadId t_game, t_eddie, t_enemies, t_points, t_boss;
 osThreadDef(GameController, osPriorityNormal, 1, 0);
-osTimerDef(timer_eddie, EddieController);
-osTimerDef(timer_enemies, EnemiesController);
-osTimerDef(timer_points, PointsController);
-osTimerDef(timer_boss, BossController); 
-osTimerId t_eddie;
-osTimerId	t_enemies;
-osTimerId	t_points;
-osTimerId	t_boss;
+osThreadDef(EddieController, osPriorityNormal, 1, 0);
+osThreadDef(EnemiesController, osPriorityNormal, 1, 0);
+osThreadDef(PointsController, osPriorityNormal, 1, 0);
+osThreadDef(BossController, osPriorityNormal, 1, 0);
+//signals
+uint16_t signal_game = 0x04;
+uint16_t signal_eddie = 0x01;
+uint16_t signal_enemies = 0x01;
+uint16_t signal_points = 0x02;
+uint16_t signal_boss = 0x03;
+//TIMERS
+osTimerDef(t_awake, AwakeEverybody);
+osTimerId t_awake;
 
+osTimerDef(t_sound, StopSound);
+osTimerId t_sound;
+
+void StopSound(){
+		buzzer_write(false);
+}
+void AwakeEverybody(){
+		//send signals 
+		osSignalSet(t_game,signal_game);
+
+}
 int main (void) {
 
   //uint32_t color = 0x00, i, j, pixel,pixel_ed;
 	osKernelInitialize();
-	t_eddie = osTimerCreate(osTimer(timer_eddie), osTimerPeriodic, (void *)0);
-	t_enemies = osTimerCreate(osTimer(timer_enemies), osTimerPeriodic, (void *)1);
-	t_points = osTimerCreate(osTimer(timer_points), osTimerPeriodic, (void *)2);
-	t_boss = osTimerCreate(osTimer(timer_boss), osTimerPeriodic, (void *)3);
+	t_awake = osTimerCreate(osTimer(t_awake), osTimerPeriodic, (void *)0);
+	t_sound = osTimerCreate(osTimer(t_sound), osTimerOnce, (void *)1);
 	init_all();
 	Initialize();
 	OnPause();
 	InitializeBackGround();
 	
-	osThreadCreate(osThread(GameController), NULL);
+	t_game = osThreadCreate(osThread(GameController), NULL);
+	t_eddie = osThreadCreate(osThread(EddieController), NULL);
+	t_enemies = osThreadCreate(osThread(EnemiesController), NULL);
+	t_points = osThreadCreate(osThread(PointsController), NULL);
+	t_boss = osThreadCreate(osThread(BossController), NULL);
 	
+	mutex_draw = osMutexCreate(osMutex(mutex_draw));
 
-	osTimerStart(t_eddie, TIMER_EDDIE);
+	osTimerStart(t_awake, TIMER);
+	
 	osKernelStart();
 	osDelay(osWaitForever);
 }
@@ -254,6 +291,8 @@ void init_all(){
 	temp_init();
 	opt_init();
 	led_init();
+	buzzer_vol_set(buzzer_vol);
+	buzzer_write(false);
 }
 
 
@@ -402,7 +441,7 @@ void draw(uint8_t id, uint16_t x, uint16_t y, uint16_t last_x, uint16_t last_y, 
 					2 - draw_Enemy
 					3 - draw_Point 
 					4 - draw_Boss && draw_Key	*/
-		
+		osMutexWait(mutex_draw,osWaitForever);
 		if(id==0){// caso precise no futuro
 		}
 		else if (id==1){
@@ -428,6 +467,7 @@ void draw(uint8_t id, uint16_t x, uint16_t y, uint16_t last_x, uint16_t last_y, 
 				draw_Boss(x,y);			
 				draw_Key(x,Key_y);
 		}
+		osMutexRelease(mutex_draw);
 }
 
 void draw_circle(uint16_t x, uint16_t y){
@@ -579,7 +619,6 @@ void Initialize(){
 		score=0;
 		game_over = false;
 		game_won = false;
-		//onPause = false;
 		
 		jumping = false;
 		jumping_counter = 0;
@@ -619,10 +658,13 @@ void EddieController(){
 		bool jumping_button, may_go_up,may_go_down;
 		uint32_t Eddie_last_x;
 		uint32_t Eddie_last_y;
-	
-		//if(!onPause){
+		
+		while(1){
+				osSignalWait(signal_eddie,osWaitForever);
+			
 				Eddie_last_x = Eddie_x;
 				Eddie_last_y = Eddie_y;
+			
 				may_go_up = collisionStairsControllerUp();
 				may_go_down = collisionStairsControllerDown();
 				if(going_up==false && going_down==false && jumping==false){
@@ -697,7 +739,8 @@ void EddieController(){
 				//}
 				//draw_Eddie(Eddie_x, Eddie_y);		
 				draw(1,Eddie_x, Eddie_y, Eddie_last_x, Eddie_last_y, 0, 0);
-		//}
+		}
+
 }
 
 
@@ -706,7 +749,8 @@ void EnemiesController(){
 		
 		uint32_t enemies_last_x[ENEMIES_COUNTER] ;
 		uint32_t enemies_last_y[ENEMIES_COUNTER] ;
-		//if(!onPause){
+		while(1){
+				osSignalWait(signal_enemies,osWaitForever);
 				for(i=0; i<ENEMIES_COUNTER; i++){
 						enemies_last_x[i] = enemies_x[i];
 						enemies_last_y[i] = enemies_y[i];
@@ -726,7 +770,7 @@ void EnemiesController(){
 						//draw_Enemy(enemies_x[i],enemies_y[i]);
 						draw(2, enemies_x[i],enemies_y[i],enemies_last_x[i], enemies_last_y[i], 0, 0);
 				}		
-		//}
+		}
 }
 
 
@@ -735,7 +779,8 @@ void PointsController(){
 		
 		uint32_t points_last_x[POINT_COUNTER] ;
 		uint32_t points_last_y[POINT_COUNTER] ;
-		//if(!onPause){
+		while(1){
+				osSignalWait(signal_points,osWaitForever);
 				for(i=0; i<POINT_COUNTER; i++){
 						points_last_x[i] = points_x[i];
 						points_last_y[i] = points_y[i];
@@ -751,7 +796,8 @@ void PointsController(){
 						//draw_Point(points_x[i],points_y[i]);
 						draw(3, points_x[i],points_y[i], points_last_x[i], points_last_y[i], 0, 0);
 				}
-		//}		
+		}
+				
 }
 
 
@@ -762,7 +808,8 @@ void BossController(){
 		uint32_t boss_last_y;
 		uint32_t key_last_y;
 	
-		//if(!onPause){
+		while(1){
+				osSignalWait(signal_boss,osWaitForever);
 				boss_last_x = Boss_x;
 				boss_last_y = Boss_y;
 				key_last_y = Key_y;
@@ -789,7 +836,7 @@ void BossController(){
 				//draw_Boss(Boss_x,Boss_y);			
 				//draw_Key(Boss_x,Key_y);
 				draw(4,Boss_x,Boss_y,boss_last_x, boss_last_y,Key_y,key_last_y );
-		//}
+		}
 }
 		
 
@@ -868,9 +915,8 @@ void newEnemyPosition(uint8_t id){
 		//drawBack(enemies_x[id], enemies_x[id], ENEMY_WIDTH, ENEMY_HEIGHT);
 		uint16_t last_x = enemies_x[id];
 		if(enemies_side[id]!=0){
-				uint8_t new_x = (score*enemies_x[id]/(id+1))%120+MARGEM_ESQUERDA; 
-				enemies_x[id] = new_x;
-				
+				uint8_t new_x = (27*enemies_x[id]/(id+1))%110+10; 
+				enemies_x[id] = new_x;		
 		}
 		draw(2,enemies_x[id],enemies_y[id], last_x,enemies_y[id], 0,0 );
 		
@@ -896,6 +942,7 @@ void InitializeNewLevel(){
 				for(i=0; i<POINT_COUNTER; i++){
 						newPointPosition(i);
 				}
+				enemies_x[2]=100;
 				
 				Eddie_x = 115;
 				Eddie_y = 124-EDDIE_HEIGHT;
@@ -929,6 +976,7 @@ void GameOver(){
 		uint16_t i,j;
 		bool pause=true;
 		GrContextForegroundSet(&sContext, ClrBlack);
+		GrContextBackgroundSet(&sContext, ClrBlack);
 		intToString(score, buf, 10, 10, 3);
 		
 		for (i=0; i<128; i++){
@@ -938,6 +986,7 @@ void GameOver(){
 		}
 		GrContextForegroundSet(&sContext, ClrYellow);
 		while(pause){
+			
 				pause = !button_read_debounce();
 				GrStringDraw(&sContext,"Game Over", -1, (sContext.psFont->ui8MaxWidth)*6,  (sContext.psFont->ui8Height+2)*4, true);
 				GrStringDraw(&sContext,"U LOSER", -1, (sContext.psFont->ui8MaxWidth)*7,  (sContext.psFont->ui8Height+2)*5, true);
@@ -986,10 +1035,7 @@ void NextLevel(){
 		level++;
 		points=0;
 		intToString(level, buf, 10, 10, 3);
-		timer_status = osTimerStop(t_eddie);		
-		timer_status = osTimerStop(t_enemies);		
-		timer_status = osTimerStop(t_points);		
-		timer_status = osTimerStop(t_boss);
+		timer_status = osTimerStop(t_awake);		
 		while(pause)
 		{
 				pause = !button_read_debounce();
@@ -999,94 +1045,92 @@ void NextLevel(){
 		}
 		InitializeNewLevel();
 		//onPause = false;
-		timer_status = osTimerStart(t_eddie, TIMER_EDDIE);		
-		timer_status = osTimerStart(t_enemies, TIMER_EDDIE);		
-		timer_status = osTimerStart(t_points, TIMER_EDDIE);		
-		timer_status = osTimerStart(t_boss, TIMER_EDDIE);
+		timer_status = osTimerStart(t_awake, TIMER);		
+
 }
 
 void GameController(){
-		char pbufx[10], pbufy[10], pbufz[10];
+		char pbufx[10], pbufy[10], pbufz[10], pbuff[10];
 		uint8_t id_enemy=10, id_point=10;
 		uint8_t timer_status;
 		bool boss_collision, key_collision;
-		bool needPause = false;
-		
-		while(!game_over && !game_won)
-		{
-				//vira TIMER
-				//EddieController();
-				//EnemiesController();
-				//PointsController();
-				//BossController();
-			
-				//fica aqui msm 
-				boss_collision = collisionBossController();
-				key_collision = collisionKeyController();
-				id_enemy =collisionEnemyController();
-				id_point = collisionPointController();
-				
-				if(boss_collision || id_enemy!=10){	//boss_collision || id_enemy!=10
-						if(lives>1){
-								lives--;
-								ResetEddie();
-								newEnemyPosition(id_enemy);
-								needPause = true;
-						}
-						else{game_over = true;}
+	
+		while(1){
+			if(!game_over && !game_won){
+					osSignalWait(signal_game,osWaitForever);
 					
-				}
-				if(id_point!=10){
-						points++;
-						score+=10;
-						newPointPosition(id_point);
-				}
-				if(key_collision ){
-						if(level<MAXLEVEL){
-								points++;
-								score+=300;
-								NextLevel();
-						}
-						else{
-								game_won = true;
-						}	
-				}
-				
-				GrContextBackgroundSet(&sContext, ClrBlack);
-				intToString(lives, pbufx, 10, 10, 3);
-				intToString(score, pbufy, 10, 10, 3);
-				GrContextForegroundSet(&sContext, ClrRed);
-				GrStringDraw(&sContext,"Lives:", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*0, true);
-				GrStringDraw(&sContext,"Score", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);
-				GrStringDraw(&sContext,(char*)pbufx, -1, (sContext.psFont->ui8MaxWidth)*6,  (sContext.psFont->ui8Height+2)*0, true);
-				GrStringDraw(&sContext,(char*)pbufy, -1, (sContext.psFont->ui8MaxWidth)*16,  (sContext.psFont->ui8Height+2)*0, true);
-
-			if(needPause){
-					osDelay(100);
-					needPause = false;
-			}	
-			if(points>=4){
-					GrStringDraw(&sContext,"Get The Key, idiot!", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*1, true);
+					//fica aqui msm 
+					boss_collision = collisionBossController();
+					key_collision = collisionKeyController();
+					id_enemy =collisionEnemyController();
+					id_point = collisionPointController();
+					
+					if(boss_collision || id_enemy!=10){	//boss_collision || id_enemy!=10
+							if(lives>1){
+									buzzer_per = 4;
+									buzzer_per_set(buzzer_per);
+									buzzer_write(true);
+									osTimerStart(t_sound, 2*TIMER);
+									lives--;
+									ResetEddie();
+									newEnemyPosition(id_enemy);
+							}
+							else{game_over = true;}					
+					}
+					if(id_point!=10){
+							buzzer_per = 1;
+							buzzer_per_set(buzzer_per);
+							buzzer_write(true);
+							osTimerStart(t_sound, 2*TIMER);
+							points++;
+							score+=10;
+							newPointPosition(id_point);
+					}
+					if(key_collision ){
+							if(level<MAXLEVEL){
+									buzzer_per = 2;
+									buzzer_per_set(buzzer_per);
+									buzzer_write(true);
+									osTimerStart(t_sound, 2*TIMER);
+									points++;
+									score+=300;
+									NextLevel();
+							}
+							else{
+									game_won = true;
+							}	
+					}
+					
+					GrContextBackgroundSet(&sContext, ClrBlack);
+					GrContextForegroundSet(&sContext, ClrYellow);
+					intToString(lives, pbufx, 10, 10, 3);
+					intToString(score, pbufy, 10, 10, 3);
+					osMutexWait(mutex_draw,osWaitForever);
+					GrStringDraw(&sContext,"Lives:", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*0, true);
+					GrStringDraw(&sContext,"Score", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);
+					GrStringDraw(&sContext,(char*)pbufx, -1, (sContext.psFont->ui8MaxWidth)*6, 	(sContext.psFont->ui8Height+2)*0, true);
+					GrStringDraw(&sContext,(char*)pbufy, -1, (sContext.psFont->ui8MaxWidth)*16, (sContext.psFont->ui8Height+2)*0, true);
+					
+					if(points>=4){
+							GrStringDraw(&sContext,"Get The Key!", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*1, true);
+					}
+					osMutexRelease(mutex_draw);
 			}
-			osDelay(500);
-		}	
-		//onPause = true;
-		
-		timer_status = osTimerStop(t_eddie);		
-		timer_status = osTimerStop(t_enemies);		
-		timer_status = osTimerStop(t_points);		
-		timer_status = osTimerStop(t_boss);
-		
-		if(game_won){
-				GameWon();
+			else{
+					timer_status = osTimerStop(t_awake);		
+					osMutexWait(mutex_draw,osWaitForever);
+					if(game_won){
+							GameWon();
+					}
+					else if(game_over){
+							GameOver();
+					}
+					osMutexRelease(mutex_draw);
+			}	
+			
+			osSignalSet(t_eddie,signal_eddie);
+			osSignalSet(t_enemies,signal_enemies);
+			osSignalSet(t_points,signal_points);
+			osSignalSet(t_boss,signal_boss);
 		}
-		else{
-			GameOver();
-		}
-
 }
-
-
-
-
-

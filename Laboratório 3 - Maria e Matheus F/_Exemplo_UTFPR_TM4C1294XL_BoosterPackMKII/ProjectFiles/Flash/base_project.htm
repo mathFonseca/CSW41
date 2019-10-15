@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\base_project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\base_project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Oct 10 16:37:04 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Oct 14 08:24:32 2019
 <BR><P>
 <H3>Maximum Stack Usage =        224 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -528,8 +528,8 @@ Global Symbols
 <P><STRONG><a name="[c9]"></a>draw_pixel</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = draw_pixel
 </UL>
-<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
+<BR>[Called By]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameOver
 <LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitializeBacKGround
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drawBack
@@ -555,8 +555,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_read_s1
 </UL>
-<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
+<BR>[Called By]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameOver
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EddieController
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OnPause
@@ -755,23 +755,23 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> exemplotiva.o(.constdata)
 </UL>
-<P><STRONG><a name="[106]"></a>collisionEnemyController</STRONG> (Thumb, 108 bytes, Stack size 20 bytes, exemplotiva.o(.text))
+<P><STRONG><a name="[105]"></a>collisionEnemyController</STRONG> (Thumb, 108 bytes, Stack size 20 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = collisionEnemyController
 </UL>
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
 </UL>
 
-<P><STRONG><a name="[107]"></a>collisionPointController</STRONG> (Thumb, 66 bytes, Stack size 20 bytes, exemplotiva.o(.text))
+<P><STRONG><a name="[106]"></a>collisionPointController</STRONG> (Thumb, 66 bytes, Stack size 20 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = collisionPointController
 </UL>
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
 </UL>
 
-<P><STRONG><a name="[105]"></a>collisionKeyController</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, exemplotiva.o(.text))
+<P><STRONG><a name="[104]"></a>collisionKeyController</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, exemplotiva.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
 </UL>
 
-<P><STRONG><a name="[104]"></a>collisionBossController</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, exemplotiva.o(.text))
+<P><STRONG><a name="[103]"></a>collisionBossController</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = collisionBossController
 </UL>
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
@@ -810,15 +810,13 @@ Global Symbols
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newPointPosition
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitializeBackGround
 </UL>
-<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<BR>[Called By]<UL><LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
 </UL>
 
-<P><STRONG><a name="[ff]"></a>GameOver</STRONG> (Thumb, 298 bytes, Stack size 48 bytes, exemplotiva.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = GameOver &rArr; intToString &rArr; __aeabi_ldivmod
+<P><STRONG><a name="[ff]"></a>GameOver</STRONG> (Thumb, 252 bytes, Stack size 40 bytes, exemplotiva.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = GameOver &rArr; intToString &rArr; __aeabi_ldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_write
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GrStringDraw
+<BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GrStringDraw
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_read_debounce
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_pixel
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;intToString
@@ -826,7 +824,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
 </UL>
 
-<P><STRONG><a name="[101]"></a>GameWon</STRONG> (Thumb, 324 bytes, Stack size 40 bytes, exemplotiva.o(.text))
+<P><STRONG><a name="[100]"></a>GameWon</STRONG> (Thumb, 316 bytes, Stack size 40 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = GameWon &rArr; intToString &rArr; __aeabi_ldivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GrStringDraw
@@ -837,10 +835,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
 </UL>
 
-<P><STRONG><a name="[102]"></a>NextLevel</STRONG> (Thumb, 238 bytes, Stack size 48 bytes, exemplotiva.o(.text))
+<P><STRONG><a name="[101]"></a>NextLevel</STRONG> (Thumb, 242 bytes, Stack size 48 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = NextLevel &rArr; InitializeNewLevel &rArr; newPointPosition &rArr; draw &rArr; drawBack &rArr; draw_pixel
 </UL>
-<BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStop
+<BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStop
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStart
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GrStringDraw
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitializeNewLevel
@@ -851,28 +849,28 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
 </UL>
 
-<P><STRONG><a name="[97]"></a>GameController</STRONG> (Thumb, 502 bytes, Stack size 40 bytes, exemplotiva.o(.text))
+<P><STRONG><a name="[97]"></a>GameController</STRONG> (Thumb, 506 bytes, Stack size 40 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = GameController &rArr; NextLevel &rArr; InitializeNewLevel &rArr; newPointPosition &rArr; draw &rArr; drawBack &rArr; draw_pixel
 </UL>
-<BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStop
+<BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStop
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osTimerStart
 <LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalWait
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osSignalSet
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexWait
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osMutexRelease
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_write
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GrStringDraw
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameOver
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newEnemyPosition
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;newPointPosition
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ResetEddie
-<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionBossController
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionKeyController
-<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionPointController
-<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionEnemyController
+<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionBossController
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionKeyController
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionPointController
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collisionEnemyController
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;intToString
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> exemplotiva.o(.constdata)
@@ -880,10 +878,9 @@ Global Symbols
 <P><STRONG><a name="[c6]"></a>buzzer_write</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, buzzer.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMOutputState
 </UL>
-<BR>[Called By]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
+<BR>[Called By]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameOver
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_all
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StopSound
 </UL>
@@ -894,12 +891,12 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMPulseWidthSet
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMGenPeriodGet
 </UL>
-<BR>[Called By]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
+<BR>[Called By]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_all
 </UL>
 
-<P><STRONG><a name="[100]"></a>buzzer_per_set</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, buzzer.o(.text))
+<P><STRONG><a name="[107]"></a>buzzer_per_set</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, buzzer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = buzzer_per_set &rArr; buzzer_vol_set
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMGenPeriodSet
@@ -908,7 +905,6 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameOver
 </UL>
 
 <P><STRONG><a name="[d5]"></a>buzzer_init</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, buzzer.o(.text))
@@ -924,7 +920,7 @@ Global Symbols
 <LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_div_set
 <LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_write
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_vol_set
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_all
 </UL>
@@ -2448,8 +2444,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = GrStringDraw
 </UL>
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameOver
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OnPause
 </UL>
@@ -2621,7 +2617,7 @@ Global Symbols
 
 <P><STRONG><a name="[10d]"></a>PWMGenPeriodSet</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, pwm.o(i.PWMGenPeriodSet))
 <BR><BR>[Called By]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rgb_init
-<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_per_set
 </UL>
 
 <P><STRONG><a name="[113]"></a>PWMOutputInvert</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, pwm.o(i.PWMOutputInvert))
@@ -2877,13 +2873,13 @@ Global Symbols
 
 <P><STRONG><a name="[e0]"></a>osTimerStart</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rt_cmsis.o(i.osTimerStart))
 <BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[103]"></a>osTimerStop</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rt_cmsis.o(i.osTimerStop))
+<P><STRONG><a name="[102]"></a>osTimerStop</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, rt_cmsis.o(i.osTimerStop))
 <BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
 </UL>
 
 <P><STRONG><a name="[a3]"></a>osTimerThread</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, rt_cmsis.o(i.osTimerThread))
@@ -3545,8 +3541,8 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ldivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameController
-<LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NextLevel
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameWon
 <LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GameOver
 </UL>
 

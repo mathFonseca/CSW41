@@ -26,7 +26,6 @@ Project File Date:  10/09/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-*** Note: Rebuilding project, since 'Options->Output->Create Batch File' is selected.
 Rebuild Project 'base_project' - Target 'TM4C129 Flash'
 compiling exemploTIVA.c...
 C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(4): warning:  #9-D: nested comment is not allowed
@@ -103,13 +102,13 @@ C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Math
                 uint8_t i;
 C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(871): warning:  #177-D: variable "i"  was declared but never referenced
                 uint8_t i;
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1026): warning:  #550-D: variable "timer_status"  was set but never used
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1023): warning:  #550-D: variable "timer_status"  was set but never used
                 uint8_t timer_status;
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1056): warning:  #177-D: variable "pbufz"  was declared but never referenced
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1053): warning:  #177-D: variable "pbufz"  was declared but never referenced
                 char pbufx[10], pbufy[10], pbufz[10], pbuff[10];
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1056): warning:  #177-D: variable "pbuff"  was declared but never referenced
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1053): warning:  #177-D: variable "pbuff"  was declared but never referenced
                 char pbufx[10], pbufy[10], pbufz[10], pbuff[10];
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1058): warning:  #550-D: variable "timer_status"  was set but never used
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(1055): warning:  #550-D: variable "timer_status"  was set but never used
                 uint8_t timer_status;
 C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 3 - Maria e Matheus F\_Exemplo_UTFPR_TM4C1294XL_BoosterPackMKII\ProjectFiles\exemploTIVA.c(251): warning:  #177-D: function "floatToString"  was declared but never referenced
   static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, uint8_t zeros, uint8_t precision){
@@ -222,7 +221,7 @@ compiling RTX_Conf_CM.c...
 assembling startup_TM4C129.s...
 compiling system_TM4C129.c...
 linking...
-Program Size: Code=25760 RO-data=102516 RW-data=1644 ZI-data=10004  
+Program Size: Code=25700 RO-data=102516 RW-data=1644 ZI-data=10004  
 ".\Flash\base_project.axf" - 0 Error(s), 80 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -256,23 +255,23 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:RTOS:Keil RTX:4.82.0
       Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
       Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
-      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib
       Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
       Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
 
    * Component: Keil::Device:Startup:1.0.0
       Source file:   Device\Source\system_TM4C129.c
-      Include file:  Device\Include\TM4C129\TM4C129.h
       Source file:   Device\Source\ARM\startup_TM4C129.s
-Build Time Elapsed:  00:00:07
+      Include file:  Device\Include\TM4C129\TM4C129.h
+Build Time Elapsed:  00:00:12
 </pre>
 </body>
 </html>

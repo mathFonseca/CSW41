@@ -117,8 +117,8 @@ bool game_over;
 bool game_won;
 
 //Sounds
-uint16_t buzzer_vol = 0xFFFF;
-uint16_t buzzer_per = 3;
+uint16_t buzzer_vol = 5000;
+uint16_t buzzer_per = 1703;
 
 //mutex
 osMutexId mutex_draw;
@@ -989,8 +989,8 @@ void GameOver(){
 			
 				pause = !button_read_debounce();
 				GrStringDraw(&sContext,"Game Over", -1, (sContext.psFont->ui8MaxWidth)*6,  (sContext.psFont->ui8Height+2)*4, true);
-				GrStringDraw(&sContext,"U LOSER", -1, (sContext.psFont->ui8MaxWidth)*7,  (sContext.psFont->ui8Height+2)*5, true);
-				GrStringDraw(&sContext,"Maybe next time?", -1, (sContext.psFont->ui8MaxWidth)*2,  (sContext.psFont->ui8Height+2)*6, true);
+				//GrStringDraw(&sContext,"U LOSER", -1, (sContext.psFont->ui8MaxWidth)*7,  (sContext.psFont->ui8Height+2)*5, true);
+				GrStringDraw(&sContext,"Try again?", -1, (sContext.psFont->ui8MaxWidth)*6,  (sContext.psFont->ui8Height+2)*5, true);
 				GrStringDraw(&sContext,"Score:", -1, (sContext.psFont->ui8MaxWidth)*5,  (sContext.psFont->ui8Height+2)*7, true);
 				GrStringDraw(&sContext,buf, -1, (sContext.psFont->ui8MaxWidth)*13,  (sContext.psFont->ui8Height+2)*7, true);
 		}
@@ -1067,7 +1067,7 @@ void GameController(){
 					
 					if(boss_collision || id_enemy!=10){	//boss_collision || id_enemy!=10
 							if(lives>1){
-									buzzer_per = 4;
+									buzzer_per = 1500;
 									buzzer_per_set(buzzer_per);
 									buzzer_write(true);
 									osTimerStart(t_sound, 2*TIMER);
@@ -1078,7 +1078,7 @@ void GameController(){
 							else{game_over = true;}					
 					}
 					if(id_point!=10){
-							buzzer_per = 1;
+							buzzer_per = 1000;
 							buzzer_per_set(buzzer_per);
 							buzzer_write(true);
 							osTimerStart(t_sound, 2*TIMER);
@@ -1088,7 +1088,7 @@ void GameController(){
 					}
 					if(key_collision ){
 							if(level<MAXLEVEL){
-									buzzer_per = 2;
+									buzzer_per = 2000;
 									buzzer_per_set(buzzer_per);
 									buzzer_write(true);
 									osTimerStart(t_sound, 2*TIMER);
@@ -1105,6 +1105,7 @@ void GameController(){
 					GrContextForegroundSet(&sContext, ClrYellow);
 					intToString(lives, pbufx, 10, 10, 3);
 					intToString(score, pbufy, 10, 10, 3);
+					
 					osMutexWait(mutex_draw,osWaitForever);
 					GrStringDraw(&sContext,"Lives:", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*0, true);
 					GrStringDraw(&sContext,"Score", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);

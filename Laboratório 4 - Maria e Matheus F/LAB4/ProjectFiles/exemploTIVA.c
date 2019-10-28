@@ -122,9 +122,9 @@ static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, 
 	}
 }
 
-void init_all(){
+void init_all()
+{
 	cfaf128x128x16Init();
-	button_init();
 	UART_Init();
 }
 
@@ -218,11 +218,23 @@ osThreadDef(th_SignalSender, osPriorityNormal, 1, 0);
 osThreadDef(th_SignalGenerator, osPriorityNormal, 1, 0);
 osThreadDef(th_SignalDrawer, osPriorityNormal, 1, 0);
 
-int main (void){
+const uint8_t string_1[] = "PARADO AI.\n\r\0";
+const uint8_t string_2[] = "Bom dia rapaz\n\r\0";
+const uint8_t string_3[] = "voce digitou: \n\r\0";
 
-	osKernelInitialize();
-	
+int main (void)
+{
+	uint8_t resposta[4];
 	init_all();
+	UART_Send_String(string_1);
+	UART_Send_String(string_2);
+	resposta[0] = UART_Rcv();
+	UART_Send_String(string_3);
+	UART_Send_String(resposta);
+	
+	/*osKernelInitialize();
+	
+	
 	
 	t_UART = osThreadCreate(osThread(th_UART), NULL);
 	t_SignalGenerator = osThreadCreate(osThread(th_SignalGenerator), NULL);
@@ -230,5 +242,5 @@ int main (void){
 	t_SignalSender = osThreadCreate(osThread(th_SignalSender), NULL);
 
 	osKernelStart();
-	osDelay(osWaitForever);
+	osDelay(osWaitForever);*/
 }

@@ -4,6 +4,8 @@
 ".\flash\key.o"
 ".\flash\uart.o"
 ".\flash\pwm.o"
+".\flash\newuart.o"
+".\flash\newpwm.o"
 ".\flash\buzzer.o"
 ".\flash\accel.o"
 ".\flash\buttons.o"

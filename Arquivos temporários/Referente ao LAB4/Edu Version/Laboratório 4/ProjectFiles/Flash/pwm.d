@@ -1,0 +1,10 @@
+.\flash\pwm.o: pwm.c
+.\flash\pwm.o: pwm.h
+.\flash\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\flash\pwm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\flash\pwm.o: ..\inc/hw_memmap.h
+.\flash\pwm.o: ..\driverlib/pin_map.h
+.\flash\pwm.o: ..\driverlib/gpio.h
+.\flash\pwm.o: ..\driverlib/sysctl.h
+.\flash\pwm.o: ..\driverlib/timer.h
+.\flash\pwm.o: ..\driverlib/rom_map.h

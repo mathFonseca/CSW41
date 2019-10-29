@@ -1,36 +1,13 @@
-/*============================================================================
- *                    Exemplos de utilização do Kit
- *              EK-TM4C1294XL + Educational BooterPack MKII 
- *---------------------------------------------------------------------------*
- *                    Prof. André Schneider de Oliveira
- *            Universidade Tecnológica Federal do Paraná (UTFPR)
- *===========================================================================
- * Autores das bibliotecas:
- * 		Allan Patrick de Souza - <allansouza@alunos.utfpr.edu.br>
- * 		Guilherme Jacichen     - <jacichen@alunos.utfpr.edu.br>
- * 		Jessica Isoton Sampaio - <jessicasampaio@alunos.utfpr.edu.br>
- * 		Mariana Carrião        - <mcarriao@alunos.utfpr.edu.br>
- *===========================================================================*/
+
 #include "cmsis_os.h"
 #include "TM4C129.h"                    // Device header
 #include <stdbool.h>
 #include "grlib/grlib.h"
-
-/*----------------------------------------------------------------------------
- * include libraries from drivers
- *----------------------------------------------------------------------------*/
-
-#include "rgb.h"
 #include "cfaf128x128x16.h"
-#include "servo.h"
-#include "temp.h"
-#include "opt.h"
-#include "buttons.h"
 #include "buzzer.h"
-#include "joy.h"
-#include "mic.h"
-#include "accel.h"
-#include "led.h"
+//#include "UART.h"
+//#include "NewUART.h"
+#include "UART_m.h"
 
 //To print on the screen
 tContext sContext;
@@ -122,10 +99,10 @@ static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, 
 	}
 }
 
-void init_all()
-{
+void init_all(){
 	cfaf128x128x16Init();
-	UART_Init();
+	//UART_Init();
+	UART_Enable();
 }
 
 void draw_pixel(uint16_t x, uint16_t y){
@@ -218,20 +195,19 @@ osThreadDef(th_SignalSender, osPriorityNormal, 1, 0);
 osThreadDef(th_SignalGenerator, osPriorityNormal, 1, 0);
 osThreadDef(th_SignalDrawer, osPriorityNormal, 1, 0);
 
-const uint8_t string_1[] = "PARADO AI.\n\r\0";
+
 const uint8_t string_2[] = "Bom dia rapaz\n\r\0";
 const uint8_t string_3[] = "voce digitou: \n\r\0";
-
+char *string_1 = "PARADO AI\n\r\0";
+char letra;
 int main (void)
 {
 	uint8_t resposta[4];
 	init_all();
-	UART_Send_String(string_1);
-	UART_Send_String(string_2);
-	resposta[0] = UART_Rcv();
-	UART_Send_String(string_3);
-	UART_Send_String(resposta);
-	
+	UARTsend('A');
+	UARTprintString("Eae rapaz\n\r");
+	letra = UARTreceive();
+	UARTsend(letra);
 	/*osKernelInitialize();
 	
 	

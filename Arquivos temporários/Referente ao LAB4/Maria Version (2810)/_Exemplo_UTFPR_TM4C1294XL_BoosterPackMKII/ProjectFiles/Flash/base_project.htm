@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\base_project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\base_project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Oct 28 17:08:54 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Oct 29 12:56:45 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1304 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -523,8 +523,7 @@ Global Symbols
 <P><STRONG><a name="[d4]"></a>draw_pixel</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, exemplotiva.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = draw_pixel
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thread_NewGenerateSignal
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thread_DrawDisplay
+<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thread_DrawDisplay
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearDisplay
 </UL>
 
@@ -579,7 +578,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_pixel
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thread_GenerateSignal
+<BR>[Called By]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thread_NewGenerateSignal
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thread_GenerateSignal
 </UL>
 
 <P><STRONG><a name="[d8]"></a>thread_GenerateSignal</STRONG> (Thumb, 706 bytes, Stack size 1104 bytes, exemplotiva.o(.text))
@@ -602,11 +602,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e3]"></a>thread_NewGenerateSignal</STRONG> (Thumb, 900 bytes, Stack size 1112 bytes, exemplotiva.o(.text), UNUSED)
+<P><STRONG><a name="[e3]"></a>thread_NewGenerateSignal</STRONG> (Thumb, 788 bytes, Stack size 1104 bytes, exemplotiva.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;thread_DrawDisplay
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PrintCaracteristics
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearDisplay
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_pixel
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul

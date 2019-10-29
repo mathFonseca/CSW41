@@ -6,6 +6,7 @@
 ".\flash\pwm.o"
 ".\flash\newuart.o"
 ".\flash\newpwm.o"
+".\flash\uart_m.o"
 ".\flash\buzzer.o"
 ".\flash\accel.o"
 ".\flash\buttons.o"

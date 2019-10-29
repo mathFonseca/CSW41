@@ -1,5 +1,5 @@
 Dependencies for Project 'base_project', Target 'TM4C129 Flash': (DO NOT MODIFY !)
-F (.\exemploTIVA.c)(0x5DB6F7CD)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\exemplotiva.o --omf_browse .\flash\exemplotiva.crf --depend .\flash\exemplotiva.d)
+F (.\exemploTIVA.c)(0x5DB837E1)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\exemplotiva.o --omf_browse .\flash\exemplotiva.crf --depend .\flash\exemplotiva.d)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5C8ABF2C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEC1492)
@@ -12,22 +12,22 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D262
 I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h)(0x51C0453A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
 I (..\grlib/grlib.h)(0x5A0346AE)
-I (rgb.h)(0x5DAEF8CA)
 I (cfaf128x128x16.h)(0x5A2AEC64)
-I (servo.h)(0x5DAEF8D6)
-I (temp.h)(0x5DAEF8DF)
-I (opt.h)(0x5DAEF8EC)
-I (buttons.h)(0x5DAEF90D)
 I (buzzer.h)(0x5DAEF917)
-I (joy.h)(0x5DAEF922)
-I (mic.h)(0x5DAEF937)
-I (accel.h)(0x5A2F1462)
-I (led.h)(0x5A2D79E6)
+I (UART_m.h)(0x5DB83122)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEC1492)
+I (..\driverlib/gpio.h)(0x5A0346AE)
+I (..\driverlib/sysctl.h)(0x5A0346AE)
+I (..\driverlib/pin_map.h)(0x5A0346AE)
+I (..\driverlib/rom_map.h)(0x5A0346AE)
+I (..\utils/uartstdio.h)(0x5D746D16)
 F (.\point.c)(0x5D920F5D)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\point.o --omf_browse .\flash\point.crf --depend .\flash\point.d)
 F (.\point.h)(0x5D92035A)()
 F (.\key.h)(0x5D98E2C4)()
 F (.\key.c)(0x5D98ECD8)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\key.o --omf_browse .\flash\key.crf --depend .\flash\key.d)
-F (.\UART.c)(0x5DB6EDD7)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\uart.o --omf_browse .\flash\uart.crf --depend .\flash\uart.d)
+F (.\UART.c)(0x5DB82B75)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\uart.o --omf_browse .\flash\uart.crf --depend .\flash\uart.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
 I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h)(0x530F3946)
 I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h)(0x530F3946)
@@ -36,10 +36,10 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D262B66)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D262B66)
 I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h)(0x51C0453A)
-F (.\UART.h)(0x5DAEFA8D)()
+F (.\UART.h)(0x5DB82774)()
 F (.\PWM.c)(0x5DAEFA7E)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\pwm.o --omf_browse .\flash\pwm.crf --depend .\flash\pwm.d)
 F (.\PWM.h)(0x5DAEFA98)()
-F (.\NewUART.c)(0x5CFE2468)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\newuart.o --omf_browse .\flash\newuart.crf --depend .\flash\newuart.d)
+F (.\NewUART.c)(0x5DB8299F)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\newuart.o --omf_browse .\flash\newuart.crf --depend .\flash\newuart.d)
 I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h)(0x530F3946)
 I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h)(0x530F3946)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D262B66)
@@ -61,6 +61,30 @@ I (..\driverlib/pin_map.h)(0x5A0346AE)
 I (..\driverlib/gpio.h)(0x5A0346AE)
 I (..\driverlib/sysctl.h)(0x5A0346AE)
 I (..\driverlib/rom_map.h)(0x5A0346AE)
+F (.\NewUART.h)(0x5CEAEB8A)()
+F (.\NewPWM.h)(0x5CF6D068)()
+F (.\UART_m.h)(0x5DB83122)()
+F (.\UART_m.c)(0x5DB83303)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\uart_m.o --omf_browse .\flash\uart_m.crf --depend .\flash\uart_m.d)
+I (UART_m.h)(0x5DB83122)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5C8ABF2C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEC1492)
+I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h)(0x530F3946)
+I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h)(0x530F3946)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D262B66)
+I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h)(0x51C0453A)
+I (..\driverlib/gpio.h)(0x5A0346AE)
+I (..\driverlib/sysctl.h)(0x5A0346AE)
+I (..\driverlib/pin_map.h)(0x5A0346AE)
+I (..\driverlib/rom_map.h)(0x5A0346AE)
+I (..\utils/uartstdio.h)(0x5D746D16)
 F (.\Abstract.txt)(0x5A79C596)()
 F (.\buzzer.c)(0x5DAEF95B)(-c --cpu Cortex-M4.fp -D__RTX -g -O1 --apcs=interwork -I ..-I.\RTE\_TM4C129_Flash-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0-o .\flash\buzzer.o --omf_browse .\flash\buzzer.crf --depend .\flash\buzzer.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)

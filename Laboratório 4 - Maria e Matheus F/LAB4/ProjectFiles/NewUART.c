@@ -10,8 +10,8 @@ void init_uart(){
 	GPIOA_AHB -> PCTL = (1<<0)|(1<<4);
 	GPIOA_AHB -> DEN = (1<<0)|(1<<1);
 	UART0 ->	CTL &= ~(1<<0); 						//desabilita a uart
-	UART0 ->	IBRD = 65; 									// baudrate
-	UART0 ->	FBRD = 7;
+	UART0 ->	IBRD = 520; 									// baudrate
+	UART0 ->	FBRD = 53;
 	UART0 ->	LCRH = (0x3<<5); 						//palavra de 8 bits
 	UART0 ->	CC	= 0x0; 									// usa clock do sistema
 	UART0 ->	IFLS |=(1<<4); 

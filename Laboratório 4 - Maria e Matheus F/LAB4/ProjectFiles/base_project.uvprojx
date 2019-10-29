@@ -437,6 +437,26 @@
               <FileType>1</FileType>
               <FilePath>.\NewPWM.c</FilePath>
             </File>
+            <File>
+              <FileName>NewUART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\NewUART.h</FilePath>
+            </File>
+            <File>
+              <FileName>NewPWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\NewPWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART_m.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART_m.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART_m.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART_m.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -965,6 +985,26 @@
               <FileName>NewPWM.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\NewPWM.c</FilePath>
+            </File>
+            <File>
+              <FileName>NewUART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\NewUART.h</FilePath>
+            </File>
+            <File>
+              <FileName>NewPWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\NewPWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART_m.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART_m.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART_m.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART_m.c</FilePath>
             </File>
           </Files>
         </Group>

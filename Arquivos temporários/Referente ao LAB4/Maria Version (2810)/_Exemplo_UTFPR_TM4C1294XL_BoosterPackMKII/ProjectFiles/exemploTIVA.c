@@ -501,8 +501,8 @@ void thread_NewGenerateSignal(Signal *signal, uint16_t h_scale, float old_amp){
 			
 			for(i=0; i<128; i++){
 					output[i] = ZERO+amp*y[(i*h_scale/SCALE_DEFAULT)%(tam)];
-					//thread_DrawDisplay(i, output[i]);
-					
+					thread_DrawDisplay(i, output[i]);
+					/*
 					if(output[i]<ZERO){
 							altura = 128-(int)output[i];
 							for(j=ZERO; j<altura+1;j++)
@@ -515,7 +515,7 @@ void thread_NewGenerateSignal(Signal *signal, uint16_t h_scale, float old_amp){
 					}
 					else{
 							draw_pixel(i,ZERO);
-					}
+					}	*/
 					osDelay(1/(signal->fn*128));
 			}
 }

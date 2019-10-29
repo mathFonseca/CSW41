@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include "TM4C129.h"                    // Device header
 
+
 #define SYSCTL_RCGCUART_R       (*((volatile uint32_t *)0x400FE618))
 #define SYSCTL_RCGCGPIO_R       (*((volatile uint32_t *)0x400FE608))
 #define SYSCTL_PRUART_R         (*((volatile uint32_t *)0x400FEA18))
@@ -13,8 +14,6 @@
 #define GPIO_PORTA_AHB_AFSEL_R  (*((volatile uint32_t *)0x40058420))
 #define GPIO_PORTA_AHB_PCTL_R   (*((volatile uint32_t *)0x4005852C))
 #define GPIO_PORTA_AHB_AMSEL_R  (*((volatile uint32_t *)0x40058528))
-
-
 #define UART0_CTL_R             (*((volatile uint32_t *)0x4000C030))
 #define UART0_IBRD_R            (*((volatile uint32_t *)0x4000C024))
 #define UART0_FBRD_R            (*((volatile uint32_t *)0x4000C028))
@@ -29,10 +28,6 @@
 // Definições de Funções
 void UART_Send(uint8_t data);
 void UART_Send_String(const uint8_t mensagem[]);
-
-// Variáveis Globais
-const uint8_t st_inicio[] = "UART Iniciada com sucesso.\n\r\0";
-uint32_t interruption;
 
 // -------------------------------------------------------------------------------
 // Função UART_Init
@@ -61,7 +56,6 @@ void UART_Init(void)
 	UART0_CC_R = 0;
   UART0_CTL_R = UART0_CTL_R | 0x301;
 		
-	UART_Send_String(st_inicio);	
 }
 
 // -------------------------------------------------------------------------------
@@ -72,7 +66,7 @@ void UART_Init(void)
 void UART_Send_String(const uint8_t mensagem[])
 {
 	uint32_t i = 0;
-	while(mensagem[i] != '\0' && !interruption) //  trocar 1 por !interruption
+	while(mensagem[i] != '\0') //  trocar 1 por !interruption
 	{
 		UART_Send(mensagem[i]);
 		// Necessário esperar por 1 milisegundo aqui.
@@ -102,7 +96,7 @@ uint8_t UART_Rcv(void)
 	uint32_t exit_flag = 1;
 	while((UART0_FR_R & UART_FR_RXFE)!=0 && exit_flag)
 	{
-		if(interruption) // Interrupção durante leitura. Trocar 1 por um Signal. (Interrupção)
+		if(1) // Interrupção durante leitura. Trocar 1 por um Signal. (Interrupção)
 		{
 			exit_flag = 0; // Sai do while.
 		}

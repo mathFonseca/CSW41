@@ -22,29 +22,33 @@ Dialog DLL:      TCM.DLL V1.36.2.0
  
 <h2>Project:</h2>
 C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\base_project.uvprojx
-Project File Date:  10/28/2019
+Project File Date:  10/29/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild Project 'base_project' - Target 'TM4C129 Flash'
 compiling exemploTIVA.c...
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(128): warning:  #223-D: function "UART_Init" declared implicitly
-        UART_Init();
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(216): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\UART_m.h(32): warning:  #1295-D: Deprecated declaration UARTenable - give arg types
+  void UARTenable();
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\UART_m.h(36): warning:  #1295-D: Deprecated declaration UARTprintMenu - give arg types
+  void UARTprintMenu();
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(105): warning:  #223-D: function "UART_Enable" declared implicitly
+        UART_Enable();
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(172): warning:  #223-D: function "button_read_s1" declared implicitly
+                if(button_read_s1())
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(193): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
   osThreadDef(th_UART, osPriorityAboveNormal, 1, 0);
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(217): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(194): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
   osThreadDef(th_SignalSender, osPriorityNormal, 1, 0);
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(218): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(195): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
   osThreadDef(th_SignalGenerator, osPriorityNormal, 1, 0);
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(219): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(196): warning:  #144-D: a value of type "void (*)(void)" cannot be used to initialize an entity of type "os_pthread"
   osThreadDef(th_SignalDrawer, osPriorityNormal, 1, 0);
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(229): warning:  #223-D: function "UART_Send_String" declared implicitly
-        UART_Send_String(string_1);
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(231): warning:  #223-D: function "UART_Rcv" declared implicitly
-        resposta[0] = UART_Rcv();
-C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(95): warning:  #177-D: function "floatToString"  was declared but never referenced
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(205): warning:  #177-D: variable "resposta"  was declared but never referenced
+        uint8_t resposta[4];
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\exemploTIVA.c(72): warning:  #177-D: function "floatToString"  was declared but never referenced
   static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, uint8_t zeros, uint8_t precision){
-exemploTIVA.c: 8 warnings, 0 errors
+exemploTIVA.c: 10 warnings, 0 errors
 compiling point.c...
 compiling key.c...
 compiling UART.c...
@@ -65,6 +69,16 @@ C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Math
 C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\NewPWM.c(113): warning:  #223-D: function "PWMClockSet" declared implicitly
                         PWMClockSet(PWM0_BASE, PWM_SYSCLK_DIV_64);                      
 NewPWM.c: 5 warnings, 0 errors
+compiling UART_m.c...
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\UART_m.h(32): warning:  #1295-D: Deprecated declaration UARTenable - give arg types
+  void UARTenable();
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\UART_m.h(36): warning:  #1295-D: Deprecated declaration UARTprintMenu - give arg types
+  void UARTprintMenu();
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\UART_m.c(18): warning:  #223-D: function "UARTConfigSetExpClk" declared implicitly
+      MAP_UARTConfigSetExpClk(g_ulBase, ui32SysClock, 115200, (UART_CONFIG_PAR_NONE | UART_CONFIG_STOP_ONE | UART_CONFIG_WLEN_8)); // Configure the UART for 115200, n, 8, 1
+C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\UART_m.c(19): warning:  #223-D: function "UARTEnable" declared implicitly
+      MAP_UARTEnable(g_ulBase); // Enable the UART operation.
+UART_m.c: 4 warnings, 0 errors
 compiling buzzer.c...
 C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\Laboratório 4 - Maria e Matheus F\LAB4\ProjectFiles\buzzer.c(31): warning:  #550-D: variable "g_ui32SysClock"  was set but never used
   static uint32_t g_ui32SysClock;
@@ -119,8 +133,8 @@ compiling RTX_Conf_CM.c...
 assembling startup_TM4C129.s...
 compiling system_TM4C129.c...
 linking...
-Program Size: Code=12290 RO-data=2334 RW-data=72 ZI-data=9880  
-".\Flash\base_project.axf" - 0 Error(s), 31 Warning(s).
+Program Size: Code=12972 RO-data=2804 RW-data=80 ZI-data=9880  
+".\Flash\base_project.axf" - 0 Error(s), 37 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -152,24 +166,24 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:RTOS:Keil RTX:4.82.0
       Source file:   CMSIS\RTOS\RTX\SRC\ARM\SVC_Table.s
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
-      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
-      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
-      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
-      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
       Library file:  CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MsgQueue.c
+      Include file:  CMSIS\RTOS\RTX\INC\cmsis_os.h
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Thread.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Mutex.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Timer.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MemPool.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\MailQueue.c
+      Source file:   CMSIS\RTOS\RTX\Templates\RTX_Conf_CM.c
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\Semaphore.c
+      Include file:  CMSIS\RTOS\RTX\UserCodeTemplates\osObjects.h
+      Source file:   CMSIS\RTOS\RTX\UserCodeTemplates\main.c
 
    * Component: Keil::Device:Startup:1.0.0
-      Include file:  Device\Include\TM4C129\TM4C129.h
       Source file:   Device\Source\system_TM4C129.c
+      Include file:  Device\Include\TM4C129\TM4C129.h
       Source file:   Device\Source\ARM\startup_TM4C129.s
-Build Time Elapsed:  00:00:12
+Build Time Elapsed:  00:00:13
 </pre>
 </body>
 </html>

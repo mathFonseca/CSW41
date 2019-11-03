@@ -1,0 +1,682 @@
+﻿/*============================================================================
+ *                    Exemplos de utilização do Kit
+ *              EK-TM4C1294XL + Educational BooterPack MKII 
+ /*============================================================================
+ *                    Exemplos de utilização do Kit
+ *              EK-TM4C1294XL + Educational BooterPack MKII 
+ *---------------------------------------------------------------------------*
+ *                    Prof. André Schneider de Oliveira
+ *            Universidade Tecnológica Federal do Paraná (UTFPR)
+ *===========================================================================
+ * Autores das bibliotecas:
+ * 		Allan Patrick de Souza - <allansouza@alunos.utfpr.edu.br>
+ * 		Guilherme Jacichen     - <jacichen@alunos.utfpr.edu.br>
+ * 		Jessica Isoton Sampaio - <jessicasampaio@alunos.utfpr.edu.br>
+ * 		Mariana Carrião        - <mcarriao@alunos.utfpr.edu.br>
+ *===========================================================================*/
+#include "cmsis_os.h"
+#include "TM4C129.h"                    // Device header
+#include <stdbool.h>
+#include "grlib/grlib.h"
+
+/*----------------------------------------------------------------------------
+ * include libraries from drivers
+ *----------------------------------------------------------------------------*/
+
+#include "rgb.h"
+#include "cfaf128x128x16.h"
+#include "servo.h"
+#include "temp.h"
+#include "opt.h"
+#include "buttons.h"
+#include "buzzer.h"
+#include "joy.h"
+#include "mic.h"
+#include "accel.h"
+#include "led.h"
+#include "cmsis_os.h"
+
+#include "math.h"
+
+#define ZERO 78
+#define MAX_V 3.3
+#define MAX_F 200
+#define DISPLAY_TAM 128
+#define MAX_SIGNAL_HEIGHT 50
+#define L1 32
+#define L2 64
+#define L3 96
+#define SCALE_DEFAULT 4
+
+#define F_PWM 2560
+
+tContext sContext;
+
+//mutex
+osMutexId mutex_display;
+osMutexDef(mutex_display);
+
+osMutexId mutex_uart;
+osMutexDef(mutex_uart);
+
+
+typedef struct{
+	float amplitude;
+	uint16_t  waveType;
+	uint16_t fn;
+	uint16_t h_scale;
+}Signal;
+
+osPoolId sig_id;
+osPoolDef(sig,10,Signal);
+
+typedef struct{
+	uint16_t x;
+	uint16_t y;
+}Ponto;
+
+osPoolId pt_id;
+osPoolDef(pt,10,Ponto);
+
+typedef struct{
+	uint16_t y;
+}MsgPwm;
+
+osPoolId msgpwm_id;
+osPoolDef(msgpwm,10,MsgPwm);
+
+typedef struct{
+	char mens;
+}uartMsg;
+
+osPoolId uartMsg_id;
+osPoolDef(uartMsg,10,uartMsg);
+
+osMailQDef(uart_mail_q,2,uartMsg);
+osMailQId (uart_mail_q_id);
+osMailQDef(usr2gen_mail,5,Signal);
+osMailQId (usr2gen_mail_id);
+osMailQDef(gen2dis_mail,5,Ponto);
+osMailQId (gen2dis_mail_id);
+osMailQDef(gen2pwm_mail,5,MsgPwm);
+osMailQId (gen2pwm_mail_id);
+
+
+//threads
+osThreadId t_userinput, t_generatesignal, t_drawdisplay, t_pwm;
+void t_UserInput();
+void t_DrawDisplay();
+void t_PWM();
+void t_GenerateSignal();
+
+osThreadDef(t_UserInput, osPriorityAboveNormal, 1, 0);
+osThreadDef(t_GenerateSignal, osPriorityNormal, 1, 0);
+osThreadDef(t_DrawDisplay, osPriorityNormal, 1, 0);
+osThreadDef(t_PWM, osPriorityNormal, 1, 0);
+
+void init_all();
+
+Signal *sigDefault;
+//uint16_t last_t;
+int main (void) {
+		
+		osKernelInitialize();
+		init_all();
+		
+		sig_id = osPoolCreate(osPool(sig));
+		pt_id = osPoolCreate(osPool(pt));
+		msgpwm_id = osPoolCreate(osPool(msgpwm));
+		uartMsg_id = osPoolCreate(osPool(uartMsg));
+
+		mutex_display = osMutexCreate(osMutex(mutex_display));
+		mutex_uart = osMutexCreate(osMutex(mutex_uart));
+
+		t_userinput = osThreadCreate(osThread(t_UserInput), NULL);
+		t_generatesignal = osThreadCreate(osThread(t_GenerateSignal), NULL);
+		t_drawdisplay = osThreadCreate(osThread(t_DrawDisplay), NULL);
+		t_pwm = osThreadCreate(osThread(t_PWM), NULL);
+	
+		sigDefault = (Signal*) osPoolAlloc(sig_id);
+		sigDefault->amplitude=1;
+		sigDefault->fn=20;
+		sigDefault->waveType=0; //sine
+		sigDefault->h_scale = 4;
+	
+		//last_t = 0;
+		
+		osKernelStart();
+		
+		osDelay(osWaitForever);
+}
+
+static void intToString(int64_t value, char * pBuf, uint32_t len, uint32_t base, uint8_t zeros){
+	static const char* pAscii = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	bool n = false;
+	int pos = 0, d = 0;
+	int64_t tmpValue = value;
+
+	// the buffer must not be null and at least have a length of 2 to handle one
+	// digit and null-terminator
+	if (pBuf == NULL || len < 2)
+			return;
+
+	// a valid base cannot be less than 2 or larger than 36
+	// a base value of 2 means binary representation. A value of 1 would mean only zeros
+	// a base larger than 36 can only be used if a larger alphabet were used.
+	if (base < 2 || base > 36)
+			return;
+
+	if (zeros > len)
+		return;
+	
+	// negative value
+	if (value < 0)
+	{
+			tmpValue = -tmpValue;
+			value    = -value;
+			pBuf[pos++] = '-';
+			n = true;
+	}
+
+	// calculate the required length of the buffer
+	do {
+			pos++;
+			tmpValue /= base;
+	} while(tmpValue > 0);
+
+
+	if (pos > len)
+			// the len parameter is invalid.
+			return;
+
+	if(zeros > pos){
+		pBuf[zeros] = '\0';
+		do{
+			pBuf[d++ + (n ? 1 : 0)] = pAscii[0]; 
+		}
+		while(zeros > d + pos);
+	}
+	else
+		pBuf[pos] = '\0';
+
+	pos += d;
+	do {
+			pBuf[--pos] = pAscii[value % base];
+			value /= base;
+	} while(value > 0);
+}
+
+static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, uint8_t zeros, uint8_t precision){
+	static const char* pAscii = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	uint8_t start = 0xFF;
+	if(len < 2)
+		return;
+	
+	if (base < 2 || base > 36)
+		return;
+	
+	if(zeros + precision + 1 > len)
+		return;
+	
+	intToString((int64_t) value, pBuf, len, base, zeros);
+	while(pBuf[++start] != '\0' && start < len); 
+
+	if(start + precision + 1 > len)
+		return;
+	
+	pBuf[start+precision+1] = '\0';
+	
+	if(value < 0)
+		value = -value;
+	pBuf[start++] = '.';
+	while(precision-- > 0){
+		value -= (uint32_t) value;
+		value *= (float) base;
+		pBuf[start++] = pAscii[(uint32_t) value];
+	}
+}
+
+
+void init_all(){
+	cfaf128x128x16Init();
+	joy_init();
+	accel_init();
+	buzzer_init(); 
+	button_init();
+	mic_init();
+	rgb_init();
+	servo_init();
+	temp_init();
+	opt_init();
+	led_init();
+	GrContextInit(&sContext, &g_sCfaf128x128x16);
+	GrFlush(&sContext);
+	GrContextFontSet(&sContext, g_psFontFixed6x8);
+}
+
+
+void draw_pixel(uint16_t x, uint16_t y){
+	GrPixelDraw(&sContext, x, y);
+}
+
+void draw_circle(uint16_t x, uint16_t y){
+	GrCircleDraw(&sContext, 
+		(sContext.psFont->ui8MaxWidth)*x + (sContext.psFont->ui8MaxWidth)/2, 
+		(sContext.psFont->ui8Height+2)*y + sContext.psFont->ui8Height/2 - 1, 
+		(sContext.psFont->ui8MaxWidth)/2);
+}
+
+void fill_circle(uint16_t x, uint16_t y){
+	GrCircleFill(&sContext, 
+		(sContext.psFont->ui8MaxWidth)*x + sContext.psFont->ui8MaxWidth/2, 
+		(sContext.psFont->ui8Height+2)*y + sContext.psFont->ui8Height/2 - 1, 
+		(sContext.psFont->ui8MaxWidth)/2-1);
+}
+
+uint32_t saturate(uint8_t r, uint8_t g, uint8_t b){
+	uint8_t *max = &r, 
+					*mid = &g, 
+					*min = &b,
+					*aux, 
+					div, num;
+	if (*mid > *max){ aux = max; max = mid; mid = aux; }
+	if (*min > *mid){ aux = mid; mid = min; min = aux; }
+	if (*mid > *max){	aux = max; max = mid; mid = aux; }
+	if(*max != *min){
+		div = *max-*min;
+		num = *mid-*min;
+		*max = 0xFF;
+		*min = 0x00;
+		*mid = (uint8_t) num*0xFF/div;
+	}
+	return 	(((uint32_t) r) << 16) | 
+					(((uint32_t) g) <<  8) | 
+					( (uint32_t) b       );
+}
+
+/*-----------------new code*/
+bool button_read_debounce1(void) {
+	uint8_t i = 0;
+	while(i < 50) {
+		if(button_read_s1())
+			i++;
+		else
+			return false;
+	}
+	return true;
+}
+bool button_read_debounce2(void) {
+	uint8_t i = 0;
+	while(i < 50) {
+		if(button_read_s2())
+			i++;
+		else
+			return false;
+	}
+	return true;
+}
+
+
+
+
+void clearDisplay(uint16_t amplitude, uint16_t scale){
+		uint16_t i,j;
+		
+		for(i=0; i<DISPLAY_TAM; i++){
+				GrContextForegroundSet(&sContext, ClrBlack);
+				for(j=ZERO-amplitude; j<ZERO+amplitude+2; j++){
+						draw_pixel(i,j);
+				}
+				GrContextForegroundSet(&sContext, ClrRed);
+				draw_pixel(i,ZERO);//linha horizontal
+		}	
+		for(i=0; i<DISPLAY_TAM; i++){
+				if(((L1*scale/SCALE_DEFAULT)>0) && ((L1*scale/SCALE_DEFAULT)<128)){
+						draw_pixel((L1*scale/SCALE_DEFAULT),j);
+				}
+				if(((L2*scale/SCALE_DEFAULT)>0) && ((L2*scale/SCALE_DEFAULT)<128)){
+						draw_pixel((L2*scale/SCALE_DEFAULT),j);
+				}
+				if(((L3*scale/SCALE_DEFAULT)>0) && ((L3*scale/SCALE_DEFAULT)<128)){
+						draw_pixel((L3*scale/SCALE_DEFAULT),j);
+				}
+		}
+}
+
+
+
+char PrintCaracteristics(uint16_t wt, uint16_t f, float amp){
+		char pbuf_f[10], pbuf_a[10];
+		char wave[5];
+		uint16_t i,j;
+	
+	/*
+		GrContextForegroundSet(&sContext, ClrBlack);
+		for(i=(sContext.psFont->ui8MaxWidth)*8; i<(sContext.psFont->ui8MaxWidth)*18; i++){
+				for(j=0; j<(sContext.psFont->ui8Height+2) ;j++){
+						draw_pixel(i,j);
+				}
+		}
+		*/
+	
+		//WaveType: 0->senoide; 1->triangular; 2->dente de serra; 3->quadrada; 4->trapezoidal
+		GrContextForegroundSet(&sContext, ClrWhite);
+		GrStringDraw(&sContext,"WaveType:", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*0, true);
+		if(wt==0){
+				GrStringDraw(&sContext,"Sine     ", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);
+		}
+		if(wt==1){
+				GrStringDraw(&sContext,"Triangle ", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);
+		}
+		if(wt==2){
+				GrStringDraw(&sContext,"SawTooth ", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);
+		}
+		if(wt==3){
+				GrStringDraw(&sContext,"Square   ", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);
+		}
+		if(wt==4){
+				GrStringDraw(&sContext,"Trapezoid", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*0, true);
+		}
+		
+		//frequency
+		intToString(f, pbuf_f, 10, 10, 3);
+		GrStringDraw(&sContext,"Freq:", -1, (sContext.psFont->ui8MaxWidth)*0,  (sContext.psFont->ui8Height+2)*1, true);
+		GrStringDraw(&sContext,pbuf_f, -1, (sContext.psFont->ui8MaxWidth)*6,  (sContext.psFont->ui8Height+2)*1, true);
+		//amp
+		floatToString(amp, pbuf_a, 10, 10, 3, 3);
+		GrStringDraw(&sContext,"Ampl:", -1, (sContext.psFont->ui8MaxWidth)*10,  (sContext.psFont->ui8Height+2)*1, true);
+		GrStringDraw(&sContext,pbuf_a, -1, (sContext.psFont->ui8MaxWidth)*16,  (sContext.psFont->ui8Height+2)*1, true);
+} 
+
+void t_UserInput(){
+			bool hasChanges;
+			osEvent evt;
+			Signal *newSignal;
+			Signal *prevSignal;
+			
+			//pwm function here
+			
+			prevSignal = (Signal*) osPoolAlloc(sig_id);
+	
+			prevSignal=sigDefault;
+	
+		while(true){
+			
+			//prints do uart
+			////////////////
+			
+			/*IMPLEMENTAR QUANDO TIVER UART
+			evt = osMailGet(uart_mail_q_id,osWaitForever);
+			while(evt.status!=osEventMail)
+				evt = osMailGet(uart_mail_q_id,osWaitForever);
+			*/
+				newSignal = (Signal*)osMailAlloc(usr2gen_mail_id, osWaitForever);
+				
+				newSignal->amplitude=prevSignal->amplitude;
+				newSignal->fn=prevSignal->fn;
+				newSignal->waveType=prevSignal->waveType;
+				newSignal->h_scale=prevSignal->h_scale ;
+			
+				if(button_read_debounce1()){
+						//new_h_scale*=2;				//para mudar a escala horizontal
+						
+						//signal->amplitude+=0.5;		//para mudar a amplitude do sinal
+						
+						newSignal->waveType+=1;
+						if(newSignal->waveType==4){
+								newSignal->waveType=0;
+						}
+				}
+				else if(button_read_debounce2()&& newSignal->amplitude>0){
+						//new_h_scale/=2;
+						//old_a = (newSignal->amplitude)*(MAX_SIGNAL_HEIGHT/MAX_V);
+						//signal->amplitude-=0.5;
+						
+						newSignal->waveType+=1;
+						if(newSignal->waveType==4){
+								newSignal->waveType=0;
+						}
+				}
+				
+								
+				osMailPut(usr2gen_mail_id,newSignal);	
+				prevSignal->amplitude = newSignal->amplitude;
+				prevSignal->fn = newSignal->fn;
+				prevSignal->h_scale = newSignal->h_scale;
+				prevSignal->waveType = newSignal->waveType;
+				
+		}
+}	
+
+
+void t_DrawDisplay(){
+		osEvent evt;
+		Ponto *pt;
+		uint16_t j;
+		uint16_t altura;
+		
+		while(true){
+				//Wait for event 
+				evt = osMailGet(gen2dis_mail_id, osWaitForever);
+				if(evt.status == osEventMail) {
+						pt = (Ponto*) evt.value.p;
+						//Região crítica - mutex 
+						if(pt->y<ZERO){		
+								//talvez precise limpara a tela
+								for(j=0; j<DISPLAY_TAM;j++){
+										altura = 156 - (int)pt->y;
+										if(j>=ZERO && j<=altura){
+												GrContextForegroundSet(&sContext, ClrWhite);
+												draw_pixel(pt->x,j);		
+										}
+										else{
+												GrContextForegroundSet(&sContext, ClrBlack);
+												draw_pixel(pt->x,j);		
+										}
+								}
+						}
+						else if(pt->y>ZERO){
+								for(j=0; j<DISPLAY_TAM;j++){
+										altura = 156 - (int)pt->y;
+										if(j>=altura && j<=ZERO){
+												GrContextForegroundSet(&sContext, ClrWhite);
+												draw_pixel(pt->x,j);		
+										}
+										else{
+												GrContextForegroundSet(&sContext, ClrBlack);
+												draw_pixel(pt->x,j);		
+										}
+								}						
+						}
+						else{
+								draw_pixel(pt->x,ZERO);
+						}	
+						//Fim da região critica
+						osMailFree(gen2dis_mail_id, pt);
+				}
+		}
+}	
+
+void t_PWM(){
+		osEvent evt;
+		MsgPwm *pt;
+		
+		while(true){
+				//Wait for event 
+				evt = osMailGet(gen2pwm_mail_id, osWaitForever);
+				if(evt.status == osEventMail) {
+						pt = (MsgPwm*) evt.value.p;
+						
+						osMailFree(gen2pwm_mail_id, pt);
+				}
+		}
+}	
+
+
+void t_GenerateSignal(){
+	
+			osEvent evt;
+			Signal *signal;
+			Signal *newSignal;
+			MsgPwm *pwm_msg;
+			Ponto *dis_msg;
+	
+			uint16_t fs;
+			float amp;
+			float old_amp;
+			float y[2560], output[2560];
+			uint16_t i,j, altura;
+			uint16_t tam;
+			double inc_t;
+			bool hasChanges;
+			int last_t;
+			int t;
+			signal = (Signal*) osPoolAlloc(sig_id);
+	
+			//Inicialização com os valores padrões
+			signal = sigDefault;
+			amp = (signal->amplitude)*(MAX_SIGNAL_HEIGHT/MAX_V);
+			tam = (int) F_PWM/signal->fn;
+			clearDisplay((uint16_t)amp, signal->h_scale);
+			inc_t = 0.000393625*(signal->fn);
+			//Default WaveType: 0->senoide
+			for(i=0; i<tam; i++){
+					if(signal->waveType==0){
+							y[i]=sin(i*(2*PI/tam));
+					}
+			}	
+				
+			hasChanges = false;
+			last_t =0;
+			t=0;
+	
+			while(true){
+					old_amp = (signal->amplitude)*(MAX_SIGNAL_HEIGHT/MAX_V);
+				
+					//Checar se tem nova mensagem
+					evt = osMailGet(usr2gen_mail_id,0);
+					
+					if(evt.status == osEventMail){
+							newSignal = (Signal*) evt.value.p;
+						
+							//Faz atualização de valores recebidos
+							if(signal->amplitude != newSignal->amplitude){
+									signal->amplitude = newSignal->amplitude;
+									hasChanges=true;
+							}
+							if(signal->fn != newSignal->fn){
+									signal->fn = newSignal->fn;
+									hasChanges=true;
+							}
+							if(signal->waveType != newSignal->waveType){
+									signal->waveType = newSignal->waveType;
+									hasChanges=true;
+							}
+							if(signal->h_scale != newSignal->h_scale){
+									signal->h_scale = newSignal->h_scale;
+									hasChanges=true;
+							}
+							
+							
+							//Se houverem mudancas, recalcula o y
+							if(hasChanges){
+									amp = (signal->amplitude)*(MAX_SIGNAL_HEIGHT/MAX_V);
+									tam = (int) F_PWM/signal->fn;
+									
+									//clearDisplay((uint16_t)old_amp, h_scale);
+									inc_t = 0.000393625*(signal->fn);
+									for(i=0; i<tam; i++){
+										//WaveType: 0->senoide; 1->triangular; 2->dente de serra; 3->quadrada; 4->trapezoidal
+											if(signal->fn==0)
+												y[i]=1;
+										
+											//WaveType=senoide
+											else if(signal->waveType==0){
+													y[i]=sin(i*(2*PI/tam));
+											}
+											//WaveType=triangular
+											else if(signal->waveType==1){
+													if(i<(tam/4)){
+															y[i] = i*(4*inc_t);
+													}
+													else if(i==(tam/4)){
+															y[i]=1;
+													}
+													else if((i>(tam/4)) && (i<(tam/4)*3)){
+															y[i] = 1-(i-(tam/4))*(4*inc_t);
+													}
+													else if(i==((tam/4)*3)){
+															y[i]=-1;
+													}
+													else if(i>((tam/4)*3)){
+															y[i] = -1+(i-((tam/4)*3))*(4*inc_t);
+													}
+													else{
+															y[i]=0;
+													}
+											}
+											//WaveType=Dente de Serra
+											else if(signal->waveType==2){
+													y[i]= i*(inc_t);
+											}
+											//WaveType=Quadrada
+											else if(signal->waveType==3){
+													if(i<tam/2)
+															y[i] = 1;
+													else
+															y[i] = -1;
+											}		
+											//WaveType=Trapezoidal
+											else if(signal->waveType==4){
+													if(i<(tam/4)){
+															y[i] = i*(4*inc_t);
+													}
+													else if(i==(tam/4)){
+															y[i]=1;
+													}
+													else if((i>(tam/4)) && (i<=(tam/4)*3)){
+															y[i] = 1;
+													}
+													else if(i>((tam/4)*3)){
+															y[i] = 1-(i-((tam/4)*3))*(4*inc_t);
+													}
+													else{
+															y[i]=0;
+													}
+											}
+									}	
+									last_t =0;
+							}
+					}	
+			
+					
+					GrContextForegroundSet(&sContext, ClrWhite);
+					
+					//região crítica, usar o mutex
+					PrintCaracteristics(signal->waveType, signal->fn, signal->amplitude);
+					//fim da região crítica
+					
+					for(i=0; i<tam ; i++){
+							dis_msg = (Ponto*)osMailAlloc(gen2dis_mail_id, 0);
+							pwm_msg = (MsgPwm*)osMailAlloc(gen2pwm_mail_id, 0);
+						
+							output[i] = ZERO+amp*y[((i)*signal->h_scale/SCALE_DEFAULT)];
+						
+							dis_msg->x = last_t+i;
+							
+							pwm_msg->y = output[i];//y[((i)*signal->h_scale/SCALE_DEFAULT)];
+							dis_msg->y = output[i];
+							
+							osMailPut(gen2pwm_mail_id, pwm_msg); 
+							if(dis_msg->x<128)
+								osMailPut(gen2dis_mail_id, dis_msg); 
+							
+							
+							osDelay(1 / (signal->fn * tam));
+					}
+					last_t+=tam;
+					if(last_t>127)
+						last_t = 0;
+			}
+}
+

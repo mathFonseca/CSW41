@@ -1,0 +1,7 @@
+-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..
+-I.\RTE\_TM4C129_Flash
+-IC:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include
+-IC:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\RTOS\RTX\INC
+-IC:\Users\mglucas\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129
+-D__UVISION_VERSION="527" -D_RTE_ -DTM4C1294NCPDT -Drvmdk -DPART_TM4C1294NCPDT -DTARGET_IS_TM4C129_RA0
+-o .\flash\draw.o --omf_browse .\flash\draw.crf --depend .\flash\draw.d "draw.c"

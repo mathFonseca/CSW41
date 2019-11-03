@@ -1,0 +1,3941 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             pacman_load_images, DATA, READW
+RITE
+    2 00000000                 THUMB
+    3 00000000         
+    4 00000000         ; Imagem do mapa
+    5 00000000                 EXPORT           mapa
+    6 00000000                 EXPORT           mapa_length
+    7 00000000         
+    8 00000000                 EXPORT           fantasma1_imagem
+    9 00000000                 EXPORT           fantasma_length1
+   10 00000000         
+   11 00000000                 EXPORT           fantasma2_imagem
+   12 00000000                 EXPORT           fantasma_length2
+   13 00000000         
+   14 00000000                 EXPORT           fantasma3_imagem
+   15 00000000                 EXPORT           fantasma_length3
+   16 00000000         
+   17 00000000                 EXPORT           fantasma4_imagem
+   18 00000000                 EXPORT           fantasma_length4
+   19 00000000         
+   20 00000000                 EXPORT           pacman1
+   21 00000000                 EXPORT           pacman1_length
+   22 00000000         
+   23 00000000                 EXPORT           pacman2
+   24 00000000                 EXPORT           pacman2_length
+   25 00000000         
+   26 00000000                 EXPORT           pacman3
+   27 00000000                 EXPORT           pacman3_length
+   28 00000000         
+   29 00000000                 EXPORT           pacman1_morrendo
+   30 00000000                 EXPORT           pacman1_morrendo_length
+   31 00000000         
+   32 00000000                 EXPORT           pacman2_morrendo
+   33 00000000                 EXPORT           pacman2_morrendo_length
+   34 00000000         
+   35 00000000                 EXPORT           pacman3_morrendo
+   36 00000000                 EXPORT           pacman3_morrendo_length
+   37 00000000         
+   38 00000000                 EXPORT           pacman4_morrendo
+   39 00000000                 EXPORT           pacman4_morrendo_length
+   40 00000000         
+   41 00000000                 EXPORT           fantasma_morto
+   42 00000000                 EXPORT           fantasma_morto_length
+   43 00000000         
+   44 00000000         ;-------------------------------------------
+   45 00000000         ;Imagem do Mapa
+   46 00000000         mapa
+   47 00000000 0A 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FD FF 
+              FF FF FF 
+              FD FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 7 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 8 
+
+
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FD 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 9 
+
+
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 10 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 11 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 12 
+
+
+              FF FF FD 
+              FF FD FF 
+              FF FF FF 
+              FF FF FD 
+              FF 20 20 
+              20 FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+
+
+
+ARM Macro Assembler    Page 13 
+
+
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 14 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FD FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 15 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FD FD 
+              FF FF FF 
+              FF FD FF 
+              FF FF FD 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+
+
+
+ARM Macro Assembler    Page 16 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+
+
+
+ARM Macro Assembler    Page 17 
+
+
+              20 FF FD 
+              FF FF FD 
+              FF FF FD 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              01 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FD FF 
+              FF FD FF 
+              FF FD FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+
+
+
+ARM Macro Assembler    Page 18 
+
+
+              FD FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FD FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 19 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+
+
+
+ARM Macro Assembler    Page 20 
+
+
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              01 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FD FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+
+
+
+ARM Macro Assembler    Page 21 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF 20 
+              20 FF FD 
+              FF FF FF 
+              FF FD FF 
+              20 20 FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 22 
+
+
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              FF FF FD 
+              FF FF FD 
+              FF FF 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 23 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FD FF FF 
+              FF FF FF 
+              FF FD FF 
+              20 20 20 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 FF FD 
+              FF FF FF 
+              FF FD FF 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 24 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 25 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              FF FF FF 
+              FF FD FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FD FF FF 
+              FF FF 20 
+
+
+
+ARM Macro Assembler    Page 26 
+
+
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 27 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 28 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FD FF 
+              FF FD FF 
+              FF FD FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FD FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 01 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FD 
+              FF FF FD 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 01 
+
+
+
+ARM Macro Assembler    Page 29 
+
+
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FD 
+              FD FF FF 
+              FD FF FF 
+              FD FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+
+
+
+ARM Macro Assembler    Page 30 
+
+
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 31 
+
+
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FD 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              01 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 01 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 32 
+
+
+              FF FF 20 
+              20 20 FF 
+              FD FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FD FD 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+
+
+
+ARM Macro Assembler    Page 33 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 34 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 35 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 36 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 37 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FD 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 38 
+
+
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FD 
+              FD FF FF 
+              FF FF FD 
+              FF FF FF 
+              FD FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 39 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FD FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 40 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FD FF FF 
+              FD FF FF 
+              FD FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 01 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 01 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FD FD 
+              FF FF FD 
+              FF FF FD 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 41 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FD FF 
+
+
+
+ARM Macro Assembler    Page 42 
+
+
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 43 
+
+
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 01 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 01 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 44 
+
+
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 45 
+
+
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 46 
+
+
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FD FF 
+              FF FF FF 
+              FF FF FD 
+              FF 20 20 
+              20 FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+
+
+
+ARM Macro Assembler    Page 47 
+
+
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FD FF 20 
+              20 20 FF 
+              FD FF FF 
+              FF FF FF 
+              FF FD FF 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+
+
+
+ARM Macro Assembler    Page 48 
+
+
+              FF FF FD 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FD 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              FD FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+
+
+
+ARM Macro Assembler    Page 49 
+
+
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+
+
+
+ARM Macro Assembler    Page 50 
+
+
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20         INCBIN           pacman_imagens\Pacman_mapa_pret
+o_branco.pgm
+   48 00002181         mapa_end
+   49 00002181         
+   50 00002181 00 00 00        ALIGN
+   51 00002184         mapa_length
+   52 00002184 00002184        DCD              mapa_end - mapa
+   53 00002188         
+   54 00002188         ;-------------------------------------------
+   55 00002188         ;Fantasma 1 
+   56 00002188         fantasma1_imagem
+   57 00002188 0A FF FF 
+              20 20 20 
+              FF FF FF 
+              20 20 20 
+              20 20 FF 
+              20 FF FF 
+              20 FF FF 
+              20 20 FF 
+              20 20 FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 FF 
+              20 FF 20 
+              FF FF            INCBIN           pacman_imagens\fantasma1.pgm
+   58 000021BA         fantasma1_end
+   59 000021BA         
+   60 000021BA 00 00           ALIGN
+   61 000021BC         fantasma_length1
+   62 000021BC 00000034        DCD              fantasma1_end - fantasma1_image
+m
+   63 000021C0         
+   64 000021C0         ;Fantasma2
+   65 000021C0         fantasma2_imagem
+   66 000021C0 0A FF FF 
+              20 20 20 
+              FF FF FF 
+              20 20 20 
+              20 20 FF 
+              20 FF 20 
+              20 FF 20 
+              20 20 FF 
+
+
+
+ARM Macro Assembler    Page 51 
+
+
+              FF 20 FF 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              20 FF 20 
+              FF 20            INCBIN           pacman_imagens\fantasma2.pgm
+   67 000021F2         fantasma2_end
+   68 000021F2         
+   69 000021F2 00 00           ALIGN
+   70 000021F4         fantasma_length2
+   71 000021F4 00000034        DCD              fantasma2_end - fantasma2_image
+m
+   72 000021F8         
+   73 000021F8         ;Fantasma3
+   74 000021F8         fantasma3_imagem
+   75 000021F8 FF FF 20 
+              20 20 FF 
+              FF FF 20 
+              20 20 20 
+              20 FF 20 
+              20 FF 20 
+              20 FF 20 
+              20 FF FF 
+              20 FF FF 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF 20 
+              FF 20 FF 
+              FF               INCBIN           pacman_imagens\fantasma3.pgm
+   76 00002229         fantasma3_end
+   77 00002229         
+   78 00002229 00 00 00        ALIGN
+   79 0000222C         fantasma_length3
+   80 0000222C 00000034        DCD              fantasma3_end - fantasma3_image
+m
+   81 00002230         
+   82 00002230         ;Fantasma4
+   83 00002230         fantasma4_imagem
+   84 00002230 0A FF FF 
+              20 20 20 
+              FF FF FF 
+              20 20 20 
+              20 20 FF 
+              20 FF FF 
+              20 FF FF 
+              20 20 20 
+              FF 20 20 
+              FF 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+
+
+
+ARM Macro Assembler    Page 52 
+
+
+              20 FF 20 
+              FF 20            INCBIN           pacman_imagens\fantasma4.pgm
+   85 00002262         fantasma4_end
+   86 00002262         
+   87 00002262 00 00           ALIGN
+   88 00002264         fantasma_length4
+   89 00002264 00000034        DCD              fantasma4_end - fantasma4_image
+m
+   90 00002268         
+   91 00002268         fantasma_morto
+   92 00002268 FF FF FF 
+              FF FF FF 
+              FF 20 20 
+              20 FF 20 
+              20 20 20 
+              FF 20 FF 
+              20 FF 20 
+              20 20 20 
+              FF 20 20 
+              20 FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF               INCBIN           pacman_imagens\fantasma_olho.pg
+m
+   93 00002299         fantasma_morto_end
+   94 00002299         
+   95 00002299 00 00 00        ALIGN
+   96 0000229C         fantasma_morto_length
+   97 0000229C 00000003        DCD              fantasma_morto - fantasma_morto
+_end
+   98 000022A0         
+   99 000022A0         ;-------------------------------------------
+  100 000022A0         ;PACMAN - INICIO 
+  101 000022A0         pacman1
+  102 000022A0 0A FF FF 
+              20 20 20 
+              FF FB FF 
+              20 20 FF 
+              20 20 FD 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF 20 20 
+              20 20 20 
+              FD FD FF 
+              20 20 20 
+              FF FB            INCBIN           pacman_imagens\pacman1.pgm
+  103 000022D2         pacman1_end
+  104 000022D2         
+  105 000022D2 00 00           ALIGN
+  106 000022D4         pacman1_length
+
+
+
+ARM Macro Assembler    Page 53 
+
+
+  107 000022D4 00000034        DCD              pacman1_end - pacman1
+  108 000022D8         
+  109 000022D8         ; MEIO MOVIMENTACAO
+  110 000022D8         pacman2
+  111 000022D8 0A FF FF 
+              20 20 20 
+              FF FB FF 
+              20 20 FF 
+              20 20 FD 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF FF 20 
+              20 20 20 
+              20 20 20 
+              FF 20 20 
+              20 20 20 
+              FD FD FF 
+              20 20 20 
+              FF FB            INCBIN           pacman_imagens\pacman2.pgm
+  112 0000230A         pacman2_end
+  113 0000230A         
+  114 0000230A 00 00           ALIGN
+  115 0000230C         pacman2_length
+  116 0000230C 00000034        DCD              pacman2_end - pacman2
+  117 00002310         
+  118 00002310         ; FIM MOVIMENTACAO
+  119 00002310         pacman3
+  120 00002310 0A FF FF 
+              20 20 20 
+              FF FB FF 
+              20 20 FF 
+              20 20 20 
+              20 20 20 
+              20 FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF FF 20 
+              20 20 20 
+              FF FF FF 
+              FF 20 20 
+              20 20 20 
+              20 FD FF 
+              20 20 20 
+              FF FB            INCBIN           pacman_imagens\pacman3.pgm
+  121 00002342         pacman3_end
+  122 00002342         
+  123 00002342 00 00           ALIGN
+  124 00002344         pacman3_length
+  125 00002344 00000034        DCD              pacman3_end - pacman3
+  126 00002348         ;-------------------------------------------
+  127 00002348         ; PACMAN MORRENDO
+  128 00002348         pacman1_morrendo
+  129 00002348 0A FF FF 
+              20 20 20 
+              FF FB FF 
+              20 20 20 
+              20 20 FD 
+
+
+
+ARM Macro Assembler    Page 54 
+
+
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              20 20 20 
+              FF 20 20 
+              20 20 20 
+              FD FD FF 
+              20 20 20 
+              FF FB            INCBIN           pacman_imagens\pacman1_morrendo
+.pgm
+  130 0000237A         pacman1_morrendo_end
+  131 0000237A         
+  132 0000237A 00 00           ALIGN
+  133 0000237C         pacman1_morrendo_length
+  134 0000237C 00000034        DCD              pacman1_morrendo_end - pacman1_
+morrendo
+  135 00002380         
+  136 00002380         ; PACMAN MORRENDO 2 
+  137 00002380         pacman2_morrendo
+  138 00002380 0A FF FF 
+              FF FF FF 
+              FF FB FF 
+              FF FF FF 
+              FF FF FD 
+              20 20 FF 
+              FF FF 20 
+              20 20 20 
+              20 FF 20 
+              20 20 20 
+              20 20 FF 
+              20 20 20 
+              FF 20 20 
+              20 20 20 
+              FD FD FF 
+              20 20 20 
+              FF FB            INCBIN           pacman_imagens\pacman2_morrendo
+.pgm
+  139 000023B2         pacman2_morrendo_end
+  140 000023B2         
+  141 000023B2 00 00           ALIGN
+  142 000023B4         pacman2_morrendo_length
+  143 000023B4 00000034        DCD              pacman2_morrendo_end - pacman2_
+morrendo
+  144 000023B8         
+  145 000023B8         ; PACMAN MORRENDO 3 
+  146 000023B8         pacman3_morrendo
+  147 000023B8 FF FF FF 
+              FF FF FF 
+              FB FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF FF 
+              FF FF 20 
+
+
+
+ARM Macro Assembler    Page 55 
+
+
+              20 FF 20 
+              20 FF FF 
+              20 20 20 
+              20 20 FF 
+              FD FF 20 
+              20 20 FF 
+              FB               INCBIN           pacman_imagens\pacman3_morrendo
+.pgm
+  148 000023E9         pacman3_morrendo_end
+  149 000023E9         
+  150 000023E9 00 00 00        ALIGN
+  151 000023EC         pacman3_morrendo_length
+  152 000023EC 00000034        DCD              pacman3_morrendo_end - pacman3_
+morrendo
+  153 000023F0         
+  154 000023F0         ; PACMAN MORRENDO 4 
+  155 000023F0         pacman4_morrendo
+  156 000023F0 0A FF FF 
+              FF FF FF 
+              FF FF FF 
+              20 FF 20 
+              FF 20 FF 
+              FF FF 20 
+              20 20 FF 
+              FF FF 20 
+              20 20 20 
+              20 FF FF 
+              FF 20 20 
+              20 FF FF 
+              FF 20 FF 
+              20 FF 20 
+              FF FF FF 
+              FF FF FF 
+              FF FF            INCBIN           pacman_imagens\pacman4_morrendo
+.pgm
+  157 00002422         pacman4_morrendo_end
+  158 00002422         
+  159 00002422 00 00           ALIGN
+  160 00002424         pacman4_morrendo_length
+  161 00002424 00000034        DCD              pacman4_morrendo_end - pacman4_
+morrendo
+  162 00002428         
+  163 00002428         ;-------------------------------------------
+  164 00002428         
+  165 00002428                 ALIGN
+  166 00002428                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\ram\pacman_load_images.d -o.\ram\pacman_load_images.o -I.\RTE
+\_TM4C129_RAM -IC:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\
+Core\Include -IC:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\R
+TOS\RTX\INC -IC:\Users\mglucas\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Devi
+ce\Include\TM4C129 --predefine="__RTX SETA 1" --predefine="__UVISION_VERSION SE
+TA 527" --predefine="_RTE_ SETA 1" --predefine="TM4C1294NCPDT SETA 1" --list=.\
+pacman_load_images.lst pacman_load_images.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+fantasma1_end 000021BA
+
+Symbol: fantasma1_end
+   Definitions
+      At line 58 in file pacman_load_images.s
+   Uses
+      At line 62 in file pacman_load_images.s
+Comment: fantasma1_end used once
+fantasma1_imagem 00002188
+
+Symbol: fantasma1_imagem
+   Definitions
+      At line 56 in file pacman_load_images.s
+   Uses
+      At line 8 in file pacman_load_images.s
+      At line 62 in file pacman_load_images.s
+
+fantasma2_end 000021F2
+
+Symbol: fantasma2_end
+   Definitions
+      At line 67 in file pacman_load_images.s
+   Uses
+      At line 71 in file pacman_load_images.s
+Comment: fantasma2_end used once
+fantasma2_imagem 000021C0
+
+Symbol: fantasma2_imagem
+   Definitions
+      At line 65 in file pacman_load_images.s
+   Uses
+      At line 11 in file pacman_load_images.s
+      At line 71 in file pacman_load_images.s
+
+fantasma3_end 00002229
+
+Symbol: fantasma3_end
+   Definitions
+      At line 76 in file pacman_load_images.s
+   Uses
+      At line 80 in file pacman_load_images.s
+Comment: fantasma3_end used once
+fantasma3_imagem 000021F8
+
+Symbol: fantasma3_imagem
+   Definitions
+      At line 74 in file pacman_load_images.s
+   Uses
+      At line 14 in file pacman_load_images.s
+      At line 80 in file pacman_load_images.s
+
+fantasma4_end 00002262
+
+Symbol: fantasma4_end
+   Definitions
+      At line 85 in file pacman_load_images.s
+   Uses
+      At line 89 in file pacman_load_images.s
+Comment: fantasma4_end used once
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+fantasma4_imagem 00002230
+
+Symbol: fantasma4_imagem
+   Definitions
+      At line 83 in file pacman_load_images.s
+   Uses
+      At line 17 in file pacman_load_images.s
+      At line 89 in file pacman_load_images.s
+
+fantasma_length1 000021BC
+
+Symbol: fantasma_length1
+   Definitions
+      At line 61 in file pacman_load_images.s
+   Uses
+      At line 9 in file pacman_load_images.s
+Comment: fantasma_length1 used once
+fantasma_length2 000021F4
+
+Symbol: fantasma_length2
+   Definitions
+      At line 70 in file pacman_load_images.s
+   Uses
+      At line 12 in file pacman_load_images.s
+Comment: fantasma_length2 used once
+fantasma_length3 0000222C
+
+Symbol: fantasma_length3
+   Definitions
+      At line 79 in file pacman_load_images.s
+   Uses
+      At line 15 in file pacman_load_images.s
+Comment: fantasma_length3 used once
+fantasma_length4 00002264
+
+Symbol: fantasma_length4
+   Definitions
+      At line 88 in file pacman_load_images.s
+   Uses
+      At line 18 in file pacman_load_images.s
+Comment: fantasma_length4 used once
+fantasma_morto 00002268
+
+Symbol: fantasma_morto
+   Definitions
+      At line 91 in file pacman_load_images.s
+   Uses
+      At line 41 in file pacman_load_images.s
+      At line 97 in file pacman_load_images.s
+
+fantasma_morto_end 00002299
+
+Symbol: fantasma_morto_end
+   Definitions
+      At line 93 in file pacman_load_images.s
+   Uses
+      At line 97 in file pacman_load_images.s
+Comment: fantasma_morto_end used once
+fantasma_morto_length 0000229C
+
+
+
+ARM Macro Assembler    Page 3 Alphabetic symbol ordering
+Relocatable symbols
+
+
+Symbol: fantasma_morto_length
+   Definitions
+      At line 96 in file pacman_load_images.s
+   Uses
+      At line 42 in file pacman_load_images.s
+Comment: fantasma_morto_length used once
+mapa 00000000
+
+Symbol: mapa
+   Definitions
+      At line 46 in file pacman_load_images.s
+   Uses
+      At line 5 in file pacman_load_images.s
+      At line 52 in file pacman_load_images.s
+
+mapa_end 00002181
+
+Symbol: mapa_end
+   Definitions
+      At line 48 in file pacman_load_images.s
+   Uses
+      At line 52 in file pacman_load_images.s
+Comment: mapa_end used once
+mapa_length 00002184
+
+Symbol: mapa_length
+   Definitions
+      At line 51 in file pacman_load_images.s
+   Uses
+      At line 6 in file pacman_load_images.s
+Comment: mapa_length used once
+pacman1 000022A0
+
+Symbol: pacman1
+   Definitions
+      At line 101 in file pacman_load_images.s
+   Uses
+      At line 20 in file pacman_load_images.s
+      At line 107 in file pacman_load_images.s
+
+pacman1_end 000022D2
+
+Symbol: pacman1_end
+   Definitions
+      At line 103 in file pacman_load_images.s
+   Uses
+      At line 107 in file pacman_load_images.s
+Comment: pacman1_end used once
+pacman1_length 000022D4
+
+Symbol: pacman1_length
+   Definitions
+      At line 106 in file pacman_load_images.s
+   Uses
+      At line 21 in file pacman_load_images.s
+Comment: pacman1_length used once
+pacman1_morrendo 00002348
+
+
+
+
+ARM Macro Assembler    Page 4 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: pacman1_morrendo
+   Definitions
+      At line 128 in file pacman_load_images.s
+   Uses
+      At line 29 in file pacman_load_images.s
+      At line 134 in file pacman_load_images.s
+
+pacman1_morrendo_end 0000237A
+
+Symbol: pacman1_morrendo_end
+   Definitions
+      At line 130 in file pacman_load_images.s
+   Uses
+      At line 134 in file pacman_load_images.s
+Comment: pacman1_morrendo_end used once
+pacman1_morrendo_length 0000237C
+
+Symbol: pacman1_morrendo_length
+   Definitions
+      At line 133 in file pacman_load_images.s
+   Uses
+      At line 30 in file pacman_load_images.s
+Comment: pacman1_morrendo_length used once
+pacman2 000022D8
+
+Symbol: pacman2
+   Definitions
+      At line 110 in file pacman_load_images.s
+   Uses
+      At line 23 in file pacman_load_images.s
+      At line 116 in file pacman_load_images.s
+
+pacman2_end 0000230A
+
+Symbol: pacman2_end
+   Definitions
+      At line 112 in file pacman_load_images.s
+   Uses
+      At line 116 in file pacman_load_images.s
+Comment: pacman2_end used once
+pacman2_length 0000230C
+
+Symbol: pacman2_length
+   Definitions
+      At line 115 in file pacman_load_images.s
+   Uses
+      At line 24 in file pacman_load_images.s
+Comment: pacman2_length used once
+pacman2_morrendo 00002380
+
+Symbol: pacman2_morrendo
+   Definitions
+      At line 137 in file pacman_load_images.s
+   Uses
+      At line 32 in file pacman_load_images.s
+      At line 143 in file pacman_load_images.s
+
+pacman2_morrendo_end 000023B2
+
+
+
+
+ARM Macro Assembler    Page 5 Alphabetic symbol ordering
+Relocatable symbols
+
+Symbol: pacman2_morrendo_end
+   Definitions
+      At line 139 in file pacman_load_images.s
+   Uses
+      At line 143 in file pacman_load_images.s
+Comment: pacman2_morrendo_end used once
+pacman2_morrendo_length 000023B4
+
+Symbol: pacman2_morrendo_length
+   Definitions
+      At line 142 in file pacman_load_images.s
+   Uses
+      At line 33 in file pacman_load_images.s
+Comment: pacman2_morrendo_length used once
+pacman3 00002310
+
+Symbol: pacman3
+   Definitions
+      At line 119 in file pacman_load_images.s
+   Uses
+      At line 26 in file pacman_load_images.s
+      At line 125 in file pacman_load_images.s
+
+pacman3_end 00002342
+
+Symbol: pacman3_end
+   Definitions
+      At line 121 in file pacman_load_images.s
+   Uses
+      At line 125 in file pacman_load_images.s
+Comment: pacman3_end used once
+pacman3_length 00002344
+
+Symbol: pacman3_length
+   Definitions
+      At line 124 in file pacman_load_images.s
+   Uses
+      At line 27 in file pacman_load_images.s
+Comment: pacman3_length used once
+pacman3_morrendo 000023B8
+
+Symbol: pacman3_morrendo
+   Definitions
+      At line 146 in file pacman_load_images.s
+   Uses
+      At line 35 in file pacman_load_images.s
+      At line 152 in file pacman_load_images.s
+
+pacman3_morrendo_end 000023E9
+
+Symbol: pacman3_morrendo_end
+   Definitions
+      At line 148 in file pacman_load_images.s
+   Uses
+      At line 152 in file pacman_load_images.s
+Comment: pacman3_morrendo_end used once
+pacman3_morrendo_length 000023EC
+
+Symbol: pacman3_morrendo_length
+
+
+
+ARM Macro Assembler    Page 6 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 151 in file pacman_load_images.s
+   Uses
+      At line 36 in file pacman_load_images.s
+Comment: pacman3_morrendo_length used once
+pacman4_morrendo 000023F0
+
+Symbol: pacman4_morrendo
+   Definitions
+      At line 155 in file pacman_load_images.s
+   Uses
+      At line 38 in file pacman_load_images.s
+      At line 161 in file pacman_load_images.s
+
+pacman4_morrendo_end 00002422
+
+Symbol: pacman4_morrendo_end
+   Definitions
+      At line 157 in file pacman_load_images.s
+   Uses
+      At line 161 in file pacman_load_images.s
+Comment: pacman4_morrendo_end used once
+pacman4_morrendo_length 00002424
+
+Symbol: pacman4_morrendo_length
+   Definitions
+      At line 160 in file pacman_load_images.s
+   Uses
+      At line 39 in file pacman_load_images.s
+Comment: pacman4_morrendo_length used once
+pacman_load_images 00000000
+
+Symbol: pacman_load_images
+   Definitions
+      At line 1 in file pacman_load_images.s
+   Uses
+      None
+Comment: pacman_load_images unused
+40 symbols
+374 symbols in table

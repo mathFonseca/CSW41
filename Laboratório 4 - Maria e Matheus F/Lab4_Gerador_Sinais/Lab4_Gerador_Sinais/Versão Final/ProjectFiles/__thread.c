@@ -21,7 +21,7 @@
 /* Defines */
 #define N_HARMONICAS 200
 #define TAXA 128
-#define GANTT 0
+#define GANTT 1
 
 
 /* Timer */
@@ -29,6 +29,10 @@ void timer_callback(void const *arg){}
 osTimerDef(Timer,timer_callback);
 osTimerId Timer_ID;
 
+/* Definição dos Mutex */
+osMutexDef(uart_mutex);
+osMutexId uart_mutex_id;	
+	
 /* Definicao dos Mails*/
 // Mail utilizado pelo UART
 // Mensagem UART
@@ -243,11 +247,15 @@ static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, 
 /*------------------------------------------------------------*/
 // UART Interrupt
 /*------------------------------------------------------------*/
-void UART0_Handler(void){
+void UART0_Handler(void){ // Contém GANTT
 	// Variaveis para leitura de dados da UART
 	char m;
 	UART_read *mailI;
 
+	// Variaveis pro GANTT
+	uint32_t cycles;
+	char *cycles_char;
+	
 	// Limpa as flags para reiniciar o processo
 	osSignalClear(PWM_ID,0x01);
 	osSignalClear(UART_ID,0x01);
@@ -255,13 +263,13 @@ void UART0_Handler(void){
 
 	
 	#if GANTT == 1
-	osMutexWait(mutex_UART_ID,osWaitForever);
+	osMutexWait(uart_mutex_id,osWaitForever);
 	UARTprintstring("UART Handler: active,");
 	cycles = KIN1_GetCycleCounter();
 	intToString(cycles,cycles_char,30,10,0);
 	UARTprintstring(cycles_char);
 	UARTprintstring(",");
-	osMutexRelease(mutex_UART_ID);
+	osMutexRelease(uart_mutex_id);
 	#endif
 
 	
@@ -285,12 +293,12 @@ void UART0_Handler(void){
 	osSignalSet(UART_ID,0x01);
 	
 	#if GANTT == 1
-	osMutexWait(mutex_UART_ID,osWaitForever);
+	osMutexWait(uart_mutex_id,osWaitForever);
 	cycles = KIN1_GetCycleCounter();
 	intToString(cycles,cycles_char,30,10,0);
 	UARTprintstring(cycles_char);
 	UARTprintstring("\r\n");
-	osMutexRelease(mutex_UART_ID);
+	osMutexRelease(uart_mutex_id);
 	#endif
 }
 /*------------------------------------------------------------*/
@@ -329,13 +337,17 @@ int Init_Thread (void) {
 /*************************************************************/
 // THREAD UART
 /*------------------------------------------------------------*/
-void UART(void const *argument){
+void UART(void const *argument){ // Contém GANTT
 	
 	// Definicao do meio de mensagem
 	char *pMail;
 	char mensagem[10];
-	float fator = 10.714285714285;
+	float fator = 10;//10.714285714285;
 	info_menu *specs_sinal;
+	
+	// Variaveis pro GANTT
+	uint32_t cycles;
+	char *cycles_char;
 	
 	// Evento
 	osEvent evt;
@@ -349,13 +361,13 @@ void UART(void const *argument){
 		osSignalClear(UART_ID,0x01);
 		
 		#if GANTT == 1
-		osMutexWait(mutex_UART_ID,osWaitForever);
+		osMutexWait(uart_mutex_id,osWaitForever);
 		UARTprintstring("UART: active,");
 		cycles = osKernelSysTick();
 		intToString(cycles,cycles_char,30,10,0);
 		UARTprintstring(cycles_char);
 		UARTprintstring(",");
-		osMutexRelease(mutex_UART_ID);
+		osMutexRelease(uart_mutex_id);
 		#endif
 	
 		specs_sinal = (info_menu*)osMailCAlloc(mail_UART_tratainfo_ID,osWaitForever);
@@ -511,82 +523,277 @@ void UART(void const *argument){
 			}	
 			
 			
-			/*
-			else if(pMail[0] == 'W'){
-				specs_sinal->freq = 5; // Ajusta o incremento de 5
-				specs_sinal->flag_freq = true; // Ativa a flag de troca
-				UARTprintstring("\033[2J"); // Limpa a tela
-				UART_printMenu(); // Printa o menu
-				osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
-			}
-			else if(pMail[0] == 'w'){
-				specs_sinal->freq = 1;
-				specs_sinal->flag_freq = true;
-				UARTprintstring("\033[2J");
-				UART_printMenu();
-				osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
-			}			
-			else if(pMail[0] == 'S'){
-				specs_sinal->freq = -5; // Ajusta o decremento de 1
-				specs_sinal->flag_freq = true; // Ativa a flag de troca
-				UARTprintstring("\033[2J"); // Limpa a tela
-				UART_printMenu(); // Printa o menu
-				osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
-			}
-			else if(pMail[0] == 's'){
-				specs_sinal->freq = -1;
-				specs_sinal->flag_freq = true;
-				UARTprintstring("\033[2J");
-				UART_printMenu();
-				osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
-			}
-			else if(pMail[0] == 'D'){
-					specs_sinal->amplitude = 5;
-					specs_sinal->flag_amp = true;
-			    UARTprintstring("\033[2J");
-					UART_printMenu();
-					osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
-			}
-			else if(pMail[0] == 'd'){
-					specs_sinal->amplitude = 1;
-					specs_sinal->flag_amp = true;
-			    UARTprintstring("\033[2J");
-					UART_printMenu();
-					osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
-			}			
-			else if(pMail[0] == 'A'){
-					specs_sinal->amplitude = -5;
-					specs_sinal->flag_amp = true;
-			    UARTprintstring("\033[2J");
-					UART_printMenu();
-					osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);			}
-			else if(pMail[0] == 'a'){
-					specs_sinal->amplitude = -1;
-					specs_sinal->flag_amp = true;
-			    UARTprintstring("\033[2J");
-					UART_printMenu();
-					osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
-			}	*/	
-
 			#endif
 		}
 		osMailFree(mid_UART_ID,pMail);
 		osSignalSet(generateSignal_ID,0x03);
 		
 	#if GANTT == 1
-	osMutexWait(mutex_UART_ID,osWaitForever);
+	osMutexWait(uart_mutex_id,osWaitForever);
 	cycles = osKernelSysTick();
 	intToString(cycles,cycles_char,30,10,0);
 	UARTprintstring(cycles_char);
 	UARTprintstring("\r\n");
-	osMutexRelease(mutex_UART_ID);
+	osMutexRelease(uart_mutex_id);
 	#endif
 	}
 }
+/*
+void New_UART(void const *argument){
+	
+	// Definicao do meio de mensagem
+	char *pMail;
+	char mensagem[10];
+	float fator = 10.714285714285;
+	info_menu *specs_sinal;
+	
+	// Evento
+	osEvent evt;
+	
+	// Criacao do Mail
+	mid_UART_ID = osMailCreate(osMailQ(MailQueue), NULL);
+	
+	while(true){
+		// Espero pelo sinal vindo da interrupcao
+		osSignalWait(0x01,osWaitForever);
+		osSignalClear(UART_ID,0x01);
+		
+		#if GANTT == 1
+		osMutexWait(mutex_UART_ID,osWaitForever);
+		UARTprintstring("UART: active,");
+		cycles = osKernelSysTick();
+		intToString(cycles,cycles_char,30,10,0);
+		UARTprintstring(cycles_char);
+		UARTprintstring(",");
+		osMutexRelease(mutex_UART_ID);
+		#endif
+	
+		specs_sinal = (info_menu*)osMailCAlloc(mail_UART_tratainfo_ID,osWaitForever);
+		specs_sinal->amplitude = 0;
+		specs_sinal->freq = 0;
+		specs_sinal->opt = 0;
+		specs_sinal->flag_freq = false;
+		specs_sinal->flag_amp = false;
+		specs_sinal->flag_opt = false;
+		//Forma de onda
+		// Coleta o Mail
+		evt = osMailGet(mid_UART_ID,0);
+		
+		if (evt.status == osEventMail) {
+			pMail = evt.value.p;
+					
+		#if GANTT == 0
+			UARTprintstring("\033[2J"); // Limpa a tela
+			UART_printMenuA();
+	
+			if(pMail[0] == '1'){
+				specs_sinal->opt = '1'; // Sinaliza o opt a ser trocado
+				specs_sinal->flag_opt = true; // Valida a troca de opt
+				//UARTprintstring("\033[2J"); // Limpa a tela
+				//UART_printMenu(); // Printa o menu novamente
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal); // Coloca na Mail as infos
+			}
+			else if(pMail[0] == '2'){
+				specs_sinal->opt = '2';
+				specs_sinal->flag_opt = true;
+				//UARTprintstring("\033[2J");
+				//UART_printMenu();
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '3'){
+				specs_sinal->opt = '3';
+				specs_sinal->flag_opt = true;
+				//UARTprintstring("\033[2J");
+				//UART_printMenu();
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '4'){
+				specs_sinal->opt = '4';
+				specs_sinal->flag_opt = true;
+				//UARTprintstring("\033[2J");
+				//UART_printMenu();
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '5'){
+				specs_sinal->opt = '5';
+				specs_sinal->flag_opt = true;
+				//UARTprintstring("\033[2J");
+				//UART_printMenu();
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}		
+			
+		#endif
+		}
+		osMailFree(mid_UART_ID,pMail);
+		#if GANTT == 1
+			osMutexWait(mutex_UART_ID,osWaitForever);
+			cycles = osKernelSysTick();
+			intToString(cycles,cycles_char,30,10,0);
+			UARTprintstring(cycles_char);
+			UARTprintstring("\r\n");
+			osMutexRelease(mutex_UART_ID);
+		#endif
+		//Frequencia
+		// Coleta o Mail
+		evt = osMailGet(mid_UART_ID,0);
+		
+		if (evt.status == osEventMail) {
+			pMail = evt.value.p;
+					
+		#if GANTT == 0
+			UARTprintstring("\033[2J"); // Limpa a tela
+			UART_printMenuB();
+	
+			//1 - 0Hz | 2 - 20Hz | 3 - 50Hz | 4 - 100Hz | 5 - 150Hz | 6 - 200Hz
+			else if(pMail[0] == '1'){
+				specs_sinal->freq = 0; // Ajusta o incremento de 5
+				specs_sinal->flag_freq = true; // Ativa a flag de troca
+				//UARTprintstring("\033[2J"); // Limpa a tela
+				//UART_printMenu(); // Printa o menu
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '2'){
+				specs_sinal->freq = 20;
+				specs_sinal->flag_freq = true;
+				//UARTprintstring("\033[2J");
+				//UART_printMenu();
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}	
+			else if(pMail[0] == '3'){
+				specs_sinal->freq = 50; // Ajusta o incremento de 5
+				specs_sinal->flag_freq = true; // Ativa a flag de troca
+				//UARTprintstring("\033[2J"); // Limpa a tela
+				//UART_printMenu(); // Printa o menu
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '4'){
+				specs_sinal->freq = 100;
+				specs_sinal->flag_freq = true;
+				//UARTprintstring("\033[2J");
+				//UART_printMenu();
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}	
+			else if(pMail[0] == '5'){
+				specs_sinal->freq = 150; // Ajusta o incremento de 5
+				specs_sinal->flag_freq = true; // Ativa a flag de troca
+				//UARTprintstring("\033[2J"); // Limpa a tela
+				//UART_printMenu(); // Printa o menu
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '6'){
+				specs_sinal->freq = 200;
+				specs_sinal->flag_freq = true;
+				//UARTprintstring("\033[2J");
+				//UART_printMenu();
+				//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}		
+			
+			
+		#endif
+		}
+		osMailFree(mid_UART_ID,pMail);
+		#if GANTT == 1
+			osMutexWait(mutex_UART_ID,osWaitForever);
+			cycles = osKernelSysTick();
+			intToString(cycles,cycles_char,30,10,0);
+			UARTprintstring(cycles_char);
+			UARTprintstring("\r\n");
+			osMutexRelease(mutex_UART_ID);
+		#endif
+		
+		osSignalSet(generateSignal_ID,0x03);
+		
+		//Amplitude
+		// Coleta o Mail
+		evt = osMailGet(mid_UART_ID,0);
+		
+		if (evt.status == osEventMail) {
+			pMail = evt.value.p;
+					
+		#if GANTT == 0
+			UARTprintstring("\033[2J"); // Limpa a tela
+			UART_printMenuC();
+	
+			//1 0.0V | 2 - 0.5V | 3 - 1.0V | 4 - 1.5V | 5 - 2.0V | 6 - 2.5V | 7 - 3.0V | 8 - 3.3
+			else if(pMail[0] == '1'){
+					specs_sinal->amplitude = 0.0;
+					specs_sinal->flag_amp = true;
+			    //UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '2'){
+					specs_sinal->amplitude = 0.5*fator;
+					specs_sinal->flag_amp = true;
+			    //UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			else if(pMail[0] == '3'){
+					specs_sinal->amplitude = 1*fator;
+					specs_sinal->flag_amp = true;
+			   // UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}			
+			else if(pMail[0] == '4'){
+					specs_sinal->amplitude = 1.5*fator;
+					specs_sinal->flag_amp = true;
+			   // UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);			
+			}
+			else if(pMail[0] == '5'){
+					specs_sinal->amplitude = 2*fator;
+					specs_sinal->flag_amp = true;
+			   // UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}	
+			else if(pMail[0] == '6'){
+					specs_sinal->amplitude = 2.5*fator;
+					specs_sinal->flag_amp = true;
+			    //UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}	
+			else if(pMail[0] == '7){
+					specs_sinal->amplitude = 3*fator;
+					specs_sinal->flag_amp = true;
+			    //UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}	
+			else if(pMail[0] == '8'){
+					specs_sinal->amplitude = 3.3*fator;
+					specs_sinal->flag_amp = true;
+			    //UARTprintstring("\033[2J");
+					//UART_printMenu();
+					//osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+			}
+			
+			
+		#endif
+		}
+		osMailFree(mid_UART_ID,pMail);
+		#if GANTT == 1
+			osMutexWait(mutex_UART_ID,osWaitForever);
+			cycles = osKernelSysTick();
+			intToString(cycles,cycles_char,30,10,0);
+			UARTprintstring(cycles_char);
+			UARTprintstring("\r\n");
+			osMutexRelease(mutex_UART_ID);
+		#endif
+		
+		osMailPut(mail_UART_tratainfo_ID,(info_menu*)specs_sinal);
+		osSignalSet(generateSignal_ID,0x03);
+	}
+}
+*/
 /*------------------------------------------------------------*/
 // THREAD generateSignal
 /*------------------------------------------------------------*/
-void generateSignal(void const *argument){
+void generateSignal(void const *argument){ // Contém GANTT
 	// Variaveis de plot
 	uint8_t data = 64;
 	double pi = 3.1415926;
@@ -598,6 +805,7 @@ void generateSignal(void const *argument){
 	uint8_t freq = 20;
 	uint8_t amp = 28;// 0 até 35 - 0 até 3,3V 
 	uint32_t cycles, cycles_fim;
+	char *cycles_char;
 	uint32_t clock = osKernelSysTickFrequency;
 	bool flag = true;
 	
@@ -623,13 +831,13 @@ void generateSignal(void const *argument){
 		
 
 		#if GANTT == 1
-		osMutexWait(mutex_UART_ID,osWaitForever);
+		osMutexWait(uart_mutex_id,osWaitForever);
 		UARTprintstring("generateSignal: active,");
 		cycles = osKernelSysTick();
 		intToString(cycles,cycles_char,30,10,0);
 		UARTprintstring(cycles_char);
 		UARTprintstring(",");
-		osMutexRelease(mutex_UART_ID);
+		osMutexRelease(uart_mutex_id);
 		#endif
 
 		// Espera pouco por novas mensagens na UART
@@ -733,20 +941,25 @@ void generateSignal(void const *argument){
 		osSignalSet(Display_ID,0x01);
 
 	#if GANTT == 1
-	osMutexWait(mutex_UART_ID,osWaitForever);
+	osMutexWait(uart_mutex_id,osWaitForever);
 	cycles = osKernelSysTick();
 	intToString(cycles,cycles_char,30,10,0);
 	UARTprintstring(cycles_char);
 	UARTprintstring("\r\n");
-	osMutexRelease(mutex_UART_ID);
+	osMutexRelease(uart_mutex_id);
 	#endif
 	}
 }
 /*------------------------------------------------------------*/
 // THREAD PWM
 /*------------------------------------------------------------*/ 
-void PWM(void const *argument){
+void PWM(void const *argument){	// Contém GANTT
 	osEvent event;
+	
+	// Variaveis pro GANTT
+	uint32_t cycles;
+	char *cycles_char;
+	
 	uint16_t amp=0;
 	PWM_per_set(200);
 	PWM_enable(true);
@@ -757,13 +970,13 @@ void PWM(void const *argument){
 		osSignalClear(PWM_ID,0x01);
 		
 		#if GANTT == 1
-		osMutexWait(mutex_UART_ID,osWaitForever);
+		osMutexWait(uart_mutex_id,osWaitForever);
 		UARTprintstring("PWM: active,");
 		cycles = osKernelSysTick();
 		intToString(cycles,cycles_char,30,10,0);
 		UARTprintstring(cycles_char);
 		UARTprintstring(",");
-		osMutexRelease(mutex_UART_ID);
+		osMutexRelease(uart_mutex_id);
 		#endif
 	
 		event = osMessageGet(PWM_queue_ID,osWaitForever);
@@ -777,12 +990,12 @@ void PWM(void const *argument){
 		osSignalSet(generateSignal_ID,0x01);
 		
 	#if GANTT == 1
-	osMutexWait(mutex_UART_ID,osWaitForever);
+	osMutexWait(uart_mutex_id,osWaitForever);
 	cycles = osKernelSysTick();
 	intToString(cycles,cycles_char,30,10,0);
 	UARTprintstring(cycles_char);
 	UARTprintstring("\r\n");
-	osMutexRelease(mutex_UART_ID);
+	osMutexRelease(uart_mutex_id);
 	#endif
 		
 	}
@@ -792,7 +1005,7 @@ void PWM(void const *argument){
 /*------------------------------------------------------------*/
 // THREAD Display
 /*------------------------------------------------------------*/
-void Display(void const *argument){
+void Display(void const *argument){ //  Contém GANTT
 	
 	osEvent event;
 	int i=0,j=0;
@@ -800,6 +1013,10 @@ void Display(void const *argument){
 	uint8_t data_antiga = 0;
 	
 	uint8_t counter = 0;
+	
+	// Variaveis pro GANTT
+	uint32_t cycles;
+	char *cycles_char;
 	
 	float taxa_zoom;
 	
@@ -816,13 +1033,13 @@ void Display(void const *argument){
 		osSignalClear(Display_ID,0x01);
 		
 		#if GANTT == 1
-		osMutexWait(mutex_UART_ID,osWaitForever);
+		osMutexWait(uart_mutex_id,osWaitForever);
 		UARTprintstring("Display: active,");
 		cycles = osKernelSysTick();
 		intToString(cycles,cycles_char,30,10,0);
 		UARTprintstring(cycles_char);
 		UARTprintstring(",");
-		osMutexRelease(mutex_UART_ID);
+		osMutexRelease(uart_mutex_id);
 		#endif
 		
 		data_antiga = data;
@@ -878,12 +1095,12 @@ void Display(void const *argument){
 		osSignalSet(generateSignal_ID,0X02);
 		
 	#if GANTT == 1
-	osMutexWait(mutex_UART_ID,osWaitForever);
+	osMutexWait(uart_mutex_id,osWaitForever);
 	cycles = osKernelSysTick();
 	intToString(cycles,cycles_char,30,10,0);
 	UARTprintstring(cycles_char);
 	UARTprintstring("\r\n");
-	osMutexRelease(mutex_UART_ID);
+	osMutexRelease(uart_mutex_id);
 	#endif
 	}
 
@@ -902,6 +1119,9 @@ int main() {
 
 	//Initializing all peripherals
 	init_all();
+	
+	//Initializing Mutex
+	uart_mutex_id = osMutexCreate(osMutex(uart_mutex));
 	
 	SystemCoreClockUpdate();
 	// Inicializa as Threads

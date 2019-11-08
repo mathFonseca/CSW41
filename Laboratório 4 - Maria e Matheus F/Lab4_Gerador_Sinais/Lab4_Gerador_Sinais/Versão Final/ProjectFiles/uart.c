@@ -156,8 +156,10 @@ void UART_printMenu(){
 	UARTprintstring("\n\r");
 
 }
-// Menu 1 - UART
-void UART_printMenu_A(){
+// Menu 1 - UART - Forma de onda
+void UART_printMenuA(){
+	UARTprintstring("Escolha a forma de onda");
+	UARTprintstring("\n\r");
 	UARTprintstring(" 1 - Senoidal");
 	UARTprintstring("\n\r");
 	UARTprintstring(" 2 - Quadrada");
@@ -171,11 +173,44 @@ void UART_printMenu_A(){
 	UARTprintstring(" ----------------------------------");
 	UARTprintstring("\n\r");
 }
-// Menu 2 - UART
-void UART_printMenu_BC(){
-	UARTprintstring(" + - Incrementa");
+// Menu 2 - UART - Frequencia
+void UART_printMenuB(){
+	UARTprintstring("Escolha a frequencia da onda");
 	UARTprintstring("\n\r");
-	UARTprintstring(" - - Decrementa");
+	UARTprintstring(" 1 - 0Hz");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 2 - 20Hz");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 3 - 50Hz");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 4 - 100Hz");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 5 - 1500Hz");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 6 - 200Hz");
+	UARTprintstring("\n\r");
+	UARTprintstring(" ----------------------------------");
+	UARTprintstring("\n\r");	
+}
+// Menu 3 - UART - Amplitude
+void UART_printMenuC(){
+	UARTprintstring("Escolha a amplitude da onda");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 1 - 0.0V");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 2 - 0.5V");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 3 - 1.0V");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 4 - 1.5V");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 5 - 2.0V");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 6 - 2.5V");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 7 - 3.0V");
+	UARTprintstring("\n\r");
+	UARTprintstring(" 8 - 3.3V");
 	UARTprintstring("\n\r");
 	UARTprintstring(" ----------------------------------");
 	UARTprintstring("\n\r");	

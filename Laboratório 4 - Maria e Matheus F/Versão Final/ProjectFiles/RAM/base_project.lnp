@@ -1,0 +1,23 @@
+--cpu=Cortex-M4.fp
+".\ram\uart.o"
+".\ram\__thread.o"
+".\ram\pwm.o"
+".\ram\display.o"
+".\ram\oldfunctions.o"
+".\ram\buzzer.o"
+".\ram\buttons.o"
+".\ram\led.o"
+".\ram\opt.o"
+".\ram\rgb.o"
+".\ram\servo.o"
+".\ram\cfaf128x128x16.o"
+"..\driverlib\rvmdk\driverlib.lib"
+"..\grlib\rvmdk\grlib.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"
+".\ram\rtx_conf_cm.o"
+".\ram\startup_tm4c129.o"
+".\ram\system_tm4c129.o"
+--strict --scatter ".\RAM\base_project.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\base_project.map" -o .\RAM\base_project.axf

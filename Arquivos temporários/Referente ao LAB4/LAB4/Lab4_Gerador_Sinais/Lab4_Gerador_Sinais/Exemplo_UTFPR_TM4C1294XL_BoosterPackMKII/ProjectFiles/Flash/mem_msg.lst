@@ -1,0 +1,169 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             MessageText, DATA, READONLY
+    2 00000000         
+    3 00000000                 EXPORT           Message1
+    4 00000000                 EXPORT           Message1_length
+    5 00000000         
+    6 00000000         Message1
+    7 00000000 35 61 39 
+              39 30 31 
+              30 30 36 
+              36 36 37 
+              66 65 66 
+              66 37 36 
+              39 39 30 
+              31 30 30 
+              36 38 36 
+              37 66 65 
+              66 66 37 
+              62 39 39 
+              30 31 30 
+              30 36 31 
+              36 37 66 
+              65 66 66 
+              32 37 39 
+              39 30 31 
+              30 30 32 
+              36 36 37 
+              66 65 66 
+              66 32 37 
+              39 39 30 
+              31 30 30 
+              34 63 36 
+              37 66 65 
+              66 66 36 
+              38 39 39 
+              30 31 30 
+              30 36 37 
+              36 37 66 
+              65 66 66 
+              37 62 39 
+              39 30 31 
+              30 30 35 
+              61 36 37 
+              66 65 66 
+              66 37 35 
+              39 39 30 
+              31 30 30 
+              35 61 36 
+              37 66 65 
+              66 66 32 
+              37 39 39 
+              30 31 30 
+              30 35 66 
+              36 37 66 
+              65 66 66 
+              36 63 39 
+              39 30 31 
+              30 30 35 
+              61 36 37 
+              66 65 66 
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+              66 37 62 
+              39 39 30 
+              31 30 30 
+              32 37 36 
+              37 66 65 
+              66 66 32 
+              37 39 39 
+              30 31 30 
+              30 34 62 
+              36 37 66 
+              65 66 66 
+              37 36 39 
+              39 30 31 
+              30 30 35 
+              62 36 37 
+              66 65 66 
+              66 32 37 
+              39 39 30 
+              31 30 30 
+              34 64 36 
+              37 66 65 
+              66 66 36 
+              66 39 39 
+              30 31 30 
+              30 36 38 
+              36 37 66 
+              65 66 66 
+              37 34 39 
+              39 30 31 
+              30 30 35 
+              61 36 37 
+              66 65 66 
+              66 37 61 
+              39 39 30 
+              31 30 30 
+              38 61 36 
+              35 30 32 
+              30 30 38 
+              65 62 66 
+              66 65 66 
+              66               INCBIN           mensagem1.txt
+    8 00000118         Message1_end
+    9 00000118         
+   10 00000118         ; Comprimento das imagens   
+   11 00000118         Message1_length
+   12 00000118 00000118        DCD              Message1_end - Message1
+   13 0000011C         
+   14 0000011C                 ALIGN
+   15 0000011C                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\flash\mem_msg.d -o.\flash\mem_msg.o -I.\RTE\_TM4C129_Flash -I
+C:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include -IC
+:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\RTOS\RTX\INC -IC:
+\Users\mglucas\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C1
+29 --predefine="__RTX SETA 1" --predefine="__EVAL SETA 1" --predefine="__UVISIO
+N_VERSION SETA 527" --predefine="_RTE_ SETA 1" --predefine="TM4C1294NCPDT SETA 
+1" --list=.\flash\mem_msg.lst mem_msg.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Message1 00000000
+
+Symbol: Message1
+   Definitions
+      At line 6 in file mem_msg.s
+   Uses
+      At line 3 in file mem_msg.s
+      At line 12 in file mem_msg.s
+
+Message1_end 00000118
+
+Symbol: Message1_end
+   Definitions
+      At line 8 in file mem_msg.s
+   Uses
+      At line 12 in file mem_msg.s
+Comment: Message1_end used once
+Message1_length 00000118
+
+Symbol: Message1_length
+   Definitions
+      At line 11 in file mem_msg.s
+   Uses
+      At line 4 in file mem_msg.s
+Comment: Message1_length used once
+MessageText 00000000
+
+Symbol: MessageText
+   Definitions
+      At line 1 in file mem_msg.s
+   Uses
+      None
+Comment: MessageText unused
+4 symbols
+339 symbols in table

@@ -1,0 +1,9 @@
+.\flash\display.o: display.c
+.\flash\display.o: Display.h
+.\flash\display.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\flash\display.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\flash\display.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\flash\display.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\flash\display.o: ..\grlib/grlib.h
+.\flash\display.o: cfaf128x128x16.h
+.\flash\display.o: buzzer.h

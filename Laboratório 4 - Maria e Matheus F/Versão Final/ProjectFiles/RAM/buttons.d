@@ -1,0 +1,17 @@
+.\ram\buttons.o: buttons.c
+.\ram\buttons.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\ram\buttons.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\ram\buttons.o: ..\inc/hw_types.h
+.\ram\buttons.o: ..\inc/hw_memmap.h
+.\ram\buttons.o: ..\inc/hw_gpio.h
+.\ram\buttons.o: ..\inc/hw_sysctl.h
+.\ram\buttons.o: ..\driverlib/gpio.h
+.\ram\buttons.o: ..\driverlib/sysctl.h
+.\ram\buttons.o: ..\driverlib/pin_map.h
+.\ram\buttons.o: ..\driverlib/rom.h
+.\ram\buttons.o: ..\driverlib/pwm.h
+.\ram\buttons.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\ram\buttons.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\ram\buttons.o: ..\grlib/grlib.h
+.\ram\buttons.o: cfaf128x128x16.h
+.\ram\buttons.o: buttons.h

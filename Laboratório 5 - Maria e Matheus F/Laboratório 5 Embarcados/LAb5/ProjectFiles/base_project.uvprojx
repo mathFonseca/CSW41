@@ -388,11 +388,6 @@
               <FilePath>.\uart.c</FilePath>
             </File>
             <File>
-              <FileName>display.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\display.c</FilePath>
-            </File>
-            <File>
               <FileName>display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\display.h</FilePath>
@@ -401,6 +396,11 @@
               <FileName>seg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\seg.c</FilePath>
+            </File>
+            <File>
+              <FileName>teste.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\teste.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -847,11 +847,6 @@
               <FilePath>.\uart.c</FilePath>
             </File>
             <File>
-              <FileName>display.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\display.c</FilePath>
-            </File>
-            <File>
               <FileName>display.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\display.h</FilePath>
@@ -860,6 +855,11 @@
               <FileName>seg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\seg.c</FilePath>
+            </File>
+            <File>
+              <FileName>teste.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\teste.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -4,8 +4,8 @@ SET CPU_VENDOR=Texas Instruments
 SET UV2_TARGET=TM4C129 Flash
 SET CPU_CLOCK=0x07270E00
 "C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via ".\flash\uart.__i"
-"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via ".\flash\display.__i"
 "C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via ".\flash\seg.__i"
+"C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via ".\flash\teste.__i"
 "C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via ".\flash\buttons.__i"
 "C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via ".\flash\led.__i"
 "C:\Keil_v5\ARM\ARMCC\Bin\ArmCC" --Via ".\flash\opt.__i"

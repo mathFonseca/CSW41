@@ -1,7 +1,7 @@
 --cpu=Cortex-M4.fp
 ".\flash\uart.o"
-".\flash\display.o"
 ".\flash\seg.o"
+".\flash\teste.o"
 ".\flash\buttons.o"
 ".\flash\led.o"
 ".\flash\opt.o"

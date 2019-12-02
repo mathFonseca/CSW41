@@ -1,0 +1,7 @@
+--cpu Cortex-M4.fp --pd "__RTX SETA 1" -g --apcs=interwork 
+-I.\RTE\_TM4C129_Flash
+-IC:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\Core\Include
+-IC:\Users\mglucas\AppData\Local\Arm\Packs\ARM\CMSIS\5.5.1\CMSIS\RTOS\RTX\INC
+-IC:\Users\mglucas\AppData\Local\Arm\Packs\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129
+--pd "__UVISION_VERSION SETA 527" --pd "_RTE_ SETA 1" --pd "TM4C1294NCPDT SETA 1"
+--list .\flash\utils.lst --xref -o .\flash\utils.o --depend .\flash\utils.d "..\utils\utils.sgxx"

@@ -1,0 +1,14 @@
+.\ram\pacman_load_images.o: pacman_load_images.s
+.\ram\pacman_load_images.o: pacman_imagens\Pacman_mapa_preto_branco.pgm
+.\ram\pacman_load_images.o: pacman_imagens\fantasma1.pgm
+.\ram\pacman_load_images.o: pacman_imagens\fantasma2.pgm
+.\ram\pacman_load_images.o: pacman_imagens\fantasma3.pgm
+.\ram\pacman_load_images.o: pacman_imagens\fantasma4.pgm
+.\ram\pacman_load_images.o: pacman_imagens\fantasma_olho.pgm
+.\ram\pacman_load_images.o: pacman_imagens\pacman1.pgm
+.\ram\pacman_load_images.o: pacman_imagens\pacman2.pgm
+.\ram\pacman_load_images.o: pacman_imagens\pacman3.pgm
+.\ram\pacman_load_images.o: pacman_imagens\pacman1_morrendo.pgm
+.\ram\pacman_load_images.o: pacman_imagens\pacman2_morrendo.pgm
+.\ram\pacman_load_images.o: pacman_imagens\pacman3_morrendo.pgm
+.\ram\pacman_load_images.o: pacman_imagens\pacman4_morrendo.pgm

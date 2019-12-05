@@ -1,16 +1,1 @@
 .\flash\teste.o: teste.c
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
-.\flash\teste.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\flash\teste.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h
-.\flash\teste.o: C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h
-.\flash\teste.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-.\flash\teste.o: ..\grlib/grlib.h
-.\flash\teste.o: cfaf128x128x16.h
-.\flash\teste.o: buttons.h
-.\flash\teste.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

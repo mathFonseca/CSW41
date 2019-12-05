@@ -1,4 +1,4 @@
-
+/*
 #include "cmsis_os.h"
 #include "TM4C129.h"                    // Device header
 #include <stdbool.h>
@@ -207,7 +207,7 @@ void thread_task_F1() {
 	result = 0;
 
 	for(i=1; i<=128; i++){
-			result += (i^3)/(2^i);
+			result += (i*i*i)/(1<<i);
 	}
 	resultado_geral = result;
 }
@@ -228,7 +228,7 @@ int main (void) {
 	osKernelStart();	
 	
 	contadorTicks = osKernelSysTick();
-	thread_task_D1();
+	thread_task_F1();
 	contadorTicks = osKernelSysTick() - contadorTicks;
 	
 	
@@ -245,3 +245,4 @@ int main (void) {
 	
 	osDelay(osWaitForever);
 }
+*/

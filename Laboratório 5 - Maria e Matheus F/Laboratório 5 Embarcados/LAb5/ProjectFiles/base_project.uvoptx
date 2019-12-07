@@ -519,7 +519,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>ARMRTXEVENTFLAGS</Key>
-          <Name>-L132 -Z22 -C0 -M0 -T1</Name>
+          <Name>-L132 -Z23 -C0 -M0 -T1</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -546,41 +546,41 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>673</LineNumber>
+          <LineNumber>683</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>5444</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\seg.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 5 - Maria e Matheus F\LaboratÃ³rio 5 Embarcados\LAb5\ProjectFiles\seg.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\base_project\seg.c\683</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>437</LineNumber>
+          <LineNumber>479</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>4132</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>&lt;1&gt;.\seg.c</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 5 - Maria e Matheus F\LaboratÃ³rio 5 Embarcados\LAb5\ProjectFiles\seg.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\base_project\seg.c\479</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>338</LineNumber>
+          <LineNumber>670</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>2328</Address>
+          <Address>5392</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -589,23 +589,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 5 - Maria e Matheus F\LaboratÃ³rio 5 Embarcados\LAb5\ProjectFiles\seg.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\base_project\seg.c\338</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>491</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>2518</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>C:\Users\Matheus\Documents\GitHub\Embarcados_2019_2\LaboratÃ³rio 5 - Maria e Matheus F\LaboratÃ³rio 5 Embarcados\LAb5\ProjectFiles\seg.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\base_project\seg.c\491</Expression>
+          <Expression>\\base_project\seg.c\670</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>

@@ -129,17 +129,23 @@ int fatorial(uint32_t x){
 	return result;
 }
 
-// Implementações das Threads
+// Implementa??es das Threads
 void thread_task_A1() {
 
 	int i;
 	uint64_t result;
-	
+	float porcent;
+	char pbuf[10];
+
 	result = 0;
 	for(i=0; i<=256; i++){
 			result +=i+(i+2);
+			if(i%32 == 0){ //8 atualizacoes
+				porcent=100*i/256;
+				intToString(porcent, pbuf,  10, 10, 4);
+				GrStringDraw(&sContext, pbuf, -1,15, (sContext.psFont->ui8Height+2)*0, true);
+			}
 	}
-	
 	resultado_geral = result;
 }
 //osThreadDef(thread_task_A, osPriorityNormal, 1, 0);
@@ -148,11 +154,18 @@ void thread_task_B1() {
 
 		uint8_t i;
 		float result;
+		float porcent;
+		char pbuf[10];
 
 		result = 0;
-
 		for(i=1; i<=16; i++){
 				result += (1<<i)/(fatorial(i));
+
+				if(i%2 == 0){	//8 atualizacoes
+					porcent=100*i/16;
+					intToString(porcent, pbuf,  10, 10, 4);
+					GrStringDraw(&sContext, pbuf, -1,15, (sContext.psFont->ui8Height+2)*0, true);
+				}
 		}
 		resultado_geral = result;
 }
@@ -162,11 +175,18 @@ void thread_task_C1() {
 
 	uint8_t i;
 	float result;
+	float porcent;
+	char pbuf[10];
 
 	result = 0;
-
 	for(i=0; i<=72; i++){
 			result += (i+1)/(i);
+
+			if(i%9 == 0){	//8 atualizacoes
+				porcent=100*i/72;
+				intToString(porcent, pbuf,  10, 10, 4);
+				GrStringDraw(&sContext, pbuf, -1,15, (sContext.psFont->ui8Height+2)*0, true);
+			}
 	}
 	resultado_geral = result;
 }
@@ -176,12 +196,16 @@ void thread_task_D1() {
 
 	uint8_t i;
 	float result;
+	float porcent;
+	char pbuf[10];
 
 	result = 0;
 
+	GrStringDraw(&sContext, "0", -1,15, (sContext.psFont->ui8Height+2)*0, true);
 	result = 1 + (5/fatorial(3) + (5/(fatorial(5))) + (5/(fatorial(7))) + (5/(fatorial(9))));
+	GrStringDraw(&sContext, "100", -1,15, (sContext.psFont->ui8Height+2)*0, true);
 
-	//faz algum tipo de verificação
+	//faz algum tipo de verifica??o
 	resultado_geral = result;
 }
 //osThreadDef(thread_task_D, osPriorityNormal, 1, 0);
@@ -190,10 +214,18 @@ void thread_task_E1() {
 
 	uint8_t i;
 	uint64_t result;
+	float porcent;
+	char pbuf[10];
 
 	result = 0;
 	for(i=1; i<=100; i++){
 			result += i * PI2;// (PI^2); // ele ta reclamando de alguma coisa aqui. Acho que deve ser o PI^2
+
+			if(i%10 == 0){	//10 atualizacoes
+				porcent=100*i/100;
+				intToString(porcent, pbuf,  10, 10, 4);
+				GrStringDraw(&sContext, pbuf, -1,15, (sContext.psFont->ui8Height+2)*0, true);
+			}
 	}
 	resultado_geral = result;
 }
@@ -203,18 +235,25 @@ void thread_task_F1() {
 
 	uint8_t i;
 	uint64_t result;
+	float porcent;
+	char pbuf[10];
 
 	result = 0;
-
 	for(i=1; i<=128; i++){
 			result += (i*i*i)/(1<<i);
+
+			if(i%16 == 0){	//8 atualizacoes
+				porcent=100*i/128;
+				intToString(porcent, pbuf,  10, 10, 4);
+				GrStringDraw(&sContext, pbuf, -1,15, (sContext.psFont->ui8Height+2)*0, true);
+			}
 	}
 	resultado_geral = result;
 }
 //osThreadDef(thread_task_F, osPriorityNormal, 1, 0);
 
 int main (void) {
-	
+
 	int contadorTicks;
 	char pbuf[10];
 	char pbuf2[10];
@@ -225,24 +264,27 @@ int main (void) {
 	init_all1();
 	init_display_context1();
 
-	osKernelStart();	
-	
+	osKernelStart();
+
+
+	GrStringDraw(&sContext, "%:", -1, 0, (sContext.psFont->ui8Height+2)*0, true);
+
 	contadorTicks = osKernelSysTick();
 	thread_task_F1();
 	contadorTicks = osKernelSysTick() - contadorTicks;
-	
-	
+
+
 	GrContextForegroundSet(&sContext, ClrRed);
 
 	intToString(contadorTicks, pbuf,  10, 10, 4);
 	GrStringDraw(&sContext, "TICKS:", -1,0, (sContext.psFont->ui8Height+2)*1, true);
 	GrStringDraw(&sContext, (char*)pbuf, -1, 40, (sContext.psFont->ui8Height+2)*1, true);
-	
-	
+
+
 	floatToString(resultado_geral, pbuf2,  10, 10, 4, 4);
 	GrStringDraw(&sContext, "RESULT:", -1, 0, (sContext.psFont->ui8Height+2)*3, true);
 	GrStringDraw(&sContext, (char*)pbuf2, -1, 40, (sContext.psFont->ui8Height+2)*3, true);
-	
+
 	osDelay(osWaitForever);
 }
 */

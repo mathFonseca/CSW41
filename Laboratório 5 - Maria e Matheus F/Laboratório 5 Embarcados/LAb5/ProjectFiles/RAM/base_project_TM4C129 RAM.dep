@@ -18,7 +18,8 @@ I (..\driverlib/sysctl.h)(0x5D746D16)
 I (..\driverlib/pin_map.h)(0x5D746D16)
 I (..\driverlib/rom_map.h)(0x5D746D16)
 I (..\utils/uartstdio.h)(0x5D746D16)
-F (.\__thread.c)(0x5DC89A0C)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\__thread.o --omf_browse .\ram\__thread.crf --depend .\ram\__thread.d)
+F (.\display.h)(0x5D746D16)()
+F (.\seg.c)(0x5DEC26BC)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\seg.o --omf_browse .\ram\seg.crf --depend .\ram\seg.d)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5C8ABF2C)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEC1492)
@@ -29,65 +30,13 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h)(0x5D2
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5D262B66)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5D262B66)
 I (C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h)(0x51C0453A)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEC1492)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEC1492)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEC1492)
+I (..\grlib/grlib.h)(0x5D746D16)
+I (cfaf128x128x16.h)(0x5D746D16)
+I (buttons.h)(0x5D746D16)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5CEC1486)
-I (..\grlib/grlib.h)(0x5D746D16)
-I (..\driverlib/timer.h)(0x5D746D16)
-I (..\inc/hw_ints.h)(0x5D746D16)
-I (cfaf128x128x16.h)(0x5D746D16)
-I (display.h)(0x5D746D16)
-I (buzzer.h)(0x5D746D16)
-I (uart.h)(0x5D746D16)
-I (..\driverlib/gpio.h)(0x5D746D16)
-I (..\driverlib/sysctl.h)(0x5D746D16)
-I (..\driverlib/pin_map.h)(0x5D746D16)
-I (..\driverlib/rom_map.h)(0x5D746D16)
-I (..\utils/uartstdio.h)(0x5D746D16)
-I (pwm.h)(0x5D746D16)
-I (led.h)(0x5D746D16)
-F (.\pwm.c)(0x5D746D16)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\pwm.o --omf_browse .\ram\pwm.crf --depend .\ram\pwm.d)
-I (PWM.h)(0x5D746D16)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
-I (..\inc/hw_ints.h)(0x5D746D16)
-I (..\inc/hw_types.h)(0x5D746D16)
-I (..\inc/hw_pwm.h)(0x5D746D16)
-I (..\inc/hw_memmap.h)(0x5D746D16)
-I (..\inc/hw_gpio.h)(0x5D746D16)
-I (..\inc/hw_sysctl.h)(0x5D746D16)
-I (..\driverlib/gpio.h)(0x5D746D16)
-I (..\driverlib/sysctl.h)(0x5D746D16)
-I (..\driverlib/pin_map.h)(0x5D746D16)
-I (..\driverlib/pwm.h)(0x5D746D16)
-I (..\driverlib/interrupt.h)(0x5D746D16)
-F (.\pwm.h)(0x5D746D16)()
-F (.\display.c)(0x5DBF41B4)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\display.o --omf_browse .\ram\display.crf --depend .\ram\display.d)
-I (Display.h)(0x5D746D16)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h)(0x5C8ABF2C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEC1492)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
-I (..\grlib/grlib.h)(0x5D746D16)
-I (cfaf128x128x16.h)(0x5D746D16)
-I (buzzer.h)(0x5D746D16)
-F (.\display.h)(0x5D746D16)()
-F (.\oldfunctions.c)(0x5DC899DD)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\oldfunctions.o --omf_browse .\ram\oldfunctions.crf --depend .\ram\oldfunctions.d)
+F (.\teste.c)(0x5DEA81BB)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\teste.o --omf_browse .\ram\teste.crf --depend .\ram\teste.d)
 F (.\Abstract.txt)(0x5D746D16)()
-F (.\buzzer.c)(0x5D746D16)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\buzzer.o --omf_browse .\ram\buzzer.crf --depend .\ram\buzzer.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
-I (..\inc/hw_types.h)(0x5D746D16)
-I (..\inc/hw_memmap.h)(0x5D746D16)
-I (..\inc/hw_gpio.h)(0x5D746D16)
-I (..\inc/hw_sysctl.h)(0x5D746D16)
-I (..\driverlib/gpio.h)(0x5D746D16)
-I (..\driverlib/sysctl.h)(0x5D746D16)
-I (..\driverlib/pin_map.h)(0x5D746D16)
-I (..\driverlib/pwm.h)(0x5D746D16)
-I (buzzer.h)(0x5D746D16)
 F (.\buttons.c)(0x5D746D16)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\buttons.o --omf_browse .\ram\buttons.crf --depend .\ram\buttons.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
@@ -129,26 +78,6 @@ I (..\driverlib/pin_map.h)(0x5D746D16)
 I (..\driverlib/rom_map.h)(0x5D746D16)
 I (..\driverlib/interrupt.h)(0x5D746D16)
 I (opt.h)(0x5D746D16)
-F (.\rgb.c)(0x5D746D16)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\rgb.o --omf_browse .\ram\rgb.crf --depend .\ram\rgb.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
-I (..\inc/hw_memmap.h)(0x5D746D16)
-I (..\driverlib/gpio.h)(0x5D746D16)
-I (..\driverlib/sysctl.h)(0x5D746D16)
-I (..\driverlib/pin_map.h)(0x5D746D16)
-I (..\driverlib/rom_map.h)(0x5D746D16)
-I (..\driverlib/pwm.h)(0x5D746D16)
-I (rgb.h)(0x5D746D16)
-F (.\servo.c)(0x5D746D16)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\servo.o --omf_browse .\ram\servo.crf --depend .\ram\servo.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)
-I (..\inc/hw_memmap.h)(0x5D746D16)
-I (..\driverlib/pin_map.h)(0x5D746D16)
-I (..\driverlib/gpio.h)(0x5D746D16)
-I (..\driverlib/sysctl.h)(0x5D746D16)
-I (..\driverlib/timer.h)(0x5D746D16)
-I (..\driverlib/rom_map.h)(0x5D746D16)
-I (servo.h)(0x5D746D16)
 F (.\cfaf128x128x16.c)(0x5D746D16)(-c --cpu Cortex-M4.fp -D__RTX -g -O0 --apcs=interwork -I ..-I.\RTE\_TM4C129_RAM-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129-D__UVISION_VERSION="528" -D_RTE_ -DTM4C1294NCPDT -DTARGET_IS_TM4C129_RA0 -DPART_TM4C1294NCPDT-o .\ram\cfaf128x128x16.o --omf_browse .\ram\cfaf128x128x16.crf --depend .\ram\cfaf128x128x16.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5CEC148E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5CEC1492)

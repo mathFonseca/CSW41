@@ -1,0 +1,16 @@
+.\ram\seg.o: seg.c
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\RTOS\RTX\INC\cmsis_os.h
+.\ram\seg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\ram\seg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C129.h
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\TM4C1294NCPDT.h
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\core_cm4.h
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_version.h
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_compiler.h
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.6.0\CMSIS\Core\Include\cmsis_armcc.h
+.\ram\seg.o: C:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C129\system_TM4C129.h
+.\ram\seg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\ram\seg.o: ..\grlib/grlib.h
+.\ram\seg.o: cfaf128x128x16.h
+.\ram\seg.o: buttons.h
+.\ram\seg.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

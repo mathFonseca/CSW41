@@ -46,7 +46,7 @@ typedef struct {
 	osThreadId thread_id;			// ID da Thread
 	int static_priority;			// Prioridade inicial
 	int current_priority;			// Prioridade dinamica
-	uint64_t expected_duration;	// Duração esperada (proveniente de testes isolados)
+	uint64_t expected_duration;	// Dura??o esperada (proveniente de testes isolados)
 	float deadline;						// Deadline conforme especificado
 	uint8_t ready_counter;		// ?
 	uint8_t ready_max;				// ?
@@ -162,7 +162,6 @@ static void floatToString(float value, char *pBuf, uint32_t len, uint32_t base, 
 }
 
 
-// sortTasks: ?
 void sortTasks(task_t** sorting_tasks, uint8_t length) {
 	uint8_t i, j;
 	task_t* aux;
@@ -180,8 +179,7 @@ void sortTasks(task_t** sorting_tasks, uint8_t length) {
 	}
 }
 
-
-/* iniiTasks: configura cada tarefa conforme as especificações do trabalho e outros
+/* iniiTasks: configura cada tarefa conforme as especifica??es do trabalho e outros
 	parametros medidos externamente.
 */
 void initTasks() {
@@ -190,10 +188,10 @@ void initTasks() {
 	task_a.static_priority = 10;
 	task_a.current_priority = task_a.static_priority;
 	task_a.deadline = 0.7;
-	task_a.ready_max = 1000/(8*TEMPO);//5;
+	task_a.ready_max = 1000/(8*TEMPO);
 	task_a.ready_counter = task_a.ready_max;
 	task_a.status = NOT_READY;
-	task_a.expected_duration = 23090000;
+	task_a.expected_duration = 639907;
 	// result: 66306 - correto
 	task_a.task_id = 0;
 
@@ -204,7 +202,7 @@ void initTasks() {
 	task_b.ready_max = 1000/(2*TEMPO);
 	task_b.ready_counter = task_b.ready_max;
 	task_b.status = NOT_READY;
-	task_b.expected_duration = 15710000;
+	task_b.expected_duration = 913028*0.9;//
 	// result: 5 - correto: 64
 	task_b.task_id = 1;
 
@@ -215,7 +213,7 @@ void initTasks() {
 	task_c.ready_max = 1000/(5*TEMPO);
 	task_c.ready_counter = task_c.ready_max;
 	task_c.status = NOT_READY;
-	task_c.expected_duration = 11990000;
+	task_c.expected_duration = 501467;//
 	// result: 73 - correto: 76,86
 	task_c.task_id = 2;
 
@@ -226,7 +224,7 @@ void initTasks() {
 	task_d.ready_max = 1000/(1*TEMPO);
 	task_d.ready_counter = task_d.ready_max;
 	task_d.status = NOT_READY;
-	task_d.expected_duration = 47500000;
+	task_d.expected_duration = 623315991*0.9;//
 	// result: 1 - correto: 1,87
 	task_d.task_id = 3;
 
@@ -237,7 +235,7 @@ void initTasks() {
 	task_e.ready_max = 1000/(6*TEMPO);
 	task_e.ready_counter = task_e.ready_max;
 	task_e.status = NOT_READY;
-	task_e.expected_duration = 3822000;
+	task_e.expected_duration = 660000*0.9;//
 	// result: 49793 - correto: 49841,5
 	task_e.task_id = 4;
 
@@ -248,7 +246,7 @@ void initTasks() {
 	task_f.ready_max = 1000/(10*TEMPO);
 	task_f.ready_counter = task_f.ready_max;
 	task_f.status = NOT_READY;
-	task_f.expected_duration = 240900000;
+	task_f.expected_duration = 91103400;//
 	// result: 20 certo: 26
 	task_f.task_id = 5;
 
@@ -260,11 +258,9 @@ void initTasks() {
 	tasks[5] = &task_f;
 }
 
-
-// init_all: inicializa periféricos necessários.
+// init_all: inicializa perif?ricos necess?rios.
 void init_all(){
 	cfaf128x128x16Init();
-	button_init();
 }
 
 void init_display_context(){
@@ -277,9 +273,6 @@ void init_display_context(){
 	GrContextBackgroundSet(&sContext, ClrBlack);
 }
 
-
-
-
 // fatorial: auto explicativo.
 int fatorial(uint32_t x){
 	uint8_t i;
@@ -291,19 +284,35 @@ int fatorial(uint32_t x){
 	return result;
 }
 
+void print_painel(){
+		GrStringDraw(&sContext, "ID: ", -1, 0, (sContext.psFont->ui8Height+2)*0, true);
+		GrStringDraw(&sContext, "PRIO: ", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
+		GrStringDraw(&sContext, "TPRX: ", -1, 0, (sContext.psFont->ui8Height+2)*2, true);
+		GrStringDraw(&sContext, "STAT: ", -1, 0, (sContext.psFont->ui8Height+2)*3, true);
+		GrStringDraw(&sContext, "PCT%: ", -1, 0, (sContext.psFont->ui8Height+2)*4, true);
+		GrStringDraw(&sContext, "ATRA: ", -1, 0, (sContext.psFont->ui8Height+2)*5, true);
+		GrStringDraw(&sContext, "FILA: ", -1, 0, (sContext.psFont->ui8Height+2)*6, true);
+		GrStringDraw(&sContext, "FALT: ", -1, 0, (sContext.psFont->ui8Height+2)*7, true);
+}
 
-
-
+void print_fila(uint8_t ready_tasks){
+	uint8_t i;
+	char pbuf[10];
+	GrStringDraw(&sContext, "                ", -1, 30+i*8, (sContext.psFont->ui8Height+2)*6, true);
+	for(i = 0; i < ready_tasks; i++){
+		intToString(execution_q[i]->task_id, pbuf,  10, 10, 4);
+		GrStringDraw(&sContext, (char*)pbuf, -1, 30+i*8, (sContext.psFont->ui8Height+2)*6, true);
+	}
+}
 // Escalonador do sistema.
 void thread_scheduler(void const *argument) {
 	uint8_t i, entries = 0, ready_tasks = 0;
 	uint32_t execution_ticks;
-	char pbuf[10];
+	char pbuf[100];
 	osEvent evt;
 	task_ready_msg *msg;
 	int faultCounter[6];
-	//GrStringDraw(&sContext, "Prioridade: ", -1, 0, (sContext.psFont->ui8Height+2)*0, true);
-	//GrStringDraw(&sContext, "T de Relax.: ", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
+	
 	initTasks();
 
 	faultCounter[0] = 0;
@@ -314,6 +323,10 @@ void thread_scheduler(void const *argument) {
 	faultCounter[5] = 0;
 	faultCounter[6] = 0;
 	
+	#if GANNT == 1
+		print_painel();
+	#endif
+
 	while(1) {
 		// Verifica se alguma task terminou de executar
 		evt = osMailGet(task_ready_q_id, 0);
@@ -321,104 +334,85 @@ void thread_scheduler(void const *argument) {
 			msg = (task_ready_msg *) evt.value.p;
 			if(msg->task->status == EXECUTING && msg->status == NOT_READY) {
 				execution_ticks = osKernelSysTick() - msg->task->start_tick;
-				
-				#if GANNT == 1 
+
+				#if GANNT == 1
+					osMutexWait(mutex_display,0);
+					//ID
+					intToString(msg->task->task_id, pbuf,  10, 10, 1);
+					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*0, true);
 					//PRIORIDADE
 					intToString(msg->task->current_priority, pbuf,  10, 10, 4);
-					GrStringDraw(&sContext, "PRIO:    ", -1, 0, (sContext.psFont->ui8Height+2)*0, true);
-					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*0, true);
+					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*1, true);
 					//TEMPO RELAXAMENTO
 					intToString(msg->task->expected_duration - execution_ticks, pbuf,  10, 10, 4);
-					GrStringDraw(&sContext, "TPRX:    ", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
-					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*1, true);
-					//ESTADO
-					intToString(msg->task->status, pbuf,  10, 10, 4);
-					GrStringDraw(&sContext, "STAT:  ", -1, 0, (sContext.psFont->ui8Height+2)*2, true);
 					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*2, true);
-					//PERCENTUAL
-					GrStringDraw(&sContext, "PCT%:   ", -1, 0, (sContext.psFont->ui8Height+2)*3, true);
-					GrStringDraw(&sContext, "100", -1, 30, (sContext.psFont->ui8Height+2)*3, true);
+					//ESTADO
+					intToString(msg->task->status, pbuf,  10, 10, 1);
+					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*3, true);
+					//PERCENTUAL - limpar
+					GrStringDraw(&sContext, "100", -1, 30, (sContext.psFont->ui8Height+2)*4, true);
 					//ATRASO
-					GrStringDraw(&sContext, "ATRA:   ", -1, 0, (sContext.psFont->ui8Height+2)*4, true);
-					GrStringDraw(&sContext, "?", -1, 30, (sContext.psFont->ui8Height+2)*4, true);
+					GrStringDraw(&sContext, "?", -1, 30, (sContext.psFont->ui8Height+2)*5, true);
 					//FILA
-					//GrStringDraw(&sContext, "FILA:", -1, 0, (sContext.psFont->ui8Height+2)*5, true);
-					//GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*5, true);
+					//print_fila(ready_tasks);
 					//FALTAS
 					intToString(faultCounter[msg->task->task_id], pbuf,  10, 10, 4);
-					GrStringDraw(&sContext, "FALT:    ", -1, 0, (sContext.psFont->ui8Height+2)*6, true);
-					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*6, true);
-					//FALTAS
-					intToString(msg->task->task_id, pbuf,  10, 10, 4);
-					GrStringDraw(&sContext, "ID:    ", -1, 0, (sContext.psFont->ui8Height+2)*7, true);
 					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*7, true);
+					//ticks
+					intToString(execution_ticks, pbuf,  10, 10, 4);
+					GrStringDraw(&sContext, "              ", -1, 30, (sContext.psFont->ui8Height+2)*8, true);
+					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*8, true);
+					
+					osMutexRelease(mutex_display);
 				#endif
-				
-/*				
-				intToString(msg->task->static_priority, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 65, (sContext.psFont->ui8Height+2)*0, true);
-				intToString(msg->task->expected_duration - execution_ticks, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 75, (sContext.psFont->ui8Height+2)*1, true);
-
-				// Prioridade
-				intToString(msg->task->static_priority, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, "Prio:", -1, 0, (sContext.psFont->ui8Height+2)*0, true);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 65, (sContext.psFont->ui8Height+2)*0, true);
-				
-				// Tempo de relaxamento restante em ticks
-				//intToString(msg->task->, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, "T Relax:", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 75, (sContext.psFont->ui8Height+2)*1, true);			
-				
-				// Estado
-				intToString(msg->task->status, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, "Status:", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 75, (sContext.psFont->ui8Height+2)*1, true);				
-
-				// Percentual de Execução
-				//intToString(msg->task->, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, "Percent:", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 75, (sContext.psFont->ui8Height+2)*1, true);			
-
-				// Atraso em ticks
-				//intToString(msg->task->, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, "Atraso:", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 75, (sContext.psFont->ui8Height+2)*1, true);	
-
-				// Fila de Execução
-				//intToString(msg->task->, pbuf,  10, 10, 4);
-				GrStringDraw(&sContext, "Queue:", -1, 0, (sContext.psFont->ui8Height+2)*1, true);
-				GrStringDraw(&sContext, (char*)pbuf, -1, 75, (sContext.psFont->ui8Height+2)*1, true);	
-								
-*/	
-				
 
 				// No caso de Master Fault, mata o sistema.
-				
 				if(execution_ticks > (msg->task->expected_duration * (1 + msg->task->deadline))
 					&& msg->task->static_priority == -100) {
-						GrStringDraw(&sContext, "Master fault", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
+						#if GANNT == 1
+							osMutexWait(mutex_display,0);
+							GrStringDraw(&sContext, "Master fault", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
+							osMutexRelease(mutex_display);						
+						#endif
 						faultCounter[msg->task->task_id] +=1;
 						while(0) {}
-				   }
-				// No caso de Secondary Fault por lentidão, aumenta prioridade
-				else if(execution_ticks > msg->task->expected_duration * (1 + msg->task->deadline) && msg->task->static_priority > -100) {
-						
+				}
+				// No caso de Secondary Fault por lentidao, aumenta prioridade
+				else if(execution_ticks > (msg->task->expected_duration * (1 + msg->task->deadline)) && msg->task->static_priority > -100) {
 						// Atualiza a tarefa
-						msg->task->current_priority -= 10;
-						GrStringDraw(&sContext, "Fault Counter:", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
-						GrStringDraw(&sContext, (char*)pbuf, -1, 0, (sContext.psFont->ui8Height+2)*12, true);
-						faultCounter[msg->task->task_id] +=1;
-				}
-				else if(execution_ticks < (msg->task->expected_duration * (1 + msg->task->deadline)) / 2 && msg->task->static_priority > -100) {
+						if(msg->task->current_priority != -100)
+							msg->task->current_priority -= 10;
 						
-						msg->task->current_priority += 10;						
-						GrStringDraw(&sContext, "Secondary Fault P-", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
+						#if GANNT == 1
+							osMutexWait(mutex_display,0);						
+							GrStringDraw(&sContext, "Secondary Fault P+", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
+							osMutexRelease(mutex_display);						
+						#endif
+
 						faultCounter[msg->task->task_id] +=1;
 				}
-				else
-					GrStringDraw(&sContext, "#####################", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
-			}
+				// No caso de Secondary Fault por rapidez, diminuiu prioridade
+				else if(execution_ticks < (msg->task->expected_duration * (1 + msg->task->deadline)) / 2 && msg->task->static_priority > -100) {
+						if(msg->task->current_priority != 100)
+							msg->task->current_priority += 10;
+						#if GANNT == 1
+							osMutexWait(mutex_display,0);						
+							GrStringDraw(&sContext, "Secondary Fault P-", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
+							osMutexRelease(mutex_display);						
+						#endif
+
+						faultCounter[msg->task->task_id] +=1;
+				}
+				// Se não acontecer nenhum dos casos, imprime uma "limpeza" na tela
+				else{
+					#if GANNT == 1
+						osMutexWait(mutex_display,0);					
+						GrStringDraw(&sContext, "#####################", -1, 0, (sContext.psFont->ui8Height+2)*12, true);
+						osMutexRelease(mutex_display);
+					#endif
+				}
+
+			} // fim if 
 
 			msg->task->status = msg->status;
 			msg->task->ready_counter = msg->task->ready_max;
@@ -428,21 +422,22 @@ void thread_scheduler(void const *argument) {
 				execution_q[i] = execution_q[i + 1];
 			ready_tasks--;
 			osMailFree(task_ready_q_id, msg);
-		}
+		} // fim if
 
 		// A cada TEMPO ms...
-		if(entries >= TEMPO) {
+		if(entries >= TEMPO) 
+		{
 			entries = 0;
 			ready_tasks = 0;
-			for(i = 0; i < 6; i++) {
+			for(i = 0; i < 6; i++) 
+			{
 				tasks[i]->ready_counter--;
-				if(tasks[i]->ready_counter <= 0) {
+				if(tasks[i]->ready_counter <= 0) 
+				{
 					tasks[i]->status = READY;
-					
 					execution_q[ready_tasks] = tasks[i];
 					ready_tasks++;
 				}
-
 			}
 			sortTasks(execution_q, ready_tasks);
 		}
@@ -455,34 +450,48 @@ void thread_scheduler(void const *argument) {
 
 		entries++;
 		osSignalWait(0x01, osWaitForever);
-	}
+	} // fim do while
 }
 osThreadDef(thread_scheduler, osPriorityNormal, 1, 0);
 
-// Implementações das Threads
+// Implementa??es das Threads
 void thread_task_A(void const *argument) {
 
 	uint8_t i;
-	bool end;
 	uint64_t result;
+	float porcent;
+	char pbuf[10];
 	task_ready_msg *msg;
 
+	
 	while(1) {
 		osSignalWait(0x01, osWaitForever);
-
-		end = false;
 		result = 0;
-		for(i=0; i<=256; i++){
+		
+		for(i=0; i<=256; i++)
+		{
 			result +=i+(i+2);
+			/*
+			if(i%32 == 0)
+			{ //8 atualizacoes
+				porcent=100*i/256;
+				intToString(porcent, pbuf,  10, 10, 4);
+				#if GANNT == 1
+					osMutexWait(mutex_display,0);
+					GrStringDraw(&sContext, "entrou na 0", -1, 30, (sContext.psFont->ui8Height+2)*9, true);
+					GrStringDraw(&sContext, pbuf, -1,30, (sContext.psFont->ui8Height+2)*4, true);
+					osMutexRelease(mutex_display);
+				#endif
+			}
+			*/
 		}
-		end = true;
-
-		//faz algum tipo de verificação
+		//faz algum tipo de verifica??o
 
 		msg = (task_ready_msg *) osMailAlloc(task_ready_q_id, osWaitForever);
 		msg->task = tasks[0];
 		msg->status = NOT_READY;
 		osMailPut(task_ready_q_id, msg);
+		
 	}
 }
 osThreadDef(thread_task_A, osPriorityNormal, 1, 0);
@@ -490,24 +499,31 @@ osThreadDef(thread_task_A, osPriorityNormal, 1, 0);
 void thread_task_B(void const *argument) {
 
 		uint8_t i;
-		bool end;
 		float result;
+		float porcent;
+		char pbuf[10];
 		task_ready_msg *msg;
 
 		while(1) {
 			osSignalWait(0x01, osWaitForever);
-
-			end = false;
 			result = 0;
-
 			for(i=1; i<=16; i++)
 			{
-				// 2^i em C é um XOR e não é exponencial. Ai fiz com pow do math.h
+				// 2^i em C ? um XOR e n?o ? exponencial. Ai fiz com pow do math.h
 				result += pow(2,i)/(fatorial(i));
+				/*
+				if(i%2 == 0){	//8 atualizacoes
+					porcent=100*i/16;
+					intToString(porcent, pbuf,  10, 10, 4);
+					#if GANNT == 1
+						osMutexWait(mutex_display,0);
+						GrStringDraw(&sContext, pbuf, -1,30, (sContext.psFont->ui8Height+2)*4, true);
+						osMutexRelease(mutex_display);
+					#endif
+				}
+				*/
 			}
-			end = true;
-
-			//faz algum tipo de verificação
+			//faz algum tipo de verifica??o
 			msg = (task_ready_msg *) osMailAlloc(task_ready_q_id, osWaitForever);
 			msg->task = tasks[1];
 			msg->status = NOT_READY;
@@ -519,22 +535,31 @@ osThreadDef(thread_task_B, osPriorityNormal, 1, 0);
 void thread_task_C(void const *argument) {
 
 	uint8_t i;
-	bool end;
 	float result;
+	float porcent;
+	char pbuf[10];
 	task_ready_msg *msg;
 
 	while(1) {
 		osSignalWait(0x01, osWaitForever);
-
-		end = false;
 		result = 0;
 
 		for(i=0; i<=72; i++){
 			result += (i+1)/(i);
+			/*
+			if(i%9 == 0){	//8 atualizacoes
+				porcent=100*i/72;
+				intToString(porcent, pbuf,  10, 10, 4);
+				#if GANNT == 1
+					osMutexWait(mutex_display,0);				
+					GrStringDraw(&sContext, pbuf, -1,30, (sContext.psFont->ui8Height+2)*4, true);
+					osMutexRelease(mutex_display);
+				#endif
+			}
+			*/
 		}
-		end = true;
 
-		//faz algum tipo de verificação
+		//faz algum tipo de verifica??o
 		msg = (task_ready_msg *) osMailAlloc(task_ready_q_id, osWaitForever);
 		msg->task = tasks[2];
 		msg->status = NOT_READY;
@@ -546,20 +571,31 @@ osThreadDef(thread_task_C, osPriorityNormal, 1, 0);
 void thread_task_D(void const *argument) {
 
 	uint8_t i;
-	bool end;
 	float result;
+	float porcent;
+	char pbuf[10];
 	task_ready_msg *msg;
 
 	while(1) {
 		osSignalWait(0x01, osWaitForever);
-
-		end = false;
 		result = 0;
-
+		/*
+		#if GANNT == 1
+			osMutexWait(mutex_display,0);
+			GrStringDraw(&sContext, "0", -1,30, (sContext.psFont->ui8Height+2)*4, true);
+			osMutexRelease(mutex_display);
+		#endif
+		*/
 		result = 1 + (5/fatorial(3) + (5/(fatorial(5))) + (5/(fatorial(7))) + (5/(fatorial(9))));
-		end = true;
+		/*
+		#if GANNT == 1
+			osMutexWait(mutex_display,0);
+			GrStringDraw(&sContext, "100", -1,30, (sContext.psFont->ui8Height+2)*4, true);
+			osMutexRelease(mutex_display);
+		#endif
+		*/
 
-		//faz algum tipo de verificação
+		//faz algum tipo de verifica??o
 		msg = (task_ready_msg *) osMailAlloc(task_ready_q_id, osWaitForever);
 		msg->task = tasks[3];
 		msg->status = NOT_READY;
@@ -571,21 +607,29 @@ osThreadDef(thread_task_D, osPriorityNormal, 1, 0);
 void thread_task_E(void const *argument) {
 
 	uint8_t i;
-	bool end;
 	float result;
+	float porcent;
+	char pbuf[10];
 	task_ready_msg *msg;
 
 	while(1) {
 		osSignalWait(0x01, osWaitForever);
-
-		end = false;
 		result = 0;
 		for(i=1; i<=100; i++){
 			result += i * PI * PI;
+			/*
+			if(i%10 == 0){	//10 atualizacoes
+				porcent=100*i/100;
+				intToString(porcent, pbuf,  10, 10, 4);
+				#if GANNT == 1
+					osMutexWait(mutex_display,0);
+					GrStringDraw(&sContext, pbuf, -1,30, (sContext.psFont->ui8Height+2)*4, true);
+					osMutexRelease(mutex_display);
+				#endif
+			}
+			*/
 		}
-		end = true;
-
-		//faz algum tipo de verificação
+		//faz algum tipo de verifica??o
 		msg = (task_ready_msg *) osMailAlloc(task_ready_q_id, osWaitForever);
 		msg->task = tasks[4];
 		msg->status = NOT_READY;
@@ -597,26 +641,34 @@ osThreadDef(thread_task_E, osPriorityNormal, 1, 0);
 void thread_task_F(void const *argument) {
 
 	uint8_t i;
-	bool end;
 	uint64_t result;
+	float porcent;
+	char pbuf[10];
 	task_ready_msg *msg;
 
 	while(1) {
 		osSignalWait(0x01, osWaitForever);
-
-		end = false;
 		result = 0;
 
 		for(i=1; i<=128; i++)
 		{
 				result += (i*i*i)/(1<<i);
-				// Considerações sobre essa mudança:
-				// 2^128 é muito grande. Na verdade, no meio do caminho o 1/2^128 é praticamente 0. 
-				// O ruim é que o pow demora muito, então pra deixar a tarefa mais rápido, parei o for no meio do caminho mesmo
+			/*
+				if(i%16 == 0){	//8 atualizacoes
+					porcent=100*i/128;
+					intToString(porcent, pbuf,  10, 10, 4);
+					#if GANNT == 1
+						osMutexWait(mutex_display,0);	
+						GrStringDraw(&sContext, pbuf, -1, 30, (sContext.psFont->ui8Height+2)*4, true);
+						osMutexRelease(mutex_display);
+					#endif
+				}
+			*/
+				// Considera??es sobre essa mudan?a:
+				// 2^128 ? muito grande. Na verdade, no meio do caminho o 1/2^128 ? praticamente 0.
+				// O ruim ? que o pow demora muito, ent?o pra deixar a tarefa mais r?pido, parei o for no meio do caminho mesmo
 		}
-		end = true;
-
-		//faz algum tipo de verificação
+		//faz algum tipo de verifica??o
 		msg = (task_ready_msg *) osMailAlloc(task_ready_q_id, osWaitForever);
 		msg->task = tasks[5];
 		msg->status = NOT_READY;
@@ -629,20 +681,21 @@ osThreadDef(thread_task_F, osPriorityNormal, 1, 0);
  *      Main
  *---------------------------------------------------------------------------*/
 int main (void) {
-	
 
 	//Initializing all peripherals
-	init_all();
+	
 	#if GANNT == 1
+		init_all();
 		init_display_context();
 	#endif
 
 
 	// Initialize the kernel
 	osKernelInitialize();
-	
+
 	//Create the mutex
 	mutex_display = osMutexCreate(osMutex(mutex_display));
+	
 	// Create the mail queues
 	task_ready_q_id = osMailCreate(osMailQ(task_ready_q), NULL);
 
@@ -661,6 +714,6 @@ int main (void) {
 	// Start the kernel
 	osTimerStart(preempt_id, 1);
 	osKernelStart();
-	
+
 	osDelay(osWaitForever);
 }

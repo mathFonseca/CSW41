@@ -202,7 +202,7 @@ void initTasks() {
 	task_b.ready_max = 1000/(2*TEMPO);
 	task_b.ready_counter = task_b.ready_max;
 	task_b.status = NOT_READY;
-	task_b.expected_duration = 913028*0.9;//
+	task_b.expected_duration = 915000028;//
 	// result: 5 - correto: 64
 	task_b.task_id = 1;
 
@@ -213,7 +213,7 @@ void initTasks() {
 	task_c.ready_max = 1000/(5*TEMPO);
 	task_c.ready_counter = task_c.ready_max;
 	task_c.status = NOT_READY;
-	task_c.expected_duration = 501467;//
+	task_c.expected_duration = 51000467;//
 	// result: 73 - correto: 76,86
 	task_c.task_id = 2;
 
@@ -224,7 +224,7 @@ void initTasks() {
 	task_d.ready_max = 1000/(1*TEMPO);
 	task_d.ready_counter = task_d.ready_max;
 	task_d.status = NOT_READY;
-	task_d.expected_duration = 623315991*0.9;//
+	task_d.expected_duration = 630316000;//
 	// result: 1 - correto: 1,87
 	task_d.task_id = 3;
 
@@ -235,7 +235,7 @@ void initTasks() {
 	task_e.ready_max = 1000/(6*TEMPO);
 	task_e.ready_counter = task_e.ready_max;
 	task_e.status = NOT_READY;
-	task_e.expected_duration = 660000*0.9;//
+	task_e.expected_duration = 900100000;//
 	// result: 49793 - correto: 49841,5
 	task_e.task_id = 4;
 
@@ -246,7 +246,7 @@ void initTasks() {
 	task_f.ready_max = 1000/(10*TEMPO);
 	task_f.ready_counter = task_f.ready_max;
 	task_f.status = NOT_READY;
-	task_f.expected_duration = 91103400;//
+	task_f.expected_duration = 911034000;//
 	// result: 20 certo: 26
 	task_f.task_id = 5;
 
@@ -298,16 +298,17 @@ void print_painel(){
 void print_fila(uint8_t ready_tasks){
 	uint8_t i;
 	char pbuf[10];
-	GrStringDraw(&sContext, "                ", -1, 30+i*8, (sContext.psFont->ui8Height+2)*6, true);
+	GrStringDraw(&sContext, "                ", -1, 30+(i*8), (sContext.psFont->ui8Height+2)*6, true);
 	for(i = 0; i < ready_tasks; i++){
 		intToString(execution_q[i]->task_id, pbuf,  10, 10, 4);
-		GrStringDraw(&sContext, (char*)pbuf, -1, 30+i*8, (sContext.psFont->ui8Height+2)*6, true);
+		GrStringDraw(&sContext, (char*)pbuf, -1, 30+(i*8), (sContext.psFont->ui8Height+2)*6, true);
 	}
 }
 // Escalonador do sistema.
 void thread_scheduler(void const *argument) {
 	uint8_t i, entries = 0, ready_tasks = 0;
 	uint32_t execution_ticks;
+	uint32_t atraso;
 	char pbuf[100];
 	osEvent evt;
 	task_ready_msg *msg;
@@ -321,12 +322,12 @@ void thread_scheduler(void const *argument) {
 	faultCounter[3] = 0;
 	faultCounter[4] = 0;
 	faultCounter[5] = 0;
-	faultCounter[6] = 0;
 	
 	#if GANNT == 1
 		print_painel();
 	#endif
 
+	atraso = 0;
 	while(1) {
 		// Verifica se alguma task terminou de executar
 		evt = osMailGet(task_ready_q_id, 0);
@@ -352,17 +353,28 @@ void thread_scheduler(void const *argument) {
 					//PERCENTUAL - limpar
 					GrStringDraw(&sContext, "100", -1, 30, (sContext.psFont->ui8Height+2)*4, true);
 					//ATRASO
-					GrStringDraw(&sContext, "?", -1, 30, (sContext.psFont->ui8Height+2)*5, true);
+					atraso =(execution_ticks - (msg->task->expected_duration * (1 + msg->task->deadline))); 
+					if( atraso >= 0 )
+					{
+						intToString(atraso, pbuf, 10, 10, 1);
+						GrStringDraw(&sContext, "              ", -1, 30, (sContext.psFont->ui8Height+2)*5, true);	
+						GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*5, true);
+					}
+					else
+					{
+						GrStringDraw(&sContext, "              ", -1, 30, (sContext.psFont->ui8Height+2)*5, true);						
+					}
 					//FILA
-					//print_fila(ready_tasks);
+					print_fila(ready_tasks);
 					//FALTAS
 					intToString(faultCounter[msg->task->task_id], pbuf,  10, 10, 4);
 					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*7, true);
 					//ticks
+					/*
 					intToString(execution_ticks, pbuf,  10, 10, 4);
 					GrStringDraw(&sContext, "              ", -1, 30, (sContext.psFont->ui8Height+2)*8, true);
 					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*8, true);
-					
+					*/
 					osMutexRelease(mutex_display);
 				#endif
 

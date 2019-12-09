@@ -299,9 +299,10 @@ void print_fila(uint8_t ready_tasks){
 	uint8_t i;
 	char pbuf[10];
 	GrStringDraw(&sContext, "                ", -1, 30+(i*8), (sContext.psFont->ui8Height+2)*6, true);
-	for(i = 0; i < ready_tasks; i++){
-		intToString(execution_q[i]->task_id, pbuf,  10, 10, 4);
-		GrStringDraw(&sContext, (char*)pbuf, -1, 30+(i*8), (sContext.psFont->ui8Height+2)*6, true);
+	for(i = 0; i < ready_tasks; i++)
+	{
+			intToString(execution_q[i]->task_id, pbuf,  10, 10, 1);
+			GrStringDraw(&sContext, (char*)pbuf, -1, 30+(i*8), (sContext.psFont->ui8Height+2)*6, true);
 	}
 }
 // Escalonador do sistema.
@@ -333,7 +334,8 @@ void thread_scheduler(void const *argument) {
 		evt = osMailGet(task_ready_q_id, 0);
 		if(evt.status == osEventMail) {
 			msg = (task_ready_msg *) evt.value.p;
-			if(msg->task->status == EXECUTING && msg->status == NOT_READY) {
+			if(msg->task->status == EXECUTING && msg->status == NOT_READY) 
+			{
 				execution_ticks = osKernelSysTick() - msg->task->start_tick;
 
 				#if GANNT == 1
@@ -362,10 +364,11 @@ void thread_scheduler(void const *argument) {
 					}
 					else
 					{
-						GrStringDraw(&sContext, "              ", -1, 30, (sContext.psFont->ui8Height+2)*5, true);						
+						GrStringDraw(&sContext, "                    ", -1, 30, (sContext.psFont->ui8Height+2)*6, true);						
 					}
 					//FILA
 					print_fila(ready_tasks);
+					GrStringDraw(&sContext, "              ", -1, 30, (sContext.psFont->ui8Height+2)*5, true);
 					//FALTAS
 					intToString(faultCounter[msg->task->task_id], pbuf,  10, 10, 4);
 					GrStringDraw(&sContext, (char*)pbuf, -1, 30, (sContext.psFont->ui8Height+2)*7, true);
@@ -387,7 +390,7 @@ void thread_scheduler(void const *argument) {
 							osMutexRelease(mutex_display);						
 						#endif
 						faultCounter[msg->task->task_id] +=1;
-						while(0) {}
+						while(1) {}
 				}
 				// No caso de Secondary Fault por lentidao, aumenta prioridade
 				else if(execution_ticks > (msg->task->expected_duration * (1 + msg->task->deadline)) && msg->task->static_priority > -100) {
@@ -444,7 +447,7 @@ void thread_scheduler(void const *argument) {
 			for(i = 0; i < 6; i++) 
 			{
 				tasks[i]->ready_counter--;
-				if(tasks[i]->ready_counter <= 0) 
+				if(tasks[i]->ready_counter <= 0 && tasks[i]->status == NOT_READY) 
 				{
 					tasks[i]->status = READY;
 					execution_q[ready_tasks] = tasks[i];
@@ -454,7 +457,8 @@ void thread_scheduler(void const *argument) {
 			sortTasks(execution_q, ready_tasks);
 		}
 
-		if(execution_q[0]->status != EXECUTING && execution_q[0]->status == READY) {
+		if(execution_q[0]->status != EXECUTING && execution_q[0]->status == READY)
+		{
 			execution_q[0]->status = EXECUTING;
 			tasks[i]->start_tick = osKernelSysTick();
 			osSignalSet(execution_q[0]->thread_id, 0x01);
@@ -665,20 +669,6 @@ void thread_task_F(void const *argument) {
 		for(i=1; i<=128; i++)
 		{
 				result += (i*i*i)/(1<<i);
-			/*
-				if(i%16 == 0){	//8 atualizacoes
-					porcent=100*i/128;
-					intToString(porcent, pbuf,  10, 10, 4);
-					#if GANNT == 1
-						osMutexWait(mutex_display,0);	
-						GrStringDraw(&sContext, pbuf, -1, 30, (sContext.psFont->ui8Height+2)*4, true);
-						osMutexRelease(mutex_display);
-					#endif
-				}
-			*/
-				// Considera??es sobre essa mudan?a:
-				// 2^128 ? muito grande. Na verdade, no meio do caminho o 1/2^128 ? praticamente 0.
-				// O ruim ? que o pow demora muito, ent?o pra deixar a tarefa mais r?pido, parei o for no meio do caminho mesmo
 		}
 		//faz algum tipo de verifica??o
 		msg = (task_ready_msg *) osMailAlloc(task_ready_q_id, osWaitForever);
